@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uploadTest</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
+    <script>
+$(document).ready(function(){
+	var posturl="http://localhost:8080/algz/common/sql/executebatchnonquery";
+	$("#executenonquery").click(function () {
+        $.ajax({
+            type:'post',
+            url: "http://localhost:8080/algz/common/sql/executenonquery",
+             data:{'sql':'123'},
+            success:function (res) {
+            	alert(res);
+            }
+        })
+    });
+	
+    $("#executebatchnonquery").click(function () {
+        $.ajax({
+            type:'post',
+            url: "http://localhost:8080/algz/common/sql/executebatchnonquery",
+             data:{sql :['1','2']},
+             traditional: true,//必须指定为true,适用于servlet,  sql=1&sql=2; false,适用于PHP和Ruby on Rails,用于深度序列化 , sql[]=1& sql[]=1
+            success:function (res) {
+            	alert(res);
+            }
+        })
+    })
+    
+     $("#executebatchnonquery1").click(function () {
+    	  
+    	    
+        var goodsList = new Array();
+        //goodsList.push("1a");//
+        goodsList.push({name: "1",cname :"2000"});
+        goodsList.push({name: "11",cname :"20001"});
+       // goodsList.push("2a");//goodsList.push({goods_name: "铝锰合金",goods_pay :1000});
+        var list = JSON.stringify(goodsList);
+        //list=JSON.stringify({'name': '1','cname' :'2000'});
+        //list={Name: "1",Cname :"2000"};
+        $.ajax({
+        	"type":"POST",
+            //"dataType": 'json',
+           //"contentType":'application/json',
+            //url:"api/user",
+            url: "/algz/demo/sql/executebatchnonquery1",
+            //data:{age:['12134','12121']}, 
+            //"data" :list,
+            data :  {name: "2",cname :"2000",age:['1','2']},//list,//{ sql:list},
+             
+           traditional: true,//必须指定为true,适用于servlet,  sql=1&sql=2; false,适用于PHP和Ruby on Rails,用于深度序列化 , sql[]=1& sql[]=1
+            success:function (res) {
+            	alert(res);
+            }
+        })
+    })
+});
+</script>
+</head>
+<body>
+    <h>static</h>
+    <form action="http://127.0.0.1:8080/algz/common/file/upload" method="post" enctype="multipart/form-data">
+        <input type="text" name="extra">
+        <input type="file" name="file">
+        <input type="file" name="file">
+        <input type="submit" value="提交">
+    </form>
+    <br />
+    <form action="http://localhost:8083/api/user" method="post">
+     
+        <input type="text" name="name">
+        <input type="text" name="cname">
+        <input type="submit" value="表单提交executedatatable">
+    </form>
+    <br>
+    <button id="executenonquery" >ajax提交executenonquery</button>
+    <button id="executebatchnonquery" >ajax提交executebatchnonquery</button>
+        <button id="executebatchnonquery1" >ajax提交executebatchnonquery1</button>
+</body>
+</html>

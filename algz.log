@@ -1,0 +1,97 @@
+2020-12-13 13:04:15.540  INFO 11308 --- [main] c.a.platform.start.AlgzWarApplication    : Starting AlgzWarApplication on ALGZ-PC with PID 11308 (D:\Source\java\eclipse-workspace\algz_war\target\classes started by algz in D:\Source\java\eclipse-workspace\algz_war)
+2020-12-13 13:04:15.545  INFO 11308 --- [main] c.a.platform.start.AlgzWarApplication    : No active profile set, falling back to default profiles: default
+2020-12-13 13:04:17.015  INFO 11308 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-12-13 13:04:17.668  INFO 11308 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 646ms. Found 4 JPA repository interfaces.
+2020-12-13 13:04:18.378  INFO 11308 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-12-13 13:04:18.386  INFO 11308 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-13 13:04:18.386  INFO 11308 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-12-13 13:04:18.478  INFO 11308 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/algz]   : Initializing Spring embedded WebApplicationContext
+2020-12-13 13:04:18.478  INFO 11308 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2886 ms
+2020-12-13 13:04:19.126  INFO 11308 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-13 13:04:19.175  INFO 11308 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-12-13 13:04:19.303  INFO 11308 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-13 13:04:19.402  INFO 11308 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-13 13:04:19.871  INFO 11308 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-13 13:04:19.884  INFO 11308 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-12-13 13:04:20.141  WARN 11308 --- [main] o.h.b.i.InFlightMetadataCollectorImpl    : HHH000069: Duplicate generator name ALGZGenerator
+2020-12-13 13:04:27.489  INFO 11308 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-13 13:04:27.496  INFO 11308 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-13 13:04:27.830  WARN 11308 --- [main] .a.p.s.c.ALGZAbstractSecurityInterceptor : Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2020-12-13 13:04:28.043  WARN 11308 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-13 13:04:28.313  INFO 11308 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/webservice**'], []
+2020-12-13 13:04:28.313  INFO 11308 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/health'], []
+2020-12-13 13:04:28.313  INFO 11308 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/hystrix.stream'], []
+2020-12-13 13:04:28.314  INFO 11308 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/open/**'], []
+2020-12-13 13:04:28.343  INFO 11308 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@c534814, org.springframework.security.web.context.SecurityContextPersistenceFilter@14a204f, org.springframework.security.web.header.HeaderWriterFilter@177d7e98, org.springframework.security.web.csrf.CsrfFilter@570f2cf7, org.springframework.security.web.authentication.logout.LogoutFilter@62267a22, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@49dce561, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@71e064b2, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4e38b4ea, org.springframework.security.web.session.ConcurrentSessionFilter@58da6f7d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e3ccedb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@54832ad9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@eb8d539, org.springframework.security.web.session.SessionManagementFilter@7d3d89fb, org.springframework.security.web.access.ExceptionTranslationFilter@2295535f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4a81582c]
+2020-12-13 13:04:28.380  INFO 11308 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://webservice.algz.com/}CommonServiceA from class com.algz.webservice.CommonServiceA
+2020-12-13 13:04:28.672  INFO 11308 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /CommonServiceA
+2020-12-13 13:04:28.682  INFO 11308 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://webservice.algz.com/}CommonServiceBImpService from class com.algz.webservice.CommonServiceB
+2020-12-13 13:04:28.689  INFO 11308 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /CommonServiceB
+2020-12-13 13:04:28.691  INFO 11308 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://webservice.algz.com/}DesignPlatformService from class com.sany.webservice.DesignPlatformService
+2020-12-13 13:04:28.725  INFO 11308 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /DesignPlatformService
+2020-12-13 13:04:28.809  INFO 11308 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-13 13:04:29.030  INFO 11308 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/algz'
+2020-12-13 13:04:29.031  INFO 11308 --- [main] c.a.platform.start.AlgzWarApplication    : Started AlgzWarApplication in 13.763 seconds (JVM running for 14.653)
+2020-12-13 13:04:55.755  INFO 11308 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/algz]   : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-13 13:04:55.755  INFO 11308 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-12-13 13:04:55.760  INFO 11308 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2020-12-13 13:04:55.939  INFO 11308 --- [http-nio-8080-exec-1] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2020-12-13 13:04:55.970  INFO 11308 --- [http-nio-8080-exec-1] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#6dbfd081:0/SimpleConnection@5c36aeb3 [delegate=amqp://guest@127.0.0.1:5672/, localPort= 53182]
+2020-12-13 16:07:37.584  WARN 11308 --- [AMQP Connection 127.0.0.1:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured (Exception message: Connection reset)
+2020-12-13 16:07:37.589 ERROR 11308 --- [AMQP Connection 127.0.0.1:5672] o.s.a.r.c.CachingConnectionFactory       : Channel shutdown: connection error
+2020-12-13 16:45:46.319  INFO 11308 --- [http-nio-8080-exec-6] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2020-12-13 16:45:46.323  INFO 11308 --- [http-nio-8080-exec-6] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#6dbfd081:1/SimpleConnection@72f4f92f [delegate=amqp://guest@127.0.0.1:5672/, localPort= 65082]
+2020-12-13 16:46:35.228  WARN 11308 --- [AMQP Connection 127.0.0.1:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured (Exception message: Connection reset)
+2020-12-13 16:46:35.229 ERROR 11308 --- [AMQP Connection 127.0.0.1:5672] o.s.a.r.c.CachingConnectionFactory       : Channel shutdown: connection error
+2020-12-13 16:46:35.229 ERROR 11308 --- [AMQP Connection 127.0.0.1:5672] o.s.a.r.c.CachingConnectionFactory       : Channel shutdown: connection error
+2020-12-13 16:50:32.012  INFO 11308 --- [http-nio-8080-exec-9] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2020-12-13 16:50:32.015  INFO 11308 --- [http-nio-8080-exec-9] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#6dbfd081:2/SimpleConnection@1362414b [delegate=amqp://guest@127.0.0.1:5672/, localPort= 65426]
+2020-12-13 16:51:08.402  WARN 11308 --- [AMQP Connection 127.0.0.1:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured (Exception message: Connection reset)
+2020-12-13 16:51:08.403 ERROR 11308 --- [AMQP Connection 127.0.0.1:5672] o.s.a.r.c.CachingConnectionFactory       : Channel shutdown: connection error
+2020-12-13 16:51:08.403 ERROR 11308 --- [AMQP Connection 127.0.0.1:5672] o.s.a.r.c.CachingConnectionFactory       : Channel shutdown: connection error
+2020-12-13 19:05:56.798  INFO 11308 --- [http-nio-8080-exec-5] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2020-12-13 19:05:56.802  INFO 11308 --- [http-nio-8080-exec-5] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#6dbfd081:3/SimpleConnection@3e83687c [delegate=amqp://guest@127.0.0.1:5672/, localPort= 14017]
+2020-12-13 21:09:09.497  INFO 11308 --- [RMI TCP Connection(495)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-12-13 21:09:09.525  INFO 11308 --- [RMI TCP Connection(495)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-13 21:09:09.541  INFO 11308 --- [RMI TCP Connection(495)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-12-13 21:09:09.546  INFO 11308 --- [RMI TCP Connection(495)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-12-13 21:09:09.554  INFO 11308 --- [RMI TCP Connection(495)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-12-13 21:09:19.660  INFO 15836 --- [main] c.a.platform.start.AlgzWarApplication    : Starting AlgzWarApplication on ALGZ-PC with PID 15836 (D:\Source\java\eclipse-workspace\algz_war\target\classes started by algz in D:\Source\java\eclipse-workspace\algz_war)
+2020-12-13 21:09:19.663  INFO 15836 --- [main] c.a.platform.start.AlgzWarApplication    : No active profile set, falling back to default profiles: default
+2020-12-13 21:09:20.892  INFO 15836 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-12-13 21:09:21.494  INFO 15836 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 596ms. Found 4 JPA repository interfaces.
+2020-12-13 21:09:22.092  INFO 15836 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-12-13 21:09:22.099  INFO 15836 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-13 21:09:22.099  INFO 15836 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-12-13 21:09:22.183  INFO 15836 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/algz]   : Initializing Spring embedded WebApplicationContext
+2020-12-13 21:09:22.183  INFO 15836 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2486 ms
+2020-12-13 21:09:22.763  INFO 15836 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-13 21:09:22.795  INFO 15836 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-12-13 21:09:22.886  INFO 15836 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-13 21:09:22.966  INFO 15836 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-13 21:09:23.421  INFO 15836 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-13 21:09:23.431  INFO 15836 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-12-13 21:09:23.653  WARN 15836 --- [main] o.h.b.i.InFlightMetadataCollectorImpl    : HHH000069: Duplicate generator name ALGZGenerator
+2020-12-13 21:09:24.257  INFO 15836 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-13 21:09:24.263  INFO 15836 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-13 21:09:24.562  WARN 15836 --- [main] .a.p.s.c.ALGZAbstractSecurityInterceptor : Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2020-12-13 21:09:24.762  WARN 15836 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-13 21:09:24.985  INFO 15836 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/webservice**'], []
+2020-12-13 21:09:24.985  INFO 15836 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/health'], []
+2020-12-13 21:09:24.985  INFO 15836 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/hystrix.stream'], []
+2020-12-13 21:09:24.985  INFO 15836 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/open/**'], []
+2020-12-13 21:09:25.008  INFO 15836 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6de6467a, org.springframework.security.web.context.SecurityContextPersistenceFilter@6d03404e, org.springframework.security.web.header.HeaderWriterFilter@75c90ec5, org.springframework.security.web.csrf.CsrfFilter@61d8a98b, org.springframework.security.web.authentication.logout.LogoutFilter@3f2731e5, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6eef7af3, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@3df05c40, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@72cbe3b6, org.springframework.security.web.session.ConcurrentSessionFilter@26cd77cc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20bd4fd2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@36642182, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7aadb5e8, org.springframework.security.web.session.SessionManagementFilter@4f7bb581, org.springframework.security.web.access.ExceptionTranslationFilter@20f1e26, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@559baea1]
+2020-12-13 21:09:25.038  INFO 15836 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://webservice.algz.com/}CommonServiceA from class com.algz.webservice.CommonServiceA
+2020-12-13 21:09:25.299  INFO 15836 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /CommonServiceA
+2020-12-13 21:09:25.307  INFO 15836 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://webservice.algz.com/}CommonServiceBImpService from class com.algz.webservice.CommonServiceB
+2020-12-13 21:09:25.313  INFO 15836 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /CommonServiceB
+2020-12-13 21:09:25.315  INFO 15836 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://webservice.algz.com/}DesignPlatformService from class com.sany.webservice.DesignPlatformService
+2020-12-13 21:09:25.347  INFO 15836 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /DesignPlatformService
+2020-12-13 21:09:25.428  INFO 15836 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-13 21:09:25.617  INFO 15836 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/algz'
+2020-12-13 21:09:25.619  INFO 15836 --- [main] c.a.platform.start.AlgzWarApplication    : Started AlgzWarApplication in 6.211 seconds (JVM running for 7.018)
+2020-12-13 21:11:14.224  INFO 15836 --- [RMI TCP Connection(11)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-12-13 21:11:14.228  INFO 15836 --- [RMI TCP Connection(11)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-13 21:11:14.230  INFO 15836 --- [RMI TCP Connection(11)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-12-13 21:11:14.232  INFO 15836 --- [RMI TCP Connection(11)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-12-13 21:11:14.239  INFO 15836 --- [RMI TCP Connection(11)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
