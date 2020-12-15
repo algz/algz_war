@@ -124,7 +124,6 @@ public class FileController {
 			IOUtils.copy(inputStream, outputStream);
 			outputStream.flush();
 		}
-
 	}
 	
 	//////////以下暂没测试/////////////
