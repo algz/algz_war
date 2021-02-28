@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -83,33 +84,39 @@ public class OtherReponsitoryImp implements OtherReponsitory {
 	}
 	
 	@Override
-	public String GetSimulationReport(String taskid, String category) {
-		String sql="";
-		if(category.equals("D")) {
-			//动力学
-			sql="select ID,REPORTPATH,REPORTSUMMARY from S_DYNAMICTASK where id='"+taskid+"'";
-		}else {
-			//静力学
-			sql="select ID,REPORTPATH,REPORTSUMMARY from S_STATICTASK where id='"+taskid+"'";
-		}
-		
-		Object[] report=(Object[])em.createNativeQuery(sql).getSingleResult();
-		
-		APathCode pc=new APathCode();
-		pc.setRelationId(report[0]+"");
-		Example<APathCode> example = Example.of(pc);
-		List<APathCode> list=pcRepository.findAll(example);
-		if(list.size()==0) {
-			pc.setRelationId(report[0]+"");
-			pc.setFilePath(report[1]+"");
-			pc.setRemark(report[2]+"");
-			pcRepository.save(pc);
-		}else {
-			pc=pcRepository.findAll(example).get(0);
+	public APathCode GetSimulationReport(String taskid, String category) {
+		String sql = "";
+		if (category.equals("D")) {
+			// 动力学
+			sql = "select ID,REPORTPATH,REPORTSUMMARY from S_DYNAMICTASK where id='" + taskid + "'";
+		} else {
+			// 静力学
+			sql = "select ID,REPORTPATH,REPORTSUMMARY from S_STATICTASK where id='" + taskid + "'";
 		}
 
+		APathCode pc = null;
 
-		return pc.getId();
+		try {
+
+			Object[] report = (Object[]) em.createNativeQuery(sql).getSingleResult();
+
+			pc = new APathCode();
+			pc.setRelationId(report[0] + "");
+			Example<APathCode> example = Example.of(pc);
+			List<APathCode> list = pcRepository.findAll(example);
+			if (list.size() == 0) {
+				pc.setRelationId(report[0] + "");
+				pc.setFilePath(report[1] + "");
+				pc.setRemark(report[2] + "");
+				pcRepository.save(pc);
+			} else {
+				pc = pcRepository.findAll(example).get(0);
+			}
+		} catch (NoResultException nre) {
+
+		}
+
+		return pc;
 	}
 
 

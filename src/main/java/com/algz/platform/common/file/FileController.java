@@ -15,6 +15,7 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -104,26 +105,32 @@ public class FileController {
 	 * @throws FileNotFoundException
 	 */
 	@GetMapping("/down")
-	public void downLoad(String pathCode, HttpServletResponse response) throws FileNotFoundException, IOException {
-		if(pathCode==null) {
-			return;
-		}
-		APathCode pc=peReponsitory.getOne(pathCode);
-		File f=new File(filestorePath+pc.getFilePath());
-		// JDK 1.7后 可以在try中自动关闭流文件
-		// inputStream 输入 读，OutputStream输出.
-		try (InputStream inputStream = new FileInputStream(f);
-				OutputStream outputStream = response.getOutputStream();) {
-			// 设置响应类型
-			response.setContentType("application/x-download");
-			// Content-disposition是 MIME 协议的扩展，MIME 协议指示 MIME 用户代理如何显示附加的文件。
-			//当 Internet Explorer 接收到头时，它会激活文件下载对话框，它的文件名框自动填充了头中指定的文件名。
+	public void downLoad(String pathcode, HttpServletResponse response) throws FileNotFoundException, IOException {
+		if(pathcode!=null) {
+			Optional<APathCode> op=peReponsitory.findById(pathcode);
+			if(op.isPresent()) {
+				APathCode pc=op.get();
+				String downFilePath=filestorePath+pc.getFilePath();
+				File f=new File(downFilePath);
+				// JDK 1.7后 可以在try中自动关闭流文件
+				// inputStream 输入 读，OutputStream输出.
+				try (InputStream inputStream = new FileInputStream(f);
+						OutputStream outputStream = response.getOutputStream();) {
+					// 设置响应类型
+					response.setContentType("application/x-download");
+					// Content-disposition是 MIME 协议的扩展，MIME 协议指示 MIME 用户代理如何显示附加的文件。
+					//当 Internet Explorer 接收到头时，它会激活文件下载对话框，它的文件名框自动填充了头中指定的文件名。
 
-			String downFilename =  URLEncoder.encode(f.getName(),"UTF-8");//必须编码为UTF-8,不然则是乱码。
-			response.addHeader("Content-Disposition", "attachment;filename=" + downFilename);
-			IOUtils.copy(inputStream, outputStream);
-			outputStream.flush();
+					String downFilename =  URLEncoder.encode(f.getName(),"UTF-8");//必须编码为UTF-8,不然则是乱码。
+					response.addHeader("Content-Disposition", "attachment;filename=" + downFilename);
+					IOUtils.copy(inputStream, outputStream);
+					outputStream.flush();
+				}
+				return ;
+			}
 		}
+		
+		response.getOutputStream().print("not down file!");
 	}
 	
 	//////////以下暂没测试/////////////

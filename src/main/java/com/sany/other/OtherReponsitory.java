@@ -2,6 +2,8 @@ package com.sany.other;
 
 import java.util.List;
 
+import com.algz.platform.common.file.pathencode.APathCode;
+
 public interface OtherReponsitory {
 
 	public List<?> GetTaskState(String taskid,String kind);
@@ -12,5 +14,5 @@ public interface OtherReponsitory {
 	
 	public List<?> GetWholeParamTemplateParam(String templateId);
 	
-	public String GetSimulationReport(String taskid,String category);
+	public APathCode GetSimulationReport(String taskid,String category);
 }

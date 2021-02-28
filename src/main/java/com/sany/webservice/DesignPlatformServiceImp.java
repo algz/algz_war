@@ -5,6 +5,8 @@ package com.sany.webservice;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.jws.WebService;
@@ -15,10 +17,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.algz.amqp.ProducerSend;
+import com.algz.platform.common.file.pathencode.APathCode;
+import com.algz.platform.utility.JsonUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sany.Static.StaticService;
 import com.sany.airmodelManager.AirModel;
 import com.sany.dynamic.DynamicService;
@@ -46,20 +51,26 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 	@Autowired
 	private DynamicService ds;
 
-	
 	@Autowired
 	private StaticService ss;
 	
 	@Autowired
 	private OtherService os;
-
+	
 	/**
 	 * 1.获取动力学工况列表 √
 	 */
 	@Override
 	public String ReceiveDynamicGK(String datajson) {
 		String ret = "";
-		ret = ds.GetDynamicGK(datajson);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.out.println(sdf.format(new Date())+" ReceiveDynamicGK:\n in:"+datajson);
+		try {
+			ret = ds.GetDynamicGK(datajson);
+		}catch(Exception ex) {
+			System.err.println(ex.getLocalizedMessage());
+		}
+		System.out.println(" out:"+ret);
 		return ret;
 	}
 
@@ -68,6 +79,10 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 	 */
 	@Override
 	public String GetCondinate(String partid) {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.out.println(sdf.format(new Date())+" GetCondinate:"+partid);
+		String outinfo=ss.GetCondinate(partid);
+		System.out.println(" out:"+outinfo);
 		return ss.GetCondinate(partid);
 	}
 	
@@ -76,7 +91,11 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 	 */
 	@Override
 	public String ReceiveStaticGK(String partid) {
-		return ss.ReceiveStaticGK(partid);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.out.println(sdf.format(new Date())+" ReceiveStaticGK:"+partid);
+		String ret=ss.ReceiveStaticGK(partid);
+		System.out.println(" out:"+ret);
+		return ret;
 	}
 	
 	/**
@@ -84,7 +103,10 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 	 */
 	@Override
 	public String GetTaskState(String taskid, String kind) {
-		return os.GetTaskState(taskid, kind);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String outinfo=os.GetTaskState(taskid, kind);
+		System.err.println(sdf.format(new Date())+" GetTaskState:\n in"+taskid+ " "+kind+"\nout:"+outinfo);
+		return outinfo;
 	}
 	
 	/**
@@ -92,7 +114,10 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 	 */
 	@Override
 	public String GetSimulationParts() {
-		return os.GetSimulationParts();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String outinfo=os.GetSimulationParts();
+		System.out.println(sdf.format(new Date())+" GetSimulationParts:\n in: \n out:"+outinfo);
+		return outinfo;
 	}
 	
 	/**
@@ -100,7 +125,10 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 	 */
 	@Override
 	public String ReceiveWholeParamTemplate(String templateId) {
-		return os.ReceiveWholeParamTemplate(templateId);
+		String outinfo=os.ReceiveWholeParamTemplate(templateId);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.out.println(sdf.format(new Date())+" ReceiveWholeParamTemplate:\nin:"+templateId+"\nout:"+outinfo);
+		return outinfo;
 	}
 	
 
@@ -110,7 +138,10 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 	@Override
 	public String ReceiveDynamicSimulationTask(String datajson) {
 //		mqSend.sendMsgByTopics("queue.dynamic", "");
-		//String file="C:\\Users\\algz\\Desktop\\refDll\\dll\\tem\\JniInterfaceClass.j4n.dll";
+		//String 
+		//file="C:\\Users\\algz\\Desktop\\refDll\\dll\\tem\\JniInterfaceClass.j4n.dll";
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.err.println(sdf.format(new Date())+" ReceiveDynamicSimulationTask:\nin:"+datajson);
 		String file=dllDirPath+"\\JniInterfaceClass.j4n.dll";
         Bridge.setVerbose(true);
         String str="";
@@ -125,6 +156,10 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 			e.printStackTrace();
 		}
 		
+        
+        System.out.println("out:"+str);
+        //
+        //
 		//String str=com.algz.FromCSharpDll.invokCSharpMethod("D:\\Source\\java\\eclipse-workspace\\Jni4netProject\\ref\\JniInterfaceClass.j4n.dll", "");
 		//String taskid = ds.ReceiveDynamicSimulationTask(datajson);
 		return str;
@@ -138,19 +173,24 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 		String file=dllDirPath+"\\JniInterfaceClass.j4n.dll";
         Bridge.setVerbose(true);
         String str="";
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        System.err.println(sdf.format(new Date())+" ReceiveStaticSimulationTask:\nin:"+datajson);
         try {
 			Bridge.init();
 	        File loadDll = new File(file);
 	        Bridge.LoadAndRegisterAssemblyFrom(loadDll);
 	        str=jniinterfaceclass.JniInvokClass.AddStaticTask(datajson);//AddWholeTask("123");//.InvokMethod("test111");
-	        System.out.println(str);
+	        System.err.println(str);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+        System.err.println("out:"+str);
 		//String str=com.algz.FromCSharpDll.invokCSharpMethod("D:\\Source\\java\\eclipse-workspace\\Jni4netProject\\ref\\JniInterfaceClass.j4n.dll", "");
 		//String taskid = ds.ReceiveDynamicSimulationTask(datajson);
+        //
+        //
 		return str;
 		
 		//return ss.ReceiveStaticSimulationTask(datajson);
@@ -161,13 +201,27 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
 	 */
 	@Override
 	public String GetSimulationReport(String taskid, String category) {
-		return os.GetSimulationReport(taskid, category);
+		ObjectMapper mapper =JsonUtils.GetMapper();
+		ObjectNode on=mapper.createObjectNode();
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.err.println(sdf.format(new Date())+" GetTaskState:\nin:"+taskid+","+category);
+		APathCode code=os.GetSimulationReport(taskid, category);
+		
+		if(code!=null) {
+			File f=new File("c:"+code.getFilePath());
+			String fileName=f.getName().replaceAll("{.}[^.]+$", "");
+			//
+			//
+			//
+			String info="{'reporttFileCode':'"+code.getId()+"','reportFileName':'"+fileName+"','description':'"+(code.getRemark()==null?"":code.getRemark())+"','msg':''}'";
+			System.err.println("out:"+info);
+			return info;
+		}else {
+			String s="{'reporttFileCode':'','reportFileName':'','description':'','msg':'报告不存在!'}";
+			System.err.println("out:"+s);
+			return s;
+		}
 	}
-
-
-
-
-
-
 
 }
