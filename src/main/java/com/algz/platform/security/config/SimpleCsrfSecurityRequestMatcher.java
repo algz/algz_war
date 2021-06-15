@@ -47,7 +47,7 @@ public class SimpleCsrfSecurityRequestMatcher implements RequestMatcher {
 		unprotectedMatcher= new RegexRequestMatcher(_unprotectedMatcher, null);
     }
     
-    private Pattern allowedMethods = Pattern .compile("^(GET|HEAD|TRACE|OPTIONS)$");
+    private Pattern allowedMethods = Pattern .compile("^(GET|HEAD|TRACE|OPTIONS|POST)$");
     
 //	private final HashSet<String> allowedMethods = new HashSet<>(
 //			Arrays.asList("GET", "HEAD", "TRACE", "OPTIONS"));

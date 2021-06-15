@@ -15,6 +15,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface AUserRepository extends JpaRepository<AUser, String> {
 
+	/**
+	 * 按命名规范定义。（由jpa完成接口实现。）
+	 * @param username
+	 * @return
+	 */
 	AUser findByUsername(String username);
 
 }

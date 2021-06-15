@@ -39,7 +39,8 @@ public class ARole implements GrantedAuthority {
 	@Column(name="NAME")
 	private String authority;
 	
-	
+	@Column(name="DESCRIPTION")
+	private String description;
 
 	/**
 	 * jackson中的@JsonBackReference和@JsonManagedReference，以及@JsonIgnore均是为了解决对象中存在双向引用导致的无限递归（infinite recursion）问题。这些标注均可用在属性或对应的get、set方法中。  
@@ -87,4 +88,11 @@ public class ARole implements GrantedAuthority {
 		this.permissionList = permissionList;
 	}
 
+	@Override
+	public String toString() {
+		return "ARole [roleid=" + roleid + ", authority=" + authority + ", description=" + description
+				+ ", permissionList=" + permissionList + "]";
+	}
+
+	
 }
