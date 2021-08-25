@@ -1,1 +1,0 @@
-package com.algz.platform.webservice;
