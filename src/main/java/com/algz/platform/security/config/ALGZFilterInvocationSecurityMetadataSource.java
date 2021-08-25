@@ -1,15 +1,11 @@
 package com.algz.platform.security.config;
 
-import java.awt.font.OpenType;
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -21,7 +17,7 @@ import com.algz.platform.security.authority.permissionManager.APermissionReposit
 import com.algz.platform.security.authority.roleManager.ARole;
 
 /**
- * 
+ * 自定义权限拦截
  * 
  * Spring Security 的方法级别的权限控制的默认实现是把权限信息保存在内存中，
  * 而基于URL级别的权限控制的实际应用中通常是把权限信息保存在数据库中。 因此，URL级别的权限控制通常都需要我们自己实现从数据库中获取权限信息。
@@ -38,8 +34,11 @@ public class ALGZFilterInvocationSecurityMetadataSource implements FilterInvocat
 	private APermissionRepository apermissionService;
 
 	/**
-	 * 遍历每个资源（url），如果与用户请求的资源（url）匹配，则返回该资源（url）所需要的权限（角色）集合，
-	 * 如果全都不匹配，则表示用户请求的资源（url)不需要权限（角色）即可访问
+	 * 遍历每个资源（url），如果与用户请求的资源（url）匹配，则返回该资源（url）所需要的权限（角色）集合;
+	 * 如果全都不匹配，则表示用户请求的资源（url)不需要权限（角色）即可访问.
+	 * 
+	 * (如果没有登录，并且设置.antMatchers("/common/**","/demo/**").permitAll()，
+	 * 则("/common/**","/demo/**")资源不会运行到过滤器，就拦截返回到登录页面。)
 	 */
 	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {

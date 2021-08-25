@@ -14,9 +14,23 @@ public class JsonResult<T> implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+
+//	result.getStatusMsg()
+//	{
+//        status: 'ok',
+//        type,
+//        currentAuthority: 'admin',
+//      }
+	private String status;
+	
+	private String currentAuthority;
+	
+	private String type="account";
+	
 	private Boolean success;
     private Integer statusCode;
     private String statusMsg;
+    
     private T data;
 
     public JsonResult() {
@@ -24,18 +38,29 @@ public class JsonResult<T> implements Serializable {
 
     public JsonResult(boolean success) {
         this.success = success;
+        this.status=success?"ok":"error";
         this.statusCode = success ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
 		this.statusMsg = success ? ResultCode.SUCCESS.getMessage() : ResultCode.COMMON_FAIL.getMessage();
     }
 
+    public JsonResult(boolean success,String msg) {
+        this.success = success;
+        this.status=success?"ok":"error";
+        this.statusCode = success ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
+		this.statusMsg = msg;
+    }
+    
     public JsonResult(boolean success, ResultCode resultEnum) {
         this.success = success;
+        this.status=success?"ok":"error";
         this.statusCode = success ? ResultCode.SUCCESS.getCode() : (resultEnum == null ? ResultCode.COMMON_FAIL.getCode() : resultEnum.getCode());
         this.statusMsg = success ? ResultCode.SUCCESS.getMessage() : (resultEnum == null ? ResultCode.COMMON_FAIL.getMessage() : resultEnum.getMessage());
-    }
+        
+     }
 
     public JsonResult(boolean success, T data) {
         this.success = success;
+        this.status=success?"ok":"error";
         this.statusCode = success ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
         this.statusMsg = success ? ResultCode.SUCCESS.getMessage() : ResultCode.COMMON_FAIL.getMessage();
         this.data = data;
@@ -43,13 +68,14 @@ public class JsonResult<T> implements Serializable {
 
     public JsonResult(boolean success, ResultCode resultEnum, T data) {
         this.success = success;
+        this.status=success?"ok":"error";
         this.statusCode = success ? ResultCode.SUCCESS.getCode() : (resultEnum == null ? ResultCode.COMMON_FAIL.getCode() : resultEnum.getCode());
         this.statusMsg = success ? ResultCode.SUCCESS.getMessage() : (resultEnum == null ? ResultCode.COMMON_FAIL.getMessage() : resultEnum.getMessage());
         this.data = data;
     }
 
     public Boolean getSuccess() {
-        return success;
+        return true;
     }
 
     public void setSuccess(Boolean success) {
@@ -82,7 +108,37 @@ public class JsonResult<T> implements Serializable {
         this.data = data;
     }
     
-    /**
+    
+    
+    public String getCurrentAuthority() {
+		return currentAuthority;
+	}
+
+	public void setCurrentAuthority(String currentAuthority) {
+		this.currentAuthority = currentAuthority;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
+	/**
      * @Author: Hutengfei
      * @Description: 返回码定义
      * 规定:
@@ -102,6 +158,8 @@ public class JsonResult<T> implements Serializable {
         /* 权限错误 */
         NO_PERMISSION(403, "没有权限"),
         
+        USER_ACCOUNT_EXIT(2010, "账号退出"),
+        
         /* 参数错误：1000～1999 */
         PARAM_NOT_VALID(1001, "参数无效"),
         PARAM_IS_BLANK(1002, "参数为空"),
@@ -118,6 +176,8 @@ public class JsonResult<T> implements Serializable {
         USER_ACCOUNT_NOT_EXIST(2007, "账号不存在"),
         USER_ACCOUNT_ALREADY_EXIST(2008, "账号已存在"),
         USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线");
+    	
+    	
     	
         private Integer code;
         private String message;

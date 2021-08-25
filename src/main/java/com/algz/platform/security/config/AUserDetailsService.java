@@ -6,7 +6,7 @@ package com.algz.platform.security.config;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
+import org.springframework.stereotype.Service;
 
 import com.algz.platform.security.authority.userManager.AUser;
 import com.algz.platform.security.authority.userManager.AUserRepository;
@@ -15,6 +15,7 @@ import com.algz.platform.security.authority.userManager.AUserRepository;
  * @author algz
  *
  */
+//@Service
 public class AUserDetailsService implements UserDetailsService{
 
 	 private final AUserRepository dao;

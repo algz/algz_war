@@ -34,6 +34,11 @@ public class ALGZAuthenticationFailureHandler implements AuthenticationFailureHa
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		//返回json数据
+//		{
+//		      status: 'error',
+//		      type,
+//		      currentAuthority: 'guest',
+//		    }
         JsonResult<?> result = null;
         if (exception instanceof AccountExpiredException) {
             //账号过期
@@ -59,9 +64,19 @@ public class ALGZAuthenticationFailureHandler implements AuthenticationFailureHa
         }
        //处理编码方式，防止中文乱码的情况
         response.setContentType("text/json;charset=utf-8");
-       //塞到HttpServletResponse中返回给前台
+
+        result.setCurrentAuthority("guest");
+        result.setType("account");
+//        {"status":"error","currentAuthority":null,"success":false,"statusCode":2003,"statusMsg":"密码错误","data":null}  
+//        {"status":"error","type":"account","currentAuthority":"guest"}
+        String str="";
+        //str="{\"status\":\"error\",\"type\":\"account\",\"currentAuthority\":\"guest\"}";
+        //str="{\"status\":\"error\",\"type\":\"account\",\"currentAuthority\":\"guest\",\"success\":true,\"statusCode\":2003,\"statusMsg\":\"密码错误\",\"data\":null}";
+        //response.getWriter().write(str);
+        //塞到HttpServletResponse中返回给前台
+        //{"status":"error","type":"account","currentAuthority":"guest"}
+        //{"status":"error","type":"account","currentAuthority":"guest","success":false,"statusCode":2003,"statusMsg":"密码错误","data":null}
         response.getWriter().write(new ObjectMapper().writeValueAsString(result));
-		
 	}
 
 }

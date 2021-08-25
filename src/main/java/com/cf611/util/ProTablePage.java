@@ -3,7 +3,6 @@ package com.cf611.util;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 /**
  * @author algz
@@ -101,8 +100,9 @@ public class ProTablePage<T> {
 	 */
 	public void setPage(Page<T> page) {
 //		this.page=page;
-		this.setData(page.toList());
-		this.setPageSize(page.getTotalPages());
+		this.setData(page.toList()); //记录集合
+		this.setPageSize(page.getTotalPages()); //页数
+		this.setTotal(page.getTotalElements()); //记录总数
 		this.setSuccess(true);
 		this.setCurrent(page.getNumber());
 	}

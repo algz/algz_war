@@ -25,7 +25,7 @@ public class ALGZLogoutSuccessHandler implements LogoutSuccessHandler {
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-        JsonResult<?> result =new JsonResult<Object>(true);
+        JsonResult<?> result =new JsonResult<Object>(true,"账户退出");
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(new ObjectMapper().writeValueAsString(result));
 

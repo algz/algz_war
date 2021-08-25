@@ -1,5 +1,8 @@
 package com.cf611.userManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.algz.platform.security.authority.userManager.AUser;
 
 public class CurrentUserVo {
@@ -10,10 +13,15 @@ public class CurrentUserVo {
 	private String userid;
 	
 	/**
-	 * 用户名称
+	 * 用户名称(显示名称)
 	 * name: 'Serati Ma',
 	 */
 	private String name;
+	
+	/**
+	 * 权限列表
+	 */
+	private String access;
 	
 	/**
 	 * avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
@@ -49,7 +57,13 @@ public class CurrentUserVo {
 	
 	public void transform(AUser u) {
 		this.setUserid(u.getUserid());
-		this.setName(u.getUsername());
+		this.setName(u.getName()==null||u.getName().equals("")?u.getUsername():u.getName());
+		//添加权限
+		List<String> list=new ArrayList<String>();
+		u.getAuthorities().forEach(x->{
+			list.add(x.getAuthority());
+		});
+		this.setAccess(String.join(",", list));
 	}
 	
 	public String getName() {
@@ -144,6 +158,16 @@ public class CurrentUserVo {
 
 	public void setUnreadCount(Integer unreadCount) {
 		this.unreadCount = unreadCount;
+	}
+
+
+
+	public String getAccess() {
+		return access;
+	}
+
+	public void setAccess(String access) {
+		this.access = access;
 	}
 
 

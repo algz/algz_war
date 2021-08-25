@@ -1,7 +1,7 @@
 package com.cf611.util;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TreeNode {
 
@@ -15,6 +15,11 @@ public class TreeNode {
 	 * 标题
 	 */
 	private String title;
+	
+	/**
+	 * 自定义属性
+	 */
+	private Map<String,?> extProps;
 	
 	private List<TreeNode> children;
 	
@@ -133,6 +138,16 @@ public class TreeNode {
 	public void setDisableCheckbox(Boolean disableCheckbox) {
 		this.disableCheckbox = disableCheckbox;
 	}
+
+	public Map<String, ?> getExtProps() {
+		return extProps;
+	}
+
+	public void setExtProps(Map<String, ?> extProps) {
+		this.extProps = extProps;
+	}
+
+	
 	
 
 	

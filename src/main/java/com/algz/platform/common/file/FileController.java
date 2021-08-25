@@ -51,8 +51,9 @@ public class FileController {
 	private APathCodeRepository peReponsitory;
 	
 	/**
-	 * 如果在参数前添加 @ RequestParam ,则请求的参数列表中此参数不能为空,否则找不到此方法; 如果不设置,此参数能为空,也能找到此方法. @
-	 * PostMapping 只接收Post方式请求
+	 * 单文件上传。
+	 * 如果在参数前添加 @ RequestParam ,则请求的参数列表中此参数不能为空,否则找不到此方法; 如果不设置,此参数能为空,也能找到此方法. 
+	 * @ PostMapping 只接收Post方式请求
 	 * 
 	 * @param extra
 	 * @param file
@@ -60,27 +61,38 @@ public class FileController {
 	 */
 	@RequestMapping("/upload") 
 	public String fileUpload(@RequestParam("file") MultipartFile file, String extra) {
-		String path = "d:\\" + "/" + file.getOriginalFilename();
+		String path = filestorePath + "/" + file.getOriginalFilename();
 		return processUploadFile(file, extra, path);
 	}
 
+	/**
+	 * 多文件上传。
+	 * @param files
+	 * @param extra
+	 * @return
+	 */
 	@PostMapping("/uploads")
 	public String fileUpload(@RequestParam("file") MultipartFile[] files, String extra) {
-
 		for (MultipartFile file : files) {
-			String path = "d:\\" + "/" + file.getOriginalFilename();
-			path = new Date().getTime() + ".txt";
+			String path = filestorePath + "/" + file.getOriginalFilename();
 			processUploadFile(file, extra, path);
 		}
 		return "上传成功";
 	}
 
+	/**
+	 * 保存文件
+	 * @param file 文件对象
+	 * @param fileParam 附加参数
+	 * @param localFilePath 文件服务器存储全路径
+	 * @return
+	 */
 	private String processUploadFile(MultipartFile file, String fileParam, String localFilePath) {
 		try {
-			System.out.println(file.getName());// 获取表单中文件组件的名字
-			System.out.println(file.getOriginalFilename());// 获取上传文件的名字
-			System.out.println(file.getSize());// 文件的上传大小
-			System.out.println("fileParam:" + fileParam);
+			System.out.print("文件参数名称:"+file.getName());// 获取表单中文件组件的名字
+			System.out.print(",文件名称:"+file.getOriginalFilename());// 获取上传文件的名字
+			System.out.print(",文件的上传大小:"+file.getSize()+" Byte");// 文件的上传大小
+			System.out.println(",fileParam:" + fileParam);
 			// 根据路径+时间戳+文件后缀名来创建文件
 //			File localFile = new File(path, new Date().getTime() + ".txt");
 			// 如果是传入服务器 file.getInputStream();用输入输出流来读取
@@ -89,7 +101,6 @@ public class FileController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		return localFile.getAbsolutePath();
 		return file.getOriginalFilename();
 	}
 
@@ -104,7 +115,7 @@ public class FileController {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	@GetMapping("/down")
+	@RequestMapping("/down")
 	public void downLoad(String pathcode, HttpServletResponse response) throws FileNotFoundException, IOException {
 		if(pathcode!=null) {
 			Optional<APathCode> op=peReponsitory.findById(pathcode);
@@ -112,20 +123,24 @@ public class FileController {
 				APathCode pc=op.get();
 				String downFilePath=filestorePath+pc.getFilePath();
 				File f=new File(downFilePath);
-				// JDK 1.7后 可以在try中自动关闭流文件
-				// inputStream 输入 读，OutputStream输出.
-				try (InputStream inputStream = new FileInputStream(f);
-						OutputStream outputStream = response.getOutputStream();) {
-					// 设置响应类型
-					response.setContentType("application/x-download");
-					// Content-disposition是 MIME 协议的扩展，MIME 协议指示 MIME 用户代理如何显示附加的文件。
-					//当 Internet Explorer 接收到头时，它会激活文件下载对话框，它的文件名框自动填充了头中指定的文件名。
+				if(f.exists()) {
+					// JDK 1.7后 可以在try中自动关闭流文件
+					// inputStream 输入 读，OutputStream输出.
+					try (InputStream inputStream = new FileInputStream(f);
+							OutputStream outputStream = response.getOutputStream();) {
+						// 设置响应类型
+						response.setContentType("application/x-download");
+						// Content-disposition是 MIME 协议的扩展，MIME 协议指示 MIME 用户代理如何显示附加的文件。
+						//当 Internet Explorer 接收到头时，它会激活文件下载对话框，它的文件名框自动填充了头中指定的文件名。
 
-					String downFilename =  URLEncoder.encode(f.getName(),"UTF-8");//必须编码为UTF-8,不然则是乱码。
-					response.addHeader("Content-Disposition", "attachment;filename=" + downFilename);
-					IOUtils.copy(inputStream, outputStream);
-					outputStream.flush();
+						String downFilename =  URLEncoder.encode(f.getName(),"UTF-8");//必须编码为UTF-8,不然则是乱码。
+						response.addHeader("Content-Disposition", "attachment;filename=" + downFilename);
+						response.addHeader("content-type", "application/octet-stream");
+						IOUtils.copy(inputStream, outputStream);
+						outputStream.flush();
+					}
 				}
+
 				return ;
 			}
 		}

@@ -14,7 +14,7 @@ public class Indicator {
 
 	@Id
 	@Column(name = "ID")
-	@GenericGenerator(name = "ALGZGenerator", strategy = "org.hibernate.id.UUIDGenerator")
+	@GenericGenerator(name = "ALGZGenerator", strategy = "com.algz.platform.common.sql.AIDGenerator")
 	@GeneratedValue(generator="ALGZGenerator")
 	private String id;
 	

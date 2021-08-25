@@ -5,6 +5,24 @@
     <title>uploadTest</title>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
     <script>
+                //var data={name:'12345',detailArray:[{'id':'11','val':'v1'}]}
+                
+                var user1 = {
+    'id' : 'zs'
+};
+var data = [];
+data.push(user1);
+var val={name:'12345',detailList:data};
+            $.ajax({
+    url:'http://localhost:8080/algz/requirementdefinition/adddefinition',
+    type:'POST',
+    //data:val,
+    contentType:'application/json',
+    dataType: 'json',
+    //raditional : true,
+    data:JSON.stringify({'name':'123456','detailList':[{'id':'qq'}]})
+})
+    //alert(data)
 $(document).ready(function(){
 	var posturl="http://localhost:8080/algz/common/sql/executebatchnonquery";
 	$("#executenonquery").click(function () {
@@ -61,20 +79,21 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-    <h>static</h>
-    <form action="http://127.0.0.1:8080/algz/common/file/upload" method="post" enctype="multipart/form-data">
+    <h>文件上传</h>
+    <form action="http://127.0.0.1:8080/algz/common/file/uploads" method="post" enctype="multipart/form-data">
         <input type="text" name="extra">
         <input type="file" name="file">
         <input type="file" name="file">
         <input type="submit" value="提交">
     </form>
+    --------------------------
     <br />
     <form action="http://localhost:8083/api/user" method="post">
-     
         <input type="text" name="name">
         <input type="text" name="cname">
         <input type="submit" value="表单提交executedatatable">
     </form>
+    -----------------------------
     <br>
     <button id="executenonquery" >ajax提交executenonquery</button>
     <button id="executebatchnonquery" >ajax提交executebatchnonquery</button>

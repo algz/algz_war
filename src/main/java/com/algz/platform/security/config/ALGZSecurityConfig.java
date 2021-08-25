@@ -6,6 +6,8 @@ package com.algz.platform.security.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -45,6 +47,7 @@ import com.algz.platform.security.config.handler.ALGZSessionInformationExpiredSt
  * @author algz
  *
  */
+@Configuration
 @EnableWebSecurity
 public class ALGZSecurityConfig  extends WebSecurityConfigurerAdapter{
 	
@@ -90,25 +93,36 @@ public class ALGZSecurityConfig  extends WebSecurityConfigurerAdapter{
 	 * 通过重载,配置 user-detail 服务
 	 */
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		BCryptPasswordEncoder bc=new BCryptPasswordEncoder();
+//		String str=bc.encode("admin");
 		auth
 			.userDetailsService(new AUserDetailsService(auserDao))
 			//spring security 密码编码方式,必须设置,不然报错.
-			.passwordEncoder(NoOpPasswordEncoder.getInstance());//密码不加密
-//			.passwordEncoder(new BCryptPasswordEncoder());//采用 spring推荐的加密算法: BCryptPasswordEncoder;
+//			.passwordEncoder(NoOpPasswordEncoder.getInstance());//密码不加密
+			.passwordEncoder(new BCryptPasswordEncoder());//采用 spring推荐的加密算法: BCryptPasswordEncoder;
 	}
-
-	/**
-	 * 通过重载,配置 Spring Security 的 Filter 链
-	 */
-	@Override
-	public void configure(WebSecurity web) throws Exception {
+	
+//	/**
+//	 * 通过重载,配置 Spring Security 的 Filter 链
+//	 * 全局配置
+//	 */
+//	@Override
+//	public void configure(WebSecurity web) throws Exception {
 //		super.configure(web);
-		web.ignoring().antMatchers("/webservice**","/health","/hystrix.stream","/open/**");
-//		web.ignoring().antMatchers(antPatterns)
-	}
+//      // 与configure(HttpSecurity http) 方法中配置的.antMatchers("/common/**","/demo/**").permitAll() 功能相同。
+//		web.ignoring().antMatchers("/common/**","/demo/**");
+//	}
 
 	/**
+	 * 访问权限配置。
+	 * 
+	 * 仅"/common/**","/demo/**" 请求下的资源可以无条件访问，其它资源需登录后按权限访问。
+	 * .antMatchers("/common/**","/demo/**").permitAll() 
+	 * .anyRequest().authenticated() 
+	 * 
 	 * 通过重载,配置如何通过拦截器保护http请求
+	 * anonymous() 允许匿名用户访问
+	 * permitAll() 无条件允许访问
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -117,9 +131,10 @@ public class ALGZSecurityConfig  extends WebSecurityConfigurerAdapter{
 			.csrf(csrf->csrf.requireCsrfProtectionMatcher(new SimpleCsrfSecurityRequestMatcher()))
 //			.ignoringAntMatchers("/upload**").and()//实际设置了没用,因为采用白名单机制,所有权限都以数据库设置的才有效.
 		    
-		   .authorizeRequests()
-//		   .anyRequest().permitAll()
-            .and()
+		   .authorizeRequests() //开启登录配置
+		   .antMatchers("/common/**","/demo/**").permitAll() //允许访问
+		   .anyRequest().authenticated() //表示剩余的其他接口，登录之后才能访问（ALGZFilterInvocationSecurityMetadataSource）
+            
 //            .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
 //                @Override
 //                public <O extends FilterSecurityInterceptor> O postProcess(O o) {
@@ -129,23 +144,36 @@ public class ALGZSecurityConfig  extends WebSecurityConfigurerAdapter{
 //                }
 //            })
           //登出
-                .logout().
-                
-                permitAll().//允许所有用户
+		   .and().logout() //。默认访问URL”/logout”
+//              //指定的登出操作的虚拟路径，需要以post方式请求这个 http://localhost:5500/mylogout 才可以登出 ，也可以直接清除用户认证信息达到登出目的
+//              .logoutUrl("/mylogout")
+//                .logoutSuccessUrl("/login") //登出成功后访问的地址
+                .permitAll().//允许所有用户
                 logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑
                 deleteCookies("JSESSIONID")//登出之后删除cookie
             //登入
             .and().formLogin().
-//	            loginPage("/login")
-//	            .loginProcessingUrl("/doLogin")
-//	            // 指定登录页面及成功后跳转页面
-//	            .successForwardUrl("/loadIndex")
+//	            loginPage("/login") //定义登录页面，未登录时，访问一个需要登录之后才能访问的接口，会自动跳转到该页面
+//	            .loginProcessingUrl("/doLogin") //登录处理接口页面
+//	            successForwardUrl("/user/success"). // 指定了successHandler后无效。指定登录页面及成功后跳转页面
 //	            .and().authorizeRequests()
 //	            .antMatchers(commonProperties.getAllowList()).
-            
                 permitAll().//允许所有用户
                 successHandler(authenticationSuccessHandler).//登录成功处理逻辑
                 failureHandler(authenticationFailureHandler)//登录失败处理逻辑
+            //开启记住我设置，用于自动登录
+            .and().rememberMe()
+            .key("unique-and-secret") //密钥
+            .rememberMeParameter("autoLogin")
+            //存在cookie的用户名[用于cookie名],如["remember-me-cookie-algz]
+            .rememberMeCookieName("remember-me-cookie-algz")
+            //生命周期，单位毫秒
+            .tokenValiditySeconds(24 * 60 * 60) //24小时
+    //登陆后"选择记住我" ,会生成cookie  ,登出则会自动删除该cookie  , 只要不登出且未超出生命周期 ,那么关闭浏览器后再次访问将自动登录
+    //  [name]                          [value]                                                     [domain]   [path]      [expires/max-age]     [size]   [httponly]   [priority]
+    //remember-me-cookie-algz    eGk6MTU5MTIwODAzNDk5MTozZWUyN2FlMmEwMWQxNDczMDhhY2ZkYTAxZWQ5ZWQ5YQ    localhost    /       2020-06-03T18:13:54.992Z    89       ✓            Medium
+
+
             //异常处理(权限拒绝、登录失效等)
             .and().exceptionHandling().
                 accessDeniedHandler(accessDeniedHandler)//权限拒绝处理逻辑

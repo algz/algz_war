@@ -1,7 +1,9 @@
 package com.cf611.indicatorManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -45,12 +47,19 @@ public class IndicatorServiceImp implements IndicatorService {
 		indicatorParam.setParentId(root.getKey());
 		List<Indicator> indicatorList=repository.findAll(Example.of(indicatorParam));
 		if(indicatorList.size()!=0) {
+			root.setIsLeaf(false);
 			root.setChildren(new ArrayList<TreeNode>());
 			for(Indicator it:indicatorList) {
 				TreeNode node=new TreeNode(it.getId(),it.getName());
+				Map<String,String> m=new HashMap<String,String>();
+				m.put("description", it.getDescription());
+				m.put("parentId", it.getParentId());
+				node.setExtProps(m);
 				root.getChildren().add(node);
 				RecursionTreeNode(node);
 			}
+		}else {
+			root.setIsLeaf(true);
 		}
 	}
 }

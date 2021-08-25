@@ -36,9 +36,21 @@ public class ARole implements GrantedAuthority {
 	@GeneratedValue(generator="ALGZGenerator")
 	private String roleid;
 	
+	/**
+	 * 角色名称
+	 */
 	@Column(name="NAME")
 	private String authority;
 	
+	/**
+	 * 角色中文名称
+	 */
+	@Column(name="CNAME")
+	private String cname;
+	
+	/**
+	 * 角色描述
+	 */
 	@Column(name="DESCRIPTION")
 	private String description;
 
@@ -80,12 +92,35 @@ public class ARole implements GrantedAuthority {
 		return authority;
 	}
 
+	
+	
+
+
+
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
 	public List<APermission> getPermissionList() {
 		return permissionList;
 	}
 
 	public void setPermissionList(List<APermission> permissionList) {
 		this.permissionList = permissionList;
+	}
+
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

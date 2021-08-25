@@ -1,6 +1,13 @@
 package com.algz.platform.security.authority.userManager;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * CrudRepository提供了一些简单的增删查改功能，接口定义如下。 
@@ -21,5 +28,26 @@ public interface AUserRepository extends JpaRepository<AUser, String> {
 	 * @return
 	 */
 	AUser findByUsername(String username);
+	
+	/**
+	 * 自定义查询，分页
+	 * @param pageable
+	 * @return
+	 */
+	@Query(nativeQuery = true,value = "select * from algz_user_view",
+			countQuery = "select count(1) from algz_user_view ")
+	Page<Map<String,Object>> findUsersView(Pageable pageable);
+	
+	/**
+	 * 添加用户与角色关联
+	 * @param userid
+	 * @param roleid
+	 */
+	@Modifying
+	@Query(nativeQuery=true,value="insert into ALGZ_USER_ROLE (userid,roleid)values(:userid,:roleid)")
+	void addUserRole(String userid,String roleid);
 
+	@Modifying
+	@Query(nativeQuery=true,value="delete from ALGZ_USER_ROLE where userid=?1")
+	void deleteUserRoleForUserid(String userid);
 }
