@@ -158,7 +158,7 @@ public class UserServiceImp implements UserService {
 		List<Map<String,String>> mList=new ArrayList<Map<String,String>>();
 		roleList.forEach(x->{
 			Map<String,String> m=new HashMap<String,String>();
-			m.put("label", x.getDescription());
+			m.put("label", x.getCname());
 			m.put("value", x.getAuthority());
 			mList.add(m);
 		});

@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.algz.platform.utility.SpringSecurityUtils;
+import com.cf611.approvalCommentManager.ApprovalComment;
 import com.cf611.approvalCommentManager.ApprovalCommentService;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.definitionDetailManager.DefinitionDetailService;
 import com.cf611.requirementDefinition.RequirementDefinitionService;
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
 
 @Service
@@ -27,7 +30,7 @@ public class RequirementFillingServiceImp implements RequirementFillingService {
 	private ApprovalCommentService approvalCommentService;
 	
 	@Override
-	public ProTablePage<Definition> GetFillings(ProTablePage<Definition> pageParam, Definition definitionParam) {
+	public ProTablePage<DefinitionView> GetFillings(ProTablePage<DefinitionView> pageParam, DefinitionView definitionParam) {
 		return definitionService.getDefinitions(pageParam, definitionParam);
 	}
 
@@ -49,15 +52,28 @@ public class RequirementFillingServiceImp implements RequirementFillingService {
 	@Transactional
 	@Override
 	public String submitDefinition(Definition params) {
-		definitionService.publicDefinition(params);
+		ApprovalComment ac=new ApprovalComment();
+		ac.setApprovalResult("1"); //1通过，0不通过
+		ac.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+		ac.setDefinitionId(params.getId());
+		ac.setKind("1");
+		
+		definitionService.publishDefinition(params.getId(),"2",ac);
 		return null;
 	}
 
 	@Transactional
 	@Override
-	public String feedbackDefinition(Definition params) {
-		definitionService.publicDefinition(params);
-//		approvalCommentService.saveApprovalComment(null);
+	public String feedbackDefinition(Definition params,String approvalComment) {
+		ApprovalComment ac=new ApprovalComment();
+		ac.setApprovalComment(approvalComment);
+		ac.setApprovalResult("0");
+		ac.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+		ac.setDefinitionId(params.getId());
+		ac.setKind("1");
+		
+		definitionService.publishDefinition(params.getId(),"0",ac);
+		
 		return null;
 	}
 

@@ -29,8 +29,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="CF_DEFINITIONS")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 /**
+ * save()方法，会先select查询，然后匹配对象各个值有没有改变，没有改变的字段则不update此字段。
+ * 
  * @DynamicUpdate 的作用并不是更新指定字段，而是更新变化的字段；
 数据库中表字段对应到对象中的成员变量，如果请求过来的参数字段被封装成对象，直接使用save（）方法，请求url中没有涉及到的字段默认为null,
 如果这个字段在数据库中已经有值了会被null覆盖。因为，save()的对象中这个字段跟数据库中的值不同。

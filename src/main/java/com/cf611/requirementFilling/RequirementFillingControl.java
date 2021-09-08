@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
 
 @RestController
@@ -25,7 +26,8 @@ public class RequirementFillingControl {
 	 * @return
 	 */
 	@RequestMapping("/fillings")
-	public ProTablePage<Definition> getFillings(ProTablePage<Definition> pageParam,Definition definitionParam) {
+	public ProTablePage<DefinitionView> getFillings(ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam) {
+		
 		return service.GetFillings(pageParam,definitionParam);
 	}
 	
@@ -66,7 +68,7 @@ public class RequirementFillingControl {
 	 * @return
 	 */
 	@RequestMapping("feedbackdefinition")
-	public String feedbackDefinition(Definition params) {
-		return service.submitDefinition(params);
+	public String feedbackDefinition(Definition params,String approvalComment) {
+		return service.feedbackDefinition(params,approvalComment);
 	}
 }

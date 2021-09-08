@@ -2,14 +2,15 @@ package com.cf611.requirementDefinition;
 
 import java.util.List;
 
+import com.cf611.approvalCommentManager.ApprovalComment;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.requirementDefinition.definition.Definition;
-import com.cf611.requirementDefinition.definition.DefinitionView;
+import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
 
 public interface RequirementDefinitionService {
 
-	public ProTablePage<Definition> getDefinitions(ProTablePage<Definition> pageParam,Definition definitionParam);
+	public ProTablePage<DefinitionView> getDefinitions(ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam);
 	
 	public ProTablePage<DefinitionDetail> getDefinitionDetails(ProTablePage<DefinitionDetail> pageParam,DefinitionDetail definitionDetail);
 	
@@ -21,25 +22,21 @@ public interface RequirementDefinitionService {
 	public String addDefinition(Definition definition);
 	
 	/**
-	 * 发布需求定义，更新状态。
-	 * @param definition
-	 * @return
-	 */
-	public String publicDefinition(Definition definition);
-	
-	/**
 	 * 删除需求定义
 	 * @param definition
 	 * @return
 	 */
 	public String delDefinition(Definition definition);
 	
+	
 	/**
 	 * 发布需求定义
 	 * @param definitonId
+	 * @param state
+	 * @param approvalComment
 	 * @return
 	 */
-	public String publishDefinition(Definition definition);
+	public String publishDefinition(String definitionId,String state,ApprovalComment ac);
 	
 	/**
 	 * 通过需求定义，获取需求定义详情

@@ -8,11 +8,13 @@ public class TreeNode {
 	/**
 	 * 被树的 (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys 属性所用。
 	 * 注意：整个树范围内的所有节点的 key 值不能重复！
+	 * key: string | number;
 	 */
 	private String key;
 	
 	/**
 	 * 标题
+	 * title?: React.ReactNode;
 	 */
 	private String title;
 	
@@ -21,40 +23,69 @@ public class TreeNode {
 	 */
 	private Map<String,?> extProps;
 	
+	/**
+	 * 子结点
+	 * children?: DataNode[];
+	 */
 	private List<TreeNode> children;
 	
 	
 	//---------以上是必须项-------------
-	
+
+    
 	/**
 	 * 禁掉响应
+	 *     disabled?: boolean;
 	 */
 	private Boolean disabled;
 	
 	/**
 	 * 设置节点是否可被选中
+	 *     selectable?: boolean;
 	 */
 	private Boolean selectable;
 	
 	/**
 	 * 设置为叶子节点 (设置了 loadData 时有效)。为 false 时会强制将其作为父节点
+	 *     isLeaf?: boolean;
 	 */
 	private Boolean isLeaf;
 	
 	/**
 	 * icon	自定义图标。可接收组件，props 为当前节点 props
+	 *     icon?: IconType;
 	 */
 	private Boolean icon;
 	
 	/**
 	 * 	checkable	当树为 checkable 时，设置独立节点是否展示 Checkbox	boolean	-
+	 *     checkable?: boolean;
 	 */
 	private Boolean checkable;
 	
 	/**
 	 * 	disableCheckbox	禁掉 checkbox
+	 *     disableCheckbox?: boolean;
 	 */
 	private Boolean disableCheckbox;
+	
+    /**
+     * 
+     *    Set style of TreeNode. This is not recommend if you don't have any force requirement
+     *		className?: string;
+     */
+    private String className;
+    
+    /**
+     * style?: React.CSSProperties;
+     */
+    private String style;
+    
+    /**
+     * switcherIcon?: IconType;
+     */
+    private String switcherIcon;
+	
 	
 	/**
 	 * args[0]=key,[1]=title,[2]=children

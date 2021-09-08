@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.cxf.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.algz.platform.utility.SpringSecurityUtils;
 import com.cf611.approvalCommentManager.ApprovalComment;
 import com.cf611.approvalCommentManager.ApprovalCommentService;
 import com.cf611.definitionDetailManager.DefinitionDetail;
@@ -30,11 +32,11 @@ public class RequirementApprovalServiceImp implements RequirementApprovalService
 	@Transactional
 	@Override
 	public String submitDefinition(ApprovalComment ac) {
-		approvalCommentService.saveApprovalComment(ac);
-		Definition definition = new Definition();
-		definition.setId(ac.getDefinitionId());
-		definition.setState(ac.getApprovalResult().equals("1") ? "3" : "1");
-		definitionService.publicDefinition(definition);
+
+		ac.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+		ac.setKind("2");
+		definitionService.publishDefinition(ac.getDefinitionId(),ac.getApprovalResult().equals("1") ? "3" : "1",ac);
+
 		return null;
 	}
 
@@ -50,7 +52,9 @@ public class RequirementApprovalServiceImp implements RequirementApprovalService
 		
 		if(!definition.getState().equals("2")&&acList.size()>0) {
 			for(ApprovalComment act : acList) {
-				str.append(act.getCreateDate()+":"+act.getCreator()+":"+act.getApprovalComment()+"\n");
+				str.append(act.getCreateDate()+":"
+			+(act.getApprovalResult().equals("1")?"通过":"不通过")+":"
+			+(StringUtils.isEmpty(act.getApprovalComment())?"":act.getApprovalComment())+"\n");
 			}
 		}else {
 			str.append(acList.size()>0&&acList.get(0).getApprovalComment()!=null?acList.get(0).getApprovalComment():"");

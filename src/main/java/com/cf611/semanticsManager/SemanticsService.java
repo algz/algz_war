@@ -12,5 +12,19 @@ public interface SemanticsService {
 	 */
 	ProTablePage<Semantics> getSemanticss(ProTablePage<Semantics> pageParam, Semantics semanticsParam);
 
+	/**
+	 * 保存语义
+	 * @param semantics
+	 * @return
+	 */
+	String saveSemantics(Semantics semantics);
+
+	/**
+	 * 删除语义
+	 * @param semantics
+	 * @return
+	 */
+	String delSemantics(Semantics semantics);
+
 
 }

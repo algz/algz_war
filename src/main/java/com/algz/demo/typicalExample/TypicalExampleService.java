@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.cf611.util.ProTablePage;
+import com.cf611.util.TreeNode;
 
 public interface TypicalExampleService {
 
@@ -34,5 +35,7 @@ public interface TypicalExampleService {
 	 * @return
 	 */
 	List<TypicalExample> getExamplesView(String id);
+
+	List<TreeNode> GetTypicalExampleNodes(TreeNode nodeParam);
 
 }

@@ -7,6 +7,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -24,8 +25,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.Assert;
 
+
 public abstract class SpringBeanUtils {
 
+	
 	/**
 	 * Map 转换成 Entity.
 	 * 示例： MapToEntity(map,User.class)
@@ -73,7 +76,6 @@ public abstract class SpringBeanUtils {
 			list.add(MapToEntity(it.next(),entityType));
 		}
 		return list;
-		
 	}
 	
 	public static <T> Page<T> PageListMapToPageEntity(Page<Map<String,Object>> pageList,Pageable pageable,Class<T> entityType)throws Exception{
@@ -105,7 +107,7 @@ public abstract class SpringBeanUtils {
         Set<String> emptyNames = new HashSet<String>();
         for(java.beans.PropertyDescriptor pd : pds) {
             Object srcValue = src.getPropertyValue(pd.getName());
-            if (srcValue == null) emptyNames.add(pd.getName());
+            if (srcValue == null||srcValue.equals("null")) emptyNames.add(pd.getName());
         }
         String[] result = new String[emptyNames.size()];
         return emptyNames.toArray(result);

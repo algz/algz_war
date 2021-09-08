@@ -24,8 +24,8 @@ public class RegulationControl {
 	 * @return
 	 */
 	@RequestMapping("models")
-	public ProTablePage<Model> getModels(ProTablePage<Model> pageParam){
-		return modelService.getModels(pageParam);
+	public ProTablePage<Model> getModels(ProTablePage<Model> pageParam,Model modelParams){
+		return modelService.getModels(pageParam,modelParams);
 	}
 	
 

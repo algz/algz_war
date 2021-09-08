@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.algz.platform.utility.SpringSecurityUtils;
 import com.cf611.requirementDefinition.definition.Definition;
 import com.cf611.util.ProTablePage;
 import com.cf611.util.TreeNode;
@@ -61,5 +62,20 @@ public class IndicatorServiceImp implements IndicatorService {
 		}else {
 			root.setIsLeaf(true);
 		}
+	}
+
+	@Transactional
+	@Override
+	public String saveIndicator(Indicator indicatorParam) {
+		indicatorParam.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+		repository.save(indicatorParam);
+		return null;
+	}
+
+	@Transactional
+	@Override
+	public String delIndicator(Indicator indicatorParam) {
+		repository.deleteById(indicatorParam.getId());
+		return null;
 	}
 }

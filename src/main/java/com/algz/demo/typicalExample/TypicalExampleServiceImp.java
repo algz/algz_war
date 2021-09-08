@@ -1,6 +1,7 @@
 package com.algz.demo.typicalExample;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,10 @@ import org.springframework.stereotype.Service;
 
 import com.algz.platform.utility.SpringBeanUtils;
 import com.cf611.definitionDetailManager.DefinitionDetail;
+import com.cf611.indicatorManager.Indicator;
 import com.cf611.requirementDefinition.definition.Definition;
 import com.cf611.util.ProTablePage;
+import com.cf611.util.TreeNode;
 
 @Service
 public class TypicalExampleServiceImp implements TypicalExampleService {
@@ -31,12 +34,13 @@ public class TypicalExampleServiceImp implements TypicalExampleService {
 
 	/**
 	 * 查询视图
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@Override
 	public List<TypicalExample> getExamplesView(String id) {
-		List<Map<String,Object>> mapList=repository.getTypicalExampleForMapList(id);
+		List<Map<String, Object>> mapList = repository.getTypicalExampleForMapList(id);
 		try {
 			return SpringBeanUtils.ListMapToListEntity(mapList, TypicalExample.class);
 		} catch (Exception e) {
@@ -44,7 +48,7 @@ public class TypicalExampleServiceImp implements TypicalExampleService {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * List查询
 	 */
@@ -52,7 +56,7 @@ public class TypicalExampleServiceImp implements TypicalExampleService {
 	public List<TypicalExample> getExamples(TypicalExample exampleParam) {
 		return repository.findAll(Example.of(exampleParam));
 	}
-	
+
 	/**
 	 * 分页查询
 	 */
@@ -62,14 +66,16 @@ public class TypicalExampleServiceImp implements TypicalExampleService {
 		// 设置每页数据的条数;参数3，排序,字符串参数("createDate")是对象(definition)属性名称,大小写。
 		Pageable pageable = PageRequest.of(pageParam.getCurrent() - 1, pageParam.getPageSize(),
 				Sort.by("createDate").descending());
+//		pageParam.setPage(page);
 		return repository.findAll(Example.of(exampleParam), pageable);// 没有数据时，返回空列表;
 	}
-	
+
 	/**
 	 * 分页复杂查询
 	 */
 	@Override
-	public ProTablePage<TypicalExample> getSpecificationOfExamples(ProTablePage<TypicalExample> pageParam, TypicalExample exampleParam) {
+	public ProTablePage<TypicalExample> getSpecificationOfExamples(ProTablePage<TypicalExample> pageParam,
+			TypicalExample exampleParam) {
 
 		// 排序
 		// Sort sort= new Sort(Sort.Direction.ASC, "uid");
@@ -129,8 +135,6 @@ public class TypicalExampleServiceImp implements TypicalExampleService {
 		return pageParam;
 	}
 
-	
-	
 	/**
 	 * List复杂查询
 	 */
@@ -180,7 +184,40 @@ public class TypicalExampleServiceImp implements TypicalExampleService {
 		return repository.findAll(specification);// 没有数据时，返回空列表
 	}
 
+	/**
+	 * 获取树结点列表
+	 */
+	@Override
+	public List<TreeNode> GetTypicalExampleNodes(TreeNode nodeParam) {
+		TreeNode node = new TreeNode(nodeParam.getKey());
+		RecursionTreeNode(node);
+		return node.getChildren();
+	}
 
-
+	/**
+	 * 递归子结点
+	 * 
+	 * @param root
+	 */
+	private void RecursionTreeNode(TreeNode root) {
+		TypicalExample teParam = new TypicalExample();
+//		indicatorParam.setParentId(root.getKey());
+		List<TypicalExample> teList = repository.findAll(Example.of(teParam));
+		if (teList.size() != 0) {
+			root.setIsLeaf(false);
+			root.setChildren(new ArrayList<TreeNode>());
+			for (TypicalExample it : teList) {
+				TreeNode node = new TreeNode(it.getId(), it.getName());
+//				Map<String,String> m=new HashMap<String,String>();
+//				m.put("description", it.getDescription());
+//				m.put("parentId", it.getParentId());
+//				node.setExtProps(m); //自定义属性
+				root.getChildren().add(node);
+				RecursionTreeNode(node);
+			}
+		} else {
+			root.setIsLeaf(true);
+		}
+	}
 
 }

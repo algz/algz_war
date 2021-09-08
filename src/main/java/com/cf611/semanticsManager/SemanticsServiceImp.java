@@ -1,5 +1,6 @@
 package com.cf611.semanticsManager;
 
+import org.apache.cxf.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -32,4 +33,29 @@ public class SemanticsServiceImp implements SemanticsService {
 		return pageParam;
 	}
 
+	/**
+	 * 保存语义
+	 * @param semantics
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public String saveSemantics(Semantics semantics) {
+		repository.save(semantics); //save() 先查询ID是否存在，不存在则创建，存在则更新。
+		return  null;
+	}
+	
+	/**
+	 * 删除语义
+	 * @param semantics
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public String delSemantics(Semantics semantics) {
+		if(!StringUtils.isEmpty(semantics.getId())) {
+			repository.deleteById(semantics.getId());
+		}
+		return null;
+	}
 }

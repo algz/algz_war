@@ -11,4 +11,8 @@ public interface IndicatorService {
 	public ProTablePage<Indicator> GetIndicators(ProTablePage<Indicator> pageParam,Indicator indicatorParam);
 	
 	public List<TreeNode> GetIndicatorNodes(TreeNode nodeParam);
+	
+	public String saveIndicator(Indicator indicatorParam);
+
+	String delIndicator(Indicator indicatorParam);
 }

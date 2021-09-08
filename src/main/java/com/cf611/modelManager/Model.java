@@ -5,11 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="CF_MODEL")
+@DynamicInsert(true) //insert语句时，null值不添加。同时需设置一个@Column的insertable=false属性，才能全局生效。
+@DynamicUpdate(true) //update语句时，null值不更新。
 public class Model {
 	
 	@Id
@@ -27,6 +32,25 @@ public class Model {
 	@Column(name="FILEPATH")
 	private String filePath;
 
+	@Column(name="DESCRIPTION")
+	private String description;
+	
+	@Transient
+	private String picName;
+	
+	@Column(name="FILENAME")
+	private String fileName;
+	
+	@Column(name="CREATEDATE",insertable = false,updatable = false)
+	private String createDate;
+	
+	@Column(name="CREATOR")
+	private String creator;
+	
+	@Column(name="KINDID")
+	private String kindId;
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -57,6 +81,54 @@ public class Model {
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPicName() {
+		return picName;
+	}
+
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	public String getKindId() {
+		return kindId;
+	}
+
+	public void setKindId(String kindId) {
+		this.kindId = kindId;
 	}
 	
 	

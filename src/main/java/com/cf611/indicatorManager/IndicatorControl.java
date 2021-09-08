@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cf611.requirementDefinition.definition.Definition;
@@ -28,6 +29,15 @@ public class IndicatorControl {
 	@RequestMapping("/indicatornodes")
 	public List<TreeNode> getIndicatorNodes(TreeNode nodeParam){
 		return service.GetIndicatorNodes(nodeParam);
-		
+	}
+	
+	@RequestMapping(path="saveindicator",method = RequestMethod.POST)
+	public String saveIndicator(Indicator indicatorParam) {
+		return service.saveIndicator(indicatorParam);
+	}
+	
+	@RequestMapping(path="delindicator",method=RequestMethod.POST)
+	public String delIndicator(Indicator indicatorParam) {
+		return service.delIndicator(indicatorParam);
 	}
 }

@@ -4,6 +4,7 @@
 package com.algz.platform.common.file;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,7 +13,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.net.URLEncoder;
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -21,11 +22,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.cxf.common.util.StringUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,7 +75,7 @@ public class FileController {
 	@PostMapping("/uploads")
 	public String fileUpload(@RequestParam("file") MultipartFile[] files, String extra) {
 		for (MultipartFile file : files) {
-			String path = filestorePath + "/" + file.getOriginalFilename();
+			String path = filestorePath + "/123/" + file.getOriginalFilename();
 			processUploadFile(file, extra, path);
 		}
 		return "上传成功";
@@ -84,7 +85,7 @@ public class FileController {
 	 * 保存文件
 	 * @param file 文件对象
 	 * @param fileParam 附加参数
-	 * @param localFilePath 文件服务器存储全路径
+	 * @param localFilePath 文件服务器存储全路径(含文件)
 	 * @return
 	 */
 	private String processUploadFile(MultipartFile file, String fileParam, String localFilePath) {
@@ -133,19 +134,30 @@ public class FileController {
 						// Content-disposition是 MIME 协议的扩展，MIME 协议指示 MIME 用户代理如何显示附加的文件。
 						//当 Internet Explorer 接收到头时，它会激活文件下载对话框，它的文件名框自动填充了头中指定的文件名。
 
-						String downFilename =  URLEncoder.encode(f.getName(),"UTF-8");//必须编码为UTF-8,不然则是乱码。
+						String downFilename =  URLEncoder.encode(StringUtils.isEmpty(pc.getFileName())?f.getName():pc.getFileName(),"UTF-8");//必须编码为UTF-8,不然则是乱码。
 						response.addHeader("Content-Disposition", "attachment;filename=" + downFilename);
 						response.addHeader("content-type", "application/octet-stream");
 						IOUtils.copy(inputStream, outputStream);
 						outputStream.flush();
+						response.getOutputStream().close();
+						return ;
 					}
 				}
-
-				return ;
 			}
 		}
-		
-		response.getOutputStream().print("not down file!");
+			//stream输出的二进制的流，没有对字符进行编码，stream只能够使用iso 8859-1编码的字符;writer输出的文本信息，是经过系统编码之后输出的。
+			//response.getOutputStream().print("中文字");  //这行会出错,因为outputstream输出中文字造成的.换成Writer就好了。outputstream是以字节为单位输出字符串的，需要符合那个ISO 8859-1编码
+
+			response.setContentType("text/html;charset=utf-8");
+			//方式1
+//			InputStream inputStream=new ByteArrayInputStream("失败。文件不存在!".getBytes(StandardCharsets.UTF_8));
+//			IOUtils.copy(inputStream, response.getOutputStream());
+//			response.getOutputStream().flush();
+//			response.getOutputStream().close();
+			//方式2
+//			response.getWriter().println("失败。文件不存在!");
+
+
 	}
 	
 	//////////以下暂没测试/////////////

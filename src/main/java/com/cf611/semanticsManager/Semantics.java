@@ -35,6 +35,9 @@ public class Semantics {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+	@Column(name="KINDID")
+	private String kindId;
+	
 	public String getId() {
 		return id;
 	}
@@ -57,6 +60,14 @@ public class Semantics {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getKindId() {
+		return kindId;
+	}
+
+	public void setKindId(String kindId) {
+		this.kindId = kindId;
 	}
 	
 	

@@ -27,7 +27,7 @@ public class Indicator {
 	@Column(name = "CREATOR")
 	private String creator;
 	
-	@Column(name = "CREATEDATE")
+	@Column(name = "CREATEDATE",insertable = false,updatable = false)
 	private String createDate;
 	
 	@Column(name = "KEYWORD")

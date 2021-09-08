@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.cxf.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -25,11 +26,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.algz.platform.utility.SpringBeanUtils;
 import com.algz.platform.utility.SpringSecurityUtils;
+import com.cf611.approvalCommentManager.ApprovalComment;
+import com.cf611.approvalCommentManager.ApprovalCommentService;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.definitionDetailManager.DefinitionDetailRepository;
 import com.cf611.requirementDefinition.definition.Definition;
 import com.cf611.requirementDefinition.definition.DefinitionRepository;
-import com.cf611.requirementDefinition.definition.DefinitionView;
+import com.cf611.requirementDefinition.definitionView.DefinitionView;
+import com.cf611.requirementDefinition.definitionView.DefinitionViewRepository;
 import com.cf611.util.ProTablePage;
 
 /**
@@ -44,13 +48,19 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 	private DefinitionRepository repository;
 	
 	@Autowired
+	private DefinitionViewRepository definitionViewRepository;
+	
+	@Autowired
 	private DefinitionDetailRepository definitionDetailRepository;
+	
+	@Autowired
+	private ApprovalCommentService approvalCommentService;
 	
 	/**
 	 * 分页查询
 	 */
 	@Override
-	public ProTablePage<Definition> getDefinitions(ProTablePage<Definition> pageParam,Definition definitionParam) {
+	public ProTablePage<DefinitionView> getDefinitions(ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam) {
 
 		//排序
 		//Sort sort= new Sort(Sort.Direction.ASC, "uid");
@@ -60,11 +70,11 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 		Pageable pageable = PageRequest.of(pageParam.getCurrent() -1, pageParam.getPageSize(),Sort.by("createDate").descending());
 		
 		//直接使用匿名内部类实现接口
-        Specification<Definition> specification = new Specification<Definition>() {
+        Specification<DefinitionView> specification = new Specification<DefinitionView>() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-            public Predicate toPredicate(Root<Definition> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+            public Predicate toPredicate(Root<DefinitionView> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicateList = new ArrayList<>();
                 //条件1：查询 tvName 为 海信 的数据，root.get 中的值与 TV 实体中的属性名称对应
 //                if (definitionParam.getState() != null && !"".equals(definitionParam.getState())) {
@@ -97,8 +107,7 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
             }
 
         };
-        Page<Definition> page= repository.findAll(specification,pageable);//没有数据时，返回空列表
-		//Page<Definition> page= repository.findAll(Example.of(definitionParam),pageable);
+        Page<DefinitionView> page=definitionViewRepository.findAll(specification, pageable);
 		
 		pageParam.setPage(page);
 		return pageParam;
@@ -119,36 +128,45 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 		try {
 			Definition newDefinition=new Definition();
 			if(definition.getId()==null) {
-				//新增
+				//新增(definitiondetail:先insert,再update。sql语句变多，因为实体用了一对多的关联。)
 				definition.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
 				newDefinition=repository.save(definition);
+				//提交多的，则添加。
+				for(DefinitionDetail detail : definition.getDetailList()) {
+						detail.setDefinitionId(newDefinition.getId());
+						detail.setCreator(definition.getCreator());
+				}
+				
+				return "";
 			}else {
 				//更新
 				newDefinition=repository.findById(definition.getId()).get();
 				newDefinition.setName(definition.getName());
-			}
-			DefinitionDetail tem=new DefinitionDetail();
-			tem.setDefinitionId(newDefinition.getId());
-			List<DefinitionDetail> originList=definitionDetailRepository.findAll(Example.of(tem));
-			for(DefinitionDetail origin : originList) {
-				if(definition.getDetailList().contains(origin)) {
-					definition.getDetailList().remove(origin);
-					continue;
-				}else {
-					definitionDetailRepository.deleteById(origin.getId());
+				
+				DefinitionDetail tem=new DefinitionDetail();
+				tem.setDefinitionId(newDefinition.getId());
+				List<DefinitionDetail> originList=definitionDetailRepository.findAll(Example.of(tem));
+				for(DefinitionDetail origin : originList) {
+					if(definition.getDetailList().contains(origin)) {
+						definition.getDetailList().remove(origin);
+						continue;
+					}else {
+						definitionDetailRepository.deleteById(origin.getId());
+					}
 				}
-			}
-			//提交多的，则添加。
-			for(DefinitionDetail detail : definition.getDetailList()) {
-				if(detail.getId()==null) {
-					detail.setId(null);
-					detail.setDefinitionId(definition.getId());
-					detail.setCreator(definition.getCreator());
-//					detail.setIndicatorId(null);
-					definitionDetailRepository.save(detail);
+				//提交多的，则添加。
+				for(DefinitionDetail detail : definition.getDetailList()) {
+					if(detail.getId()==null) {
+						detail.setId(null);
+						detail.setDefinitionId(definition.getId());
+						detail.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+//						detail.setIndicatorId(null);
+						definitionDetailRepository.save(detail);
+					}
 				}
+				return null;
 			}
-			return null;
+			
 		}catch(Exception ex){
 			return ex.getLocalizedMessage();
 		}
@@ -159,18 +177,24 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 	 */
 	@Transactional
 	@Override
-	public String publicDefinition(Definition definition) {
-		Definition newDefinition=repository.findById(definition.getId()).get();
-		newDefinition.setState(definition.getState());
-		repository.save(newDefinition); 
+	public String publishDefinition(String definitionId,String state,ApprovalComment ac) {
+		if(!StringUtils.isEmpty(definitionId)) {
+			
+			Definition definition=repository.getOne(definitionId);
+//			definition.setId(definitionId);
+			definition.setState(state);
+			repository.save(definition); 
+			
+//			ApprovalComment ac=new ApprovalComment();
+
+			approvalCommentService.saveApprovalComment(ac);
+//			ac.setRelationId(null);
+			
+		}
+
 		return null;
 	}
 
-	@Override
-	public String publishDefinition(Definition definition) {
-		repository.save(definition);
-		return null;
-	}
 	
 	@Transactional
 	@Override

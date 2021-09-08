@@ -1,4 +1,4 @@
-package com.cf611.systemConfig.roleConfig;
+package com.cf611.roleManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -13,7 +13,7 @@ import com.algz.platform.security.authority.roleManager.ARoleRepository;
 import com.cf611.util.ProTablePage;
 
 @Service
-public class RoleConfigServiceImp implements RoleConfigService {
+public class RoleServiceImp implements RoleService {
 
 	@Autowired
 	private ARoleRepository repository;

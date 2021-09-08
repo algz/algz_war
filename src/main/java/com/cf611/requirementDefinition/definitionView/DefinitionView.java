@@ -1,4 +1,4 @@
-package com.cf611.requirementDefinition.definition;
+package com.cf611.requirementDefinition.definitionView;
 
 import java.util.List;
 

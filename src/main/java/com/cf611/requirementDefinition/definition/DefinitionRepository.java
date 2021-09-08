@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.Nullable;
 
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.requirementDefinition.definitionView.DefinitionView;
 
 /**
  * 

@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
 
 public interface RequirementFillingService {
 
-	public ProTablePage<Definition> GetFillings(ProTablePage<Definition> pageParam,Definition definitionParam);
+	public ProTablePage<DefinitionView> GetFillings(ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam);
 	
 	public List<DefinitionDetail> getDefinitionDetail(DefinitionDetail definitionParam); 
 	
@@ -16,5 +17,5 @@ public interface RequirementFillingService {
 	
 	public String submitDefinition(Definition params);
 	
-	public String feedbackDefinition(Definition params);
+	public String feedbackDefinition(Definition params,String description);
 }

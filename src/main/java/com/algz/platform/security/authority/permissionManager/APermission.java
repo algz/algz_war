@@ -28,12 +28,33 @@ public class APermission {
 	@GeneratedValue(generator = "ALGZGenerator")
 	private String permissid;
 
+	/**
+	 * 权限URL访问路径
+	 */
 	@Column(name = "PERMISSIONCODE")
 	private String permisscode;
 
 	@Column(name = "PERMISSIONNAME")
 	private String permissname;
 
+	/**
+	 * 权限类型（菜单）
+	 */
+	@Column(name = "PERMISSIONKIND")
+	private String permissionkind;
+	
+	/**
+	 * 权限组件存储路径
+	 */
+	@Column(name = "PERMISSIONPATH")
+	private String permissionpath;
+	
+	@Column(name = "ICON")
+	private String icon;	
+
+	@Column(name="CREATEDATE",insertable = false,updatable = false)
+	private String createDate;
+	
 	@JsonBackReference
 	// 不能设置FetchType.LAZY,因为user保存到session(登陆)后,再使用关联查询(此时原会话关闭,启动的是新会话),会报异常could
 	// not initialize proxy - no Session
@@ -82,4 +103,37 @@ public class APermission {
 		this.roleList = roleList;
 	}
 
+	public String getPermissionkind() {
+		return permissionkind;
+	}
+
+	public void setPermissionkind(String permissionkind) {
+		this.permissionkind = permissionkind;
+	}
+
+	public String getPermissionpath() {
+		return permissionpath;
+	}
+
+	public void setPermissionpath(String permissionpath) {
+		this.permissionpath = permissionpath;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	
 }

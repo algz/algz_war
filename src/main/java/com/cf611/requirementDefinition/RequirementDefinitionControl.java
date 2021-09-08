@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algz.platform.utility.SpringSecurityUtils;
+import com.cf611.approvalCommentManager.ApprovalComment;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.indicatorManager.IndicatorService;
 import com.cf611.requirementDefinition.definition.Definition;
-import com.cf611.requirementDefinition.definition.DefinitionView;
+import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
 import com.cf611.util.TreeNode;
 
@@ -48,7 +50,7 @@ public class RequirementDefinitionControl {
 	 * @return
 	 */
 	@RequestMapping("definitions")
-	public ProTablePage<Definition> getDefinitions(HttpServletRequest request,ProTablePage<Definition> pageParam,Definition definitionParam) {
+	public ProTablePage<DefinitionView> getDefinitions(HttpServletRequest request,ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam) {
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //	    String name = auth.getName(); //get logged in userna
 		String csrf=request.getHeader("X-CSRF-TOKEN");
@@ -73,9 +75,14 @@ public class RequirementDefinitionControl {
 	 * @param definition
 	 * @return
 	 */
-	@PostMapping("/publicdefinition")
-	public String publicDefinition(@RequestBody Definition definition) {
-		return service.publicDefinition(definition);
+	@PostMapping("/publishdefinition")
+	public String publishDefinition(@RequestBody Definition definition) {
+		ApprovalComment ac=new ApprovalComment();
+		ac.setDefinitionId(definition.getId());
+		ac.setApprovalResult("1");
+		ac.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+		ac.setKind("0");
+		return service.publishDefinition(definition.getId(),"1",ac);
 	}
 	
 	/**

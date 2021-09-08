@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -32,6 +33,9 @@ public class ApprovalComment {
 	@Column(name = "APPROVALCOMMENT")
 	private String approvalComment;
 	
+	/**
+	 * 1通过，0不通过
+	 */
 	@Column(name = "APPROVALRESULT")
 	private String approvalResult;
 	
@@ -50,6 +54,15 @@ public class ApprovalComment {
 	@Column(name = "KIND")
 	private String kind;
 
+	@Column(name="RELATIONID")
+	private String relationId;
+	
+	@Transient
+	private String kindName;
+	
+	@Transient
+    private String creatorName;
+	
 	public String getId() {
 		return id;
 	}
@@ -104,6 +117,30 @@ public class ApprovalComment {
 
 	public void setKind(String kind) {
 		this.kind = kind;
+	}
+
+	public String getRelationId() {
+		return relationId;
+	}
+
+	public void setRelationId(String relationId) {
+		this.relationId = relationId;
+	}
+
+	public String getKindName() {
+		return kindName;
+	}
+
+	public void setKindName(String kindName) {
+		this.kindName = kindName;
+	}
+
+	public String getCreatorName() {
+		return creatorName;
+	}
+
+	public void setCreatorName(String creatorName) {
+		this.creatorName = creatorName;
 	}
 
 	

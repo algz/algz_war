@@ -1,9 +1,9 @@
-package com.cf611.systemConfig.roleConfig;
+package com.cf611.roleManager;
 
 import com.algz.platform.security.authority.roleManager.ARole;
 import com.cf611.util.ProTablePage;
 
-public interface RoleConfigService {
+public interface RoleService {
 
 	/**
 	 * 获取角色列表
