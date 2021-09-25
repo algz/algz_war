@@ -8,6 +8,9 @@ import com.cf611.util.TreeNode;
 
 public interface IndicatorService {
 	
+	public Indicator GetIndicator(Indicator indicatorParam);
+	
+	
 	public ProTablePage<Indicator> GetIndicators(ProTablePage<Indicator> pageParam,Indicator indicatorParam);
 	
 	public List<TreeNode> GetIndicatorNodes(TreeNode nodeParam);

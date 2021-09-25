@@ -78,4 +78,11 @@ public class IndicatorServiceImp implements IndicatorService {
 		repository.deleteById(indicatorParam.getId());
 		return null;
 	}
+
+
+	@Override
+	public Indicator GetIndicator(Indicator indicatorParam) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

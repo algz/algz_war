@@ -69,7 +69,7 @@ public class ARole implements GrantedAuthority {
 	 */
 	@JsonManagedReference
 	 //不能设置FetchType.LAZY,因为user保存到session(登陆)后,再使用关联查询(此时原会话关闭,启动的是新会话),会报异常could not initialize proxy - no Session
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinTable(name="ALGZ_ROLE_PERMISSION",
 		joinColumns={@JoinColumn(name="ROLEID")},
 		inverseJoinColumns={@JoinColumn(name="PERMISSIONID")})

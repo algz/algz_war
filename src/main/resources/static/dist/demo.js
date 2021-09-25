@@ -1,0 +1,1 @@
+module.exports=function(s,t,e){this.name=s,this.age=t,this.money=e,this.say=function(){console.log("\u6211\u7684\u540D\u5B57\u53EB\uFF1A"+this.name+"\uFF0C\u6211\u4ECA\u5E74"+this.age+"\u5C81\uFF0C\u6708\u85AA\u4E3A\uFF1A"+this.money+"\u5143\uFF1B")}};

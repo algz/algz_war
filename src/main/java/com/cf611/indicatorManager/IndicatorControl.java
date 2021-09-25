@@ -22,6 +22,11 @@ public class IndicatorControl {
 	private IndicatorService service;
 	
 	@RequestMapping("/indicator")
+	public Indicator getIndicator(Indicator indicatorParam) {
+		return service.GetIndicator(indicatorParam);
+	}
+	
+	@RequestMapping("/indicators")
 	public ProTablePage<Indicator> getIndicators(ProTablePage<Indicator> pageParam,Indicator indicatorParam) {
 		return service.GetIndicators(pageParam,indicatorParam);
 	}

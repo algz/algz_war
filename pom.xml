@@ -12,6 +12,7 @@
 	<groupId>com.algz</groupId>
 	<artifactId>algz_war</artifactId>
 	<version>0.0.1</version>
+	<!-- 去掉下面这行，maven install 会打包成jar -->
 	<packaging>war</packaging>
 	<name>algz_war</name>
 	<description>Algz project for Spring Boot</description>
@@ -65,15 +66,20 @@
         <scope>provided</scope>
      </dependency>
      
-		<!-- 只能使用ojdbc6 与ojdbc8 (与 jsp引擎不兼容)  -->
+		<!-- 只能使用ojdbc6 与ojdbc8 (与 jsp引擎不兼容) -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>6</version>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> 
 		
-
+		<!-- mysql 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
 		<!-- CXF webservice 只能匹配 spring boot2.2.9.RELEASE -->
 		<dependency>
@@ -111,12 +117,34 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
-
-        
+<!-- https://blog.csdn.net/shipfei_csdn/article/details/103280032
+		<dependency>
+		<groupId>com</groupId>
+		<artifactId>a</artifactId>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/libs/yourlocaljar-3.0-RELEASE.jar</systemPath>
+		</dependency> -->
+		
 	</dependencies>
 
+
+
 	<build>
+	<defaultGoal>compile</defaultGoal>  
+	
+		<resources>
+		<resource>
+		<directory>D:/Users/algz/Desktop/refDll/dll/tem</directory>
+		<!-- 可选，部署目标目录 -->
+		<targetPath>WEB-INF/lib</targetPath>
+		<includes>
+		<include>**/*.jar</include>
+		</includes>
+		</resource>
+		</resources>
+	
 		<plugins>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

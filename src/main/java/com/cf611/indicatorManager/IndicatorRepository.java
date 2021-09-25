@@ -8,8 +8,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import system.Decimal;
-
 public interface IndicatorRepository extends JpaRepository<Indicator,String> {
 
 	@Query(nativeQuery = true, value = "SELECT * FROM CF_INDICATOR_SEMANTICS where IndicatorId=?1")
