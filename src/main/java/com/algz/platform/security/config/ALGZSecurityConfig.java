@@ -132,7 +132,7 @@ public class ALGZSecurityConfig  extends WebSecurityConfigurerAdapter{
 //			.ignoringAntMatchers("/upload**").and()//实际设置了没用,因为采用白名单机制,所有权限都以数据库设置的才有效.
 		    
 		   .authorizeRequests() //开启登录配置
-		   .antMatchers("/common/**","/demo/**").permitAll() //允许访问
+		   .antMatchers("/common/**","/demo/**","/websocket/**").permitAll() //允许访问
 		   .anyRequest().authenticated() //表示剩余的其他接口，登录之后才能访问（ALGZFilterInvocationSecurityMetadataSource）
             
 //            .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {

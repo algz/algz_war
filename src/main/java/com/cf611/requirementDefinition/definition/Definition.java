@@ -68,7 +68,7 @@ public class Definition {
 	
 	//mappedBy="DefinitionDetail对象的definitionId属性"
 	@OneToMany(cascade = CascadeType.ALL,fetch =FetchType.LAZY,mappedBy = "definitionId")
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //解决无法接收前端参数
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //解决无法接收前端参数,request请求的参数名前必须加 @RequestBody
 	private List<DefinitionDetail> detailList;
 	
 	@Transient

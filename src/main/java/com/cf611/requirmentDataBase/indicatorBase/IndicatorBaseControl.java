@@ -54,6 +54,33 @@ public class IndicatorBaseControl {
 		return service.getSemanticsTable(pageParam,param);
 	}
 	
+	/**
+	 * 获取指标
+	 * @param indicatorParam
+	 * @return
+	 */
+	@RequestMapping("/indicator")
+	public Indicator getIndicator(Indicator indicatorParam) {
+		return service.getIndicator(indicatorParam);
+	}
+	
+	/**
+	 * 保存指标
+	 * @param indicatorParam
+	 * @return
+	 */
+	public String saveIndicator(Indicator indicatorParam) {
+		return service.saveIndicator(indicatorParam);
+	}
+	
+	/**
+	 * 删除指标
+	 * @param indicatorParam
+	 * @return
+	 */
+	public String delIndicator(Indicator indicatorParam) {
+		return service.delIndicator(indicatorParam);
+	}
 	
 	@PostMapping("addindicatorsemantics")
 	public String addIndicatorSemantics(String indicatorId,String semanticsId) {

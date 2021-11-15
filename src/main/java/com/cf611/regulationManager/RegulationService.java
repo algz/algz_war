@@ -12,4 +12,10 @@ public interface RegulationService {
 	 */
 	ProTablePage<Regulation> getRegulations(ProTablePage<Regulation> pageParam, Regulation regulationParam);
 
+	String addRegulation(Regulation definition);
+
+	String updateRegulation(Regulation regulationParam);
+
+	String delRegulation(Regulation regulationParam);
+
 }

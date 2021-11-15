@@ -48,23 +48,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- spring security -->
 
-     <!-- jasper:tomcat提供的jsp引擎 -->
-     <dependency>
-        <groupId>org.apache.tomcat.embed</groupId>
-        <artifactId>tomcat-embed-jasper</artifactId>
-        <scope>provided</scope>
-     </dependency>
+	     <!-- jasper:tomcat提供的jsp引擎 -->
+	     <dependency>
+	        <groupId>org.apache.tomcat.embed</groupId>
+	        <artifactId>tomcat-embed-jasper</artifactId>
+	        <scope>provided</scope>
+	     </dependency>
      
 		<!-- 只能使用ojdbc6 与ojdbc8 (与 jsp引擎不兼容) -->
 		<dependency>
@@ -73,6 +75,7 @@
 			<version>6</version>
 			<scope>runtime</scope>
 		</dependency> 
+		<!-- 只能使用ojdbc6 与ojdbc8 (与 jsp引擎不兼容) -->
 		
 		<!-- mysql 驱动 -->
         <dependency>
@@ -80,6 +83,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- mysql 驱动 -->
 
 		<!-- CXF webservice 只能匹配 spring boot2.2.9.RELEASE -->
 		<dependency>
@@ -107,6 +111,7 @@
 			<artifactId>spring-rabbit-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- ampq -->
 
 		<!-- quartz <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-quartz</artifactId> 
 			</dependency> -->
@@ -115,6 +120,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		
+		<!-- websocket -->
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		
 <!-- https://blog.csdn.net/shipfei_csdn/article/details/103280032

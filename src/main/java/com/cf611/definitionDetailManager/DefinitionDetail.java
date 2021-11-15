@@ -72,7 +72,7 @@ public class DefinitionDetail {
 	
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.LAZY)
 	//name="字段名"；映射重复的列，必须其它重复列的属性设置insertable = false ,updatable = false，让Hibernate知道引用哪值。
-    @JoinColumn(name="DEFINITIONID",insertable = false ,updatable = false)
+    @JoinColumn(name="DEFINITIONID",insertable = false ,updatable = false) 
 	private Definition defintion;
 
 	@Transient
@@ -86,6 +86,9 @@ public class DefinitionDetail {
 	
 	@Transient
 	private String indicatorParentName;
+	
+	@Transient
+	private String indicatorValType;
 	
 	public String getId() {
 		return id;
@@ -195,6 +198,14 @@ public class DefinitionDetail {
 
 	public void setDefintion(Definition defintion) {
 		this.defintion = defintion;
+	}
+
+	public String getIndicatorValType() {
+		return indicatorValType;
+	}
+
+	public void setIndicatorValType(String indicatorValType) {
+		this.indicatorValType = indicatorValType;
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.cxf.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.algz.platform.utility.SpringBeanUtils;
 import com.algz.platform.utility.SpringSecurityUtils;
 import com.cf611.requirementDefinition.definition.Definition;
 import com.cf611.util.ProTablePage;
@@ -35,6 +37,10 @@ public class IndicatorServiceImp implements IndicatorService {
 		return pageParam;
 	}
 
+	@Override
+	public Indicator GetIndicator(Indicator indicatorParam) {
+		return repository.findById(indicatorParam.getId()).get();
+	}
 
 	@Override
 	public List<TreeNode> GetIndicatorNodes(TreeNode nodeParam) {
@@ -68,7 +74,14 @@ public class IndicatorServiceImp implements IndicatorService {
 	@Override
 	public String saveIndicator(Indicator indicatorParam) {
 		indicatorParam.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
-		repository.save(indicatorParam);
+		if(!StringUtils.isEmpty(indicatorParam.getId())) {
+			Indicator ind=repository.findById(indicatorParam.getId()).get();
+			SpringBeanUtils.copyPropertiesForbidNull(indicatorParam, ind);
+			repository.save(ind);
+		}else {
+			repository.save(indicatorParam);
+		}
+		
 		return null;
 	}
 
@@ -80,9 +93,5 @@ public class IndicatorServiceImp implements IndicatorService {
 	}
 
 
-	@Override
-	public Indicator GetIndicator(Indicator indicatorParam) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

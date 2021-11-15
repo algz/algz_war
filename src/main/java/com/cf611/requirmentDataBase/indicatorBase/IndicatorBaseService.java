@@ -21,4 +21,15 @@ public interface IndicatorBaseService {
 	String delIndicatorSemantics(String indicatorId, String semanticsId);
 
 	String addIndicatorSemantics(String indicatorId, String semanticsId);
+
+	/**
+	 * 获取指标
+	 * @param indicatorParam
+	 * @return
+	 */
+	Indicator getIndicator(Indicator indicatorParam);
+
+	String saveIndicator(Indicator indicatorParam);
+
+	String delIndicator(Indicator indicatorParam);
 }

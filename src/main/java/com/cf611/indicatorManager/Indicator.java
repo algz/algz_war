@@ -6,10 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="CF_INDICATORS")
+@DynamicInsert //insert语句时，null值不添加。
+@DynamicUpdate //update语句时，null值不更新。
 public class Indicator {
 
 	@Id
@@ -36,6 +40,12 @@ public class Indicator {
 	@Column(name = "PARENTID")
 	private String parentId;
 
+	@Column(name="VALTYPE")
+	private String valType;
+	
+	@Column(name="UNIT")
+	private String unit;
+	
 	public String getId() {
 		return id;
 	}
@@ -90,6 +100,22 @@ public class Indicator {
 
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getValType() {
+		return valType;
+	}
+
+	public void setValType(String valType) {
+		this.valType = valType;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 	
 	

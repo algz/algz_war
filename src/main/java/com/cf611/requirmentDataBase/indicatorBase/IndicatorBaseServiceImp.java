@@ -15,7 +15,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.algz.platform.utility.SpringSecurityUtils;
 import com.cf611.indicatorManager.Indicator;
 import com.cf611.indicatorManager.IndicatorRepository;
 import com.cf611.semanticsManager.Semantics;
@@ -65,6 +67,20 @@ public class IndicatorBaseServiceImp implements IndicatorBaseService{
 		return pageParam;
 	}
 
+	/**
+	 * 获取指标
+	 * @param indicatorParam
+	 * @return
+	 */
+	@Override
+	public Indicator getIndicator(Indicator indicatorParam) {
+		if(StringUtils.isEmpty(indicatorParam.getId())) {
+			return null;
+		}else {
+			return indicatorRepository.findById(indicatorParam.getId()).get();
+		}
+	}
+	
 	@Override
 	public ProTablePage<Semantics> getSemanticsTable(ProTablePage<Semantics> pageParam, Semantics param) {
 		Pageable pageable = PageRequest.of(0, 9999,Sort.by("Name").descending());
@@ -91,6 +107,23 @@ public class IndicatorBaseServiceImp implements IndicatorBaseService{
 		indicatorRepository.delIndicatorSemantics(indicatorId, semanticsId);
 		return null;
 	}
+	
+
+	@Transactional
+	@Override
+	public String saveIndicator(Indicator indicatorParam) {
+		indicatorParam.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+		indicatorRepository.save(indicatorParam);
+		return null;
+	}
+
+	@Transactional
+	@Override
+	public String delIndicator(Indicator indicatorParam) {
+		indicatorRepository.deleteById(indicatorParam.getId());
+		return null;
+	}
+
 	
 	@Override
 	public List<String> getSemanticsByIndicatorId(String indicatorId) {
