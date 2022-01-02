@@ -3,6 +3,9 @@ package com.cf611.semanticsManager;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -21,4 +24,5 @@ import com.cf611.requirementDefinition.definition.Definition;
  */
 public interface SemanticsRepository extends JpaRepository<Semantics,String>,JpaSpecificationExecutor<Semantics>{
 
+//	public Page<Semantics> findAllByOrderByCreateDateAtDesc(Example<Semantics> example, Pageable pageable);
 }

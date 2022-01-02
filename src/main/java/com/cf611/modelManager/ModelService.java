@@ -1,8 +1,11 @@
 package com.cf611.modelManager;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cf611.util.ProTablePage;
+import com.cf611.util.TreeNode;
 
 public interface ModelService {
 
@@ -38,4 +41,5 @@ public interface ModelService {
 	 */
 	String delModelFile(String id, String filePath);
 
+	List<TreeNode> getModelNodes(TreeNode nodeParam);
 }

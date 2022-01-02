@@ -18,4 +18,6 @@ public interface IndicatorService {
 	public String saveIndicator(Indicator indicatorParam);
 
 	String delIndicator(Indicator indicatorParam);
+	
+	List<Indicator> getIndicatorsList(Indicator indicatorParam);
 }

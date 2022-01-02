@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.catalina.LifecycleListener;
 //import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,19 +26,37 @@ import com.algz.amqp.ProducerSend;
 import com.algz.platform.security.authority.userManager.AUser;
 import com.algz.platform.security.authority.userManager.AUserRepository;
 import com.algz.platform.security.config.AUserDetailsService;
+import com.algz.redis.MessageConsumerService;
+import com.algz.redis.MessageEntity;
+import com.algz.redis.MessageProducerService;
+import com.algz.websocket.javax.WebSocketServer;
 
 @RequestMapping("/demo")
 @RestController
 public class HelloControl {
 
 	@Autowired
+  private MessageProducerService producer;
+
+  @Autowired
+  private MessageConsumerService consumer;
+	
+	@Autowired
+	private RedisTemplate<Object,Object> redisTemplate;
+	
+	@Autowired
+	private WebSocketServer webSocketServer;
+	
+	@Autowired
 	private ProducerSend mqSend; // 使用RabbitTemplate,这提供了接收/发送等等方法
 
 	@Autowired
 	private AUserRepository udao;
 
-	@RequestMapping("index")
+	@RequestMapping("/index")
 	public ModelAndView getIndex() {
+		consumer.start();
+		System.out.println(redisTemplate.opsForValue().get("test1"));
 		 ModelAndView mv=new ModelAndView();
 	        mv.setViewName("test");
 	        mv.addObject("name", "liyafei");
@@ -52,6 +71,10 @@ public class HelloControl {
 	
 	@RequestMapping("/hello")
 	public List<AUser> index(String str) {
+		producer.sendMeassage(new MessageEntity("1", "aaaa1"));
+		redisTemplate.opsForValue().set("test1", "val1");
+		webSocketServer.sendMsgToUser("1", "test,hello!");
+		
 		return udao.findAll();
 	}
 

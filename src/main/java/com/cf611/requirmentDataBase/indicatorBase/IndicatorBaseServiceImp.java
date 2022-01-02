@@ -39,7 +39,7 @@ public class IndicatorBaseServiceImp implements IndicatorBaseService{
 	public TreeNode getIndicatorTreeNodes() {
 		TreeNode root=new TreeNode("0","全部");
 		Indicator indicatorParam=new Indicator();
-		indicatorParam.setParentId(root.getKey());
+		indicatorParam.setSemanticsId(root.getKey());
 		List<Indicator> indicatorList=indicatorRepository.findAll(Example.of(indicatorParam));
 		if(indicatorList.size()!=0) {
 			root.setIsLeaf(false);
@@ -48,7 +48,7 @@ public class IndicatorBaseServiceImp implements IndicatorBaseService{
 				TreeNode node=new TreeNode(it.getId(),it.getName());
 				Map<String,String> m=new HashMap<String,String>();
 				m.put("description", it.getDescription());
-				m.put("parentId", it.getParentId());
+				m.put("parentId", it.getSemanticsId());
 				node.setExtProps(m);
 				root.getChildren().add(node);
 				//RecursionTreeNode(node);

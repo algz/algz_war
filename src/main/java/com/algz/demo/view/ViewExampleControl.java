@@ -4,8 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 2.示例类（jsp）
+ * 
+ * @author algz
+ *
+ */
 @Controller
-@RequestMapping("/viewexample")
+@RequestMapping("/demo/viewexample")
 public class ViewExampleControl {
 
 	

@@ -8,16 +8,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
 import com.algz.platform.security.authority.userManager.AUser;
+import com.algz.platform.security.authority.userManager.AUserRepository;
 import com.algz.platform.utility.JsonResult;
+import com.algz.platform.utility.SpringSecurityUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jdk.nashorn.internal.runtime.regexp.joni.Option;
@@ -30,10 +34,15 @@ import jdk.nashorn.internal.runtime.regexp.joni.Option;
 @Component
 public class ALGZAuthenticationSuccessHandler implements AuthenticationSuccessHandler  {
 
+	@Autowired
+	private AUserRepository auserRepository;
+	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 
+//		auserRepository.save(null);
+		
 		//1.登陆成功不跳转,不记住上一个请求的URI
 //		JsonResult<?> result =new JsonResult<Object>(true);
 //		response.setContentType("text/json;charset=utf-8");
@@ -52,6 +61,14 @@ public class ALGZAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		currentUser.getAuthorities().forEach(x->{
 			auList.add(x.getAuthority());
 		});
+		String ip=((WebAuthenticationDetails) SecurityContextHolder.getContext().
+                getAuthentication().getDetails()).getRemoteAddress();
+		ip=SpringSecurityUtils.getIpAddr(request);
+		currentUser.setIp(ip);
+		String mac=SpringSecurityUtils.getMACAddress(ip);
+		currentUser.setMac(mac);
+		
+		auserRepository.save(currentUser);
     	JsonResult<?> result =new JsonResult<Object>(true);
     	result.setCurrentAuthority(String.join(",", auList));
 		response.setContentType("text/json;charset=utf-8");

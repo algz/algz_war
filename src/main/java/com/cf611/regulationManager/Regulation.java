@@ -28,6 +28,12 @@ public class Regulation {
 	/**
 	 * 指标ID
 	 */
+	@Column(name="NAME")
+	private String name;
+	
+	/**
+	 * 指标ID
+	 */
 	@Column(name="INDICATORID")
 	private String indicatorId;
 	
@@ -96,6 +102,14 @@ public class Regulation {
 
 	public void setRegulationList(List<Regulation> regulationList) {
 		this.regulationList = regulationList;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

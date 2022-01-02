@@ -71,6 +71,18 @@ public class AUser implements UserDetails  {
 	@Column(name="NAME")
 	private String name;
 	
+	/**
+	 * IP 地址
+	 */
+	@Column(name="IP")
+	private String ip;
+	
+	/**
+	 * MAC 地址
+	 */
+	@Column(name="MAC")
+	private String mac;
+	
 	@JsonIgnore //设置 @JsonIgnore,restFul返回时,不读取此属性,可用于C# DataTable生成.
 	 //不能设置FetchType.LAZY,因为user保存到session(登陆)后,再使用关联查询(此时原会话关闭,启动的是新会话),会报异常could not initialize proxy - no Session
 	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
@@ -81,6 +93,8 @@ public class AUser implements UserDetails  {
 	
 	@Column(name="CREATEDATE",updatable = false,insertable = true)
 	private String createDate;
+	
+
 	
 	/**
 	 * 只读，获得角色名称
@@ -219,6 +233,30 @@ public class AUser implements UserDetails  {
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+
+
+
+	public String getIp() {
+		return ip;
+	}
+
+
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+
+
+	public String getMac() {
+		return mac;
+	}
+
+
+
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 
 

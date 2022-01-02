@@ -50,6 +50,17 @@ public class Model {
 	@Column(name="KINDID")
 	private String kindId;
 	
+	@Column(name="COMPONENTNAME")
+	private String componentName;
+	
+	@Column(name="SUBMODELNAME")
+	private String submodelName;
+	
+	/**
+	 * 类别：知识组件，通用成品
+	 */
+	@Column(name="CATEGORY")
+	private String category;
 	
 	public String getId() {
 		return id;
@@ -129,6 +140,30 @@ public class Model {
 
 	public void setKindId(String kindId) {
 		this.kindId = kindId;
+	}
+
+	public String getComponentName() {
+		return componentName;
+	}
+
+	public void setComponentName(String componentName) {
+		this.componentName = componentName;
+	}
+
+	public String getSubmodelName() {
+		return submodelName;
+	}
+
+	public void setSubmodelName(String submodelName) {
+		this.submodelName = submodelName;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

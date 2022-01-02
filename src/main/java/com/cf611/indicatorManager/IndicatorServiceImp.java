@@ -51,7 +51,7 @@ public class IndicatorServiceImp implements IndicatorService {
 
 	private void RecursionTreeNode(TreeNode root){
 		Indicator indicatorParam=new Indicator();
-		indicatorParam.setParentId(root.getKey());
+		indicatorParam.setSemanticsId(root.getKey());
 		List<Indicator> indicatorList=repository.findAll(Example.of(indicatorParam));
 		if(indicatorList.size()!=0) {
 			root.setIsLeaf(false);
@@ -60,7 +60,7 @@ public class IndicatorServiceImp implements IndicatorService {
 				TreeNode node=new TreeNode(it.getId(),it.getName());
 				Map<String,String> m=new HashMap<String,String>();
 				m.put("description", it.getDescription());
-				m.put("parentId", it.getParentId());
+				m.put("parentId", it.getSemanticsId());
 				node.setExtProps(m);
 				root.getChildren().add(node);
 				RecursionTreeNode(node);
@@ -90,6 +90,12 @@ public class IndicatorServiceImp implements IndicatorService {
 	public String delIndicator(Indicator indicatorParam) {
 		repository.deleteById(indicatorParam.getId());
 		return null;
+	}
+
+	@Override
+	public List<Indicator> getIndicatorsList(Indicator indicatorParam) {
+		List<Indicator> list= repository.findAll(Example.of(indicatorParam));
+		return list;
 	}
 
 

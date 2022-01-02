@@ -1,5 +1,7 @@
 package com.cf611.semanticsManager;
 
+import java.util.List;
+
 import com.cf611.util.ProTablePage;
 
 public interface SemanticsService {
@@ -26,5 +28,10 @@ public interface SemanticsService {
 	 */
 	String delSemantics(Semantics semantics);
 
-
+	/**
+	 * 
+	 * @param semanticsParam
+	 * @return
+	 */
+	List<Semantics> getSemanticsList(Semantics semanticsParam);
 }

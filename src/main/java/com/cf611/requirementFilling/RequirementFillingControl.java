@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cf611.definitionDetailManager.DefinitionDetail;
+import com.cf611.indicatorManager.Indicator;
 import com.cf611.requirementDefinition.definition.Definition;
 import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
@@ -70,5 +71,16 @@ public class RequirementFillingControl {
 	@RequestMapping("feedbackdefinition")
 	public String feedbackDefinition(Definition params,String approvalComment) {
 		return service.feedbackDefinition(params,approvalComment);
+	}
+	
+	/**
+	 * 获取语义列表
+	 * @param pageParam
+	 * @param semanticsParam
+	 * @return
+	 */
+	@RequestMapping("indicatorsforselect")
+	public List<Indicator> getIndicatorsForSelect(Indicator indicatorParam){
+		return service.getIndicatorsForSelect(indicatorParam);
 	}
 }

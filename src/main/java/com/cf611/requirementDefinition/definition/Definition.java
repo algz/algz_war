@@ -59,9 +59,26 @@ public class Definition {
 	@Column(name="CREATOR")
 	private String creator;
 	
+	/**
+	 * state: 0待发布；1待填充；2待审签；3待判定；4反馈;5已发布
+	 */
 	@Column(name="STATE")
 	private String state;
 	
+	@Column(name="VERSION")
+	private String version;
+	
+	/**
+	 * 基于上一个版本号（创建）（父ID）
+	 */
+	@Column(name="PARENTID")
+	private String parentId;
+	
+	/**
+	 * 顶层ID
+	 */
+	@Column(name="TOPID")
+	private String topId;
 	
 	@Column(name="CREATEDATE",updatable = false,insertable = false)
 	private String createDate;
@@ -142,6 +159,30 @@ public class Definition {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getTopId() {
+		return topId;
+	}
+
+	public void setTopId(String topId) {
+		this.topId = topId;
 	}
 
 

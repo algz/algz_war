@@ -30,4 +30,16 @@ public interface DefinitionRepository extends JpaRepository<Definition,String>,J
 	 */
 	@Query(nativeQuery = true,value="select * from cf_definitions_view")
 	public Page<DefinitionView> findViewAll(@Nullable Specification<DefinitionView> spec, Pageable pageable);
+	
+	/**
+	 * 获取最大版本号（当前版本号）
+	 * 向上查询和向下查询
+	 */
+	@Query(nativeQuery = true,value="select Max(to_number(version)+1) version from\r\n"
+			+ "(select Max(to_number(version))version from cf_definitions def "
+			+ "start with def.id=?1  connect by prior def.parentid=def.id\r\n"
+			+ "union  \r\n"
+			+ "select Max(to_number(version))version from cf_definitions def  start with def.id=?1 "
+			+ " connect by def.parentid=prior def.id)")
+	public Integer getMaxVersion(String id);
 }

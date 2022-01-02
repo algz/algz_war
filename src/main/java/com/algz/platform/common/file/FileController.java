@@ -82,34 +82,11 @@ public class FileController {
 	}
 
 	/**
-	 * 保存文件
-	 * @param file 文件对象
-	 * @param fileParam 附加参数
-	 * @param localFilePath 文件服务器存储全路径(含文件)
-	 * @return
-	 */
-	private String processUploadFile(MultipartFile file, String fileParam, String localFilePath) {
-		try {
-			System.out.print("文件参数名称:"+file.getName());// 获取表单中文件组件的名字
-			System.out.print(",文件名称:"+file.getOriginalFilename());// 获取上传文件的名字
-			System.out.print(",文件的上传大小:"+file.getSize()+" Byte");// 文件的上传大小
-			System.out.println(",fileParam:" + fileParam);
-			// 根据路径+时间戳+文件后缀名来创建文件
-//			File localFile = new File(path, new Date().getTime() + ".txt");
-			// 如果是传入服务器 file.getInputStream();用输入输出流来读取
-			// 储存为本地文件
-			file.transferTo(new File(localFilePath));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return file.getOriginalFilename();
-	}
-
-	/**
 	 * 下载文件
 	 * 
 	 * @ GetMapping 只接收Get方式请求.
-	 * http://localhost:8080/algz/common/file/down?pathcode=整机参数导入模板.xlsx
+	 * 
+	 * http://localhost:8080/algz/common/file/down?pathcode=0
 	 * @param remoteFileName 远程服务器存储的文件名 
 	 * @param request
 	 * @param response
@@ -142,6 +119,8 @@ public class FileController {
 						response.getOutputStream().close();
 						return ;
 					}
+				}else {
+					System.out.println("文件不存在！");
 				}
 			}
 		}
@@ -159,6 +138,32 @@ public class FileController {
 
 
 	}
+	
+	/**
+	 * 保存文件到本地
+	 * @param file 文件对象
+	 * @param fileParam 附加参数
+	 * @param localFilePath 文件服务器存储全路径(含文件)
+	 * @return
+	 */
+	private String processUploadFile(MultipartFile file, String fileParam, String localFilePath) {
+		try {
+			System.out.print("文件参数名称:"+file.getName());// 获取表单中文件组件的名字
+			System.out.print(",文件名称:"+file.getOriginalFilename());// 获取上传文件的名字
+			System.out.print(",文件的上传大小:"+file.getSize()+" Byte");// 文件的上传大小
+			System.out.println(",fileParam:" + fileParam);
+			// 根据路径+时间戳+文件后缀名来创建文件
+//			File localFile = new File(path, new Date().getTime() + ".txt");
+			// 如果是传入服务器 file.getInputStream();用输入输出流来读取
+			// 储存为本地文件
+			file.transferTo(new File(localFilePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return file.getOriginalFilename();
+	}
+
+	
 	
 	//////////以下暂没测试/////////////
 	

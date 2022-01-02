@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.algz.demo.Goods;
-
 @RequestMapping("/demo/sql")
 @RestController
 public class SQLDemoControl {
@@ -86,7 +84,7 @@ public class SQLDemoControl {
 	
 @RequestMapping("executebatchnonquery1")
 @ResponseBody
-	public void ExecuteBatchNonQuery1(Goods sql, HttpServletRequest request) {
+	public void ExecuteBatchNonQuery1(String sql, HttpServletRequest request) {
 		try {		
 			System.out.println(".......");
 //			service.ExecuteNonQuery(null);

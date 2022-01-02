@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.query.NativeQuery;
@@ -18,11 +17,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.hibernate.transform.AliasedTupleSubsetResultTransformer;
 import org.hibernate.transform.Transformers;
+
+/**
+ * 使用query.unwrap，必须添加事务（@Transactional(readOnly=true)），不然会报异常：com.sun.proxy.$Proxy267 cannot be cast to org.hibernate.query.internal.NativeQueryImpl
+ * @author algz
+ *
+ */
 @Repository
+@Transactional(readOnly=true)
 public class SQLReponsitoryImp implements SQLRepository {
 
 //	@Autowired

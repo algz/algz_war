@@ -11,6 +11,9 @@ import com.cf611.approvalCommentManager.ApprovalComment;
 import com.cf611.approvalCommentManager.ApprovalCommentService;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.definitionDetailManager.DefinitionDetailService;
+import com.cf611.indicatorManager.Indicator;
+import com.cf611.indicatorManager.IndicatorRepository;
+import com.cf611.indicatorManager.IndicatorService;
 import com.cf611.requirementDefinition.RequirementDefinitionService;
 import com.cf611.requirementDefinition.definition.Definition;
 import com.cf611.requirementDefinition.definitionView.DefinitionView;
@@ -28,6 +31,9 @@ public class RequirementFillingServiceImp implements RequirementFillingService {
 	
 	@Autowired
 	private ApprovalCommentService approvalCommentService;
+	
+	@Autowired
+	private IndicatorService indicatorService;
 	
 	@Override
 	public ProTablePage<DefinitionView> GetFillings(ProTablePage<DefinitionView> pageParam, DefinitionView definitionParam) {
@@ -75,6 +81,13 @@ public class RequirementFillingServiceImp implements RequirementFillingService {
 		definitionService.publishDefinition(params.getId(),"0",ac);
 		
 		return null;
+	}
+
+	@Override
+	public List<Indicator> getIndicatorsForSelect(Indicator indicatorParam) {
+		// TODO Auto-generated method stub
+		List<Indicator> list=indicatorService.getIndicatorsList(indicatorParam);
+		return list;
 	}
 
 }

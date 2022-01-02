@@ -31,4 +31,13 @@ public class SemanticsKindControl {
 	public String delSemanticsKind(SemanticsKind kind) {
 		return service.delSemanticsKind(kind);
 	}
+	
+	/**
+	 * 获取语义库树
+	 * @return
+	 */
+	@RequestMapping("semanticskindtree")
+	public List<TreeNode> getSemanticsKindTree(){
+		return service.getSemanticsKindTree();
+	}
 }

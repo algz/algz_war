@@ -4,6 +4,8 @@ package com.algz.platform.security.config;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.security.access.ConfigAttribute;
@@ -15,6 +17,9 @@ import org.springframework.stereotype.Component;
 import com.algz.platform.security.authority.permissionManager.APermission;
 import com.algz.platform.security.authority.permissionManager.APermissionRepository;
 import com.algz.platform.security.authority.roleManager.ARole;
+import com.cf611.modelManager.ModelControl;
+
+
 
 /**
  * 自定义权限拦截
@@ -33,6 +38,8 @@ public class ALGZFilterInvocationSecurityMetadataSource implements FilterInvocat
 	@Autowired
 	private APermissionRepository apermissionService;
 
+	private  final Logger logger=LoggerFactory.getLogger(ModelControl.class);
+	
 	/**
 	 * 遍历每个资源（url），如果与用户请求的资源（url）匹配，则返回该资源（url）所需要的权限（角色）集合;
 	 * 如果全都不匹配，则表示用户请求的资源（url)不需要权限（角色）即可访问.
@@ -45,10 +52,9 @@ public class ALGZFilterInvocationSecurityMetadataSource implements FilterInvocat
 		FilterInvocation filterInvocation=(FilterInvocation) object;
 		// 打印请求地址和参数.
         String url = filterInvocation.getRequestUrl();
-        System.out.println("访问的URL地址为(包括参数):" + url);
+        logger.info("访问的URL地址为(包括参数):" + url);
         url = filterInvocation.getRequest().getServletPath();
-        System.out.println("访问的URL地址为:" + url);
-
+        logger.info("访问的URL地址为:" + url);
         //方法1.采用自定义SQL查询
 //        APermission per=apermissionService.findByPermissname(url);
 //        List<ARole> roleList =Optional.ofNullable(per).orElse(new APermission()).getRoleList();

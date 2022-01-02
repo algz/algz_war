@@ -2,7 +2,10 @@ package com.cf611.modelManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.algz.platform.common.file.FileUtil;
 import com.cf611.util.ProTablePage;
+import com.cf611.util.TreeNode;
+
 
 @RestController
 @RequestMapping("/modelmanager")
@@ -23,6 +28,9 @@ public class ModelControl {
 	
 	@Autowired
 	private ModelService service;
+	
+	//日志
+	private  final Logger log=LoggerFactory.getLogger(ModelControl.class);
 	
 	/**
 	 * 获取模型列表。
@@ -74,5 +82,11 @@ public class ModelControl {
 	@RequestMapping("delmodelfile")
 	public String delModelFile(Model model) {
 		return service.delModelFile(model.getId(),model.getFilePath());
+	}
+
+	@RequestMapping("modelnodes")
+	public List<TreeNode> getModelNodes(TreeNode nodeParam){
+		log.info("正在调用 getModelNodes ");
+		return service.getModelNodes(nodeParam);
 	}
 }

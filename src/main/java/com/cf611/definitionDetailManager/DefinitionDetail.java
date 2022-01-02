@@ -58,6 +58,18 @@ public class DefinitionDetail {
 	@Column(name="CREATEDATE")
 	private String createDate;
 	
+//	@Column(name="INDICATORID")
+//	private String indicatorId;
+	
+	/**
+	 * 语义ID
+	 */
+	@Column(name="SEMANTICSID")
+	private String semanticsId;
+	
+	/**
+	 * 指标ID（值）
+	 */
 	@Column(name="INDICATORID")
 	private String indicatorId;
 	
@@ -79,7 +91,7 @@ public class DefinitionDetail {
 	private String definitionName;
 	
 	@Transient
-	private String indicatorName;
+	private String semanticsName;
 
 	@Transient
 	private String indicatorParentId;
@@ -89,6 +101,12 @@ public class DefinitionDetail {
 	
 	@Transient
 	private String indicatorValType;
+	
+	/**
+	 * 关联的指标名称。与val(存储的是指标ID)相关
+	 */
+	@Transient
+	private String indicatorName;
 	
 	public String getId() {
 		return id;
@@ -122,13 +140,13 @@ public class DefinitionDetail {
 		this.createDate = createDate;
 	}
 
-	public String getIndicatorId() {
-		return indicatorId;
-	}
-
-	public void setIndicatorId(String indicatorId) {
-		this.indicatorId = indicatorId;
-	}
+//	public String getIndicatorId() {
+//		return indicatorId;
+//	}
+//
+//	public void setIndicatorId(String indicatorId) {
+//		this.indicatorId = indicatorId;
+//	}
 
 	public String getDefinitionId() {
 		return definitionId;
@@ -162,14 +180,16 @@ public class DefinitionDetail {
 		this.definitionName = definitionName;
 	}
 
-	public String getIndicatorName() {
-		return indicatorName;
+
+	
+	public String getSemanticsName() {
+		return semanticsName;
 	}
 
-	public void setIndicatorName(String indicatorName) {
-		this.indicatorName = indicatorName;
+	public void setSemanticsName(String semanticsName) {
+		this.semanticsName = semanticsName;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		String id=((DefinitionDetail)obj).id;
@@ -207,6 +227,30 @@ public class DefinitionDetail {
 	public void setIndicatorValType(String indicatorValType) {
 		this.indicatorValType = indicatorValType;
 	}
+
+	public String getSemanticsId() {
+		return semanticsId;
+	}
+
+	public void setSemanticsId(String semanticsId) {
+		this.semanticsId = semanticsId;
+	}
+
+	public String getIndicatorId() {
+		return indicatorId;
+	}
+
+	public void setIndicatorId(String indicatorId) {
+		this.indicatorId = indicatorId;
+	}
+
+	public String getIndicatorName() {
+		return indicatorName;
+	}
+
+	public void setIndicatorName(String indicatorName) {
+		this.indicatorName = indicatorName;
+	}
 	
-	
+	 
 }

@@ -4,10 +4,13 @@
 package com.cf611.requirementDefinition;
 
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -44,6 +47,9 @@ import com.cf611.util.ProTablePage;
 @Transactional(readOnly = true) 
 public class RequirementDefinitionServiceImp implements RequirementDefinitionService {
 
+	@Autowired
+	private EntityManager entityManager;
+	
 	@Autowired
 	private DefinitionRepository repository;
 	
@@ -130,7 +136,9 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 			if(definition.getId()==null) {
 				//新增(definitiondetail:先insert,再update。sql语句变多，因为实体用了一对多的关联。)
 				definition.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+				
 				newDefinition=repository.save(definition);
+				newDefinition.setTopId(newDefinition.getId());
 				//提交多的，则添加。
 				for(DefinitionDetail detail : definition.getDetailList()) {
 						detail.setDefinitionId(newDefinition.getId());
@@ -184,7 +192,6 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 //			definition.setId(definitionId);
 			definition.setState(state);
 			repository.save(definition); 
-			
 //			ApprovalComment ac=new ApprovalComment();
 
 			approvalCommentService.saveApprovalComment(ac);
@@ -195,6 +202,40 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 		return null;
 	}
 
+	
+	/**
+	 * 如果想null属性值不更新,必需先查找出数据对象，然后再赋值给数据对象需要更新的值。
+	 */
+	@Transactional
+	@Override
+	public String upgradeDefinition(String parentId,ApprovalComment ac) {
+		if(!StringUtils.isEmpty(parentId)) {
+			
+			Definition pDefinition=repository.getOne(parentId);
+			Definition definition=new Definition();
+			SpringBeanUtils.copyPropertiesForbidNull(pDefinition, definition);
+			definition.setId(null);
+			
+//			definition.setId(definitionId);
+			definition.setState("1");
+			int cv=getMaxVersion(pDefinition.getTopId());
+			definition.setVersion(cv+"");
+			definition.setParentId(parentId);
+			definition.setTopId(pDefinition.getTopId()==null?pDefinition.getId():pDefinition.getTopId());
+			definition.setDetailList(new ArrayList<DefinitionDetail>());
+			repository.save(definition); 
+			for(DefinitionDetail pDetail : pDefinition.getDetailList()) {
+				DefinitionDetail detail=new DefinitionDetail();
+				SpringBeanUtils.copyPropertiesForbidNull(pDetail, detail);
+				detail.setId(null);
+				detail.setDefinitionId(definition.getId());
+				definitionDetailRepository.save(detail);
+			}
+			approvalCommentService.saveApprovalComment(ac);
+		}
+
+		return null;
+	}
 	
 	@Transactional
 	@Override
@@ -233,5 +274,20 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 		return repository.findById(definitionId).get();
 	}
 
-
+	
+	private Integer getMaxVersion(String topId) {
+//		String sql="select topid from cf_definitions def where id='"+definitionId+"'";
+//		String topId=(String) entityManager.createNativeQuery(sql).getSingleResult();
+//		if(topId==null) {
+//			//版本为1的数据，topId=null.
+//			topId=definitionId;
+//		}
+		String sql="select Nvl(Max(to_number(version)+1),2) version from cf_definitions def where topid='"+topId+"'";
+		BigDecimal max=(BigDecimal) entityManager.createNativeQuery(sql).getSingleResult();
+//		if(max==null) {
+//			sql="select Max(to_number(version)+1) version from cf_definitions def where topid='"+definitionId+"'";
+//			max=(BigDecimal) entityManager.createNativeQuery(sql).getSingleResult();
+//		}
+		return max.intValue();
+	}
 }

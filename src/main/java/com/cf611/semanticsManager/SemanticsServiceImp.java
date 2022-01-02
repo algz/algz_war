@@ -1,5 +1,7 @@
 package com.cf611.semanticsManager;
 
+import java.util.List;
+
 import org.apache.cxf.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -27,7 +29,8 @@ public class SemanticsServiceImp implements SemanticsService {
 	 */
 	@Override
 	public ProTablePage<Semantics> getSemanticss(ProTablePage<Semantics> pageParam, Semantics semanticsParam) {
-		Pageable pageable = PageRequest.of(pageParam.getCurrent() -1, pageParam.getPageSize());
+		Sort sort=Sort.by(Sort.Direction.ASC, "createDate");
+		Pageable pageable = PageRequest.of(pageParam.getCurrent() -1, pageParam.getPageSize(),sort);
 		Page<Semantics> page= repository.findAll(Example.of(semanticsParam),pageable); //没有数据时，返回空列表
 		pageParam.setPage(page);
 		return pageParam;
@@ -58,4 +61,19 @@ public class SemanticsServiceImp implements SemanticsService {
 		}
 		return null;
 	}
+	
+	/**
+	 * 获取语义列表
+	 * @param pageParam
+	 * @param semanticsParam
+	 * @return
+	 */
+	@Override
+	public List<Semantics> getSemanticsList(Semantics semanticsParam) {
+//		Sort sort=Sort.by(Sort.Direction.ASC, "createDate");
+		//Pageable pageable = PageRequest.of(pageParam.getCurrent() -1, pageParam.getPageSize(),sort);
+		List<Semantics> list= repository.findAll(Example.of(semanticsParam)); //没有数据时，返回空列表
+		return list;
+	}
+
 }

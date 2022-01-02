@@ -39,6 +39,14 @@ public interface RequirementDefinitionService {
 	public String publishDefinition(String definitionId,String state,ApprovalComment ac);
 	
 	/**
+	 * 提升版本
+	 * @param parentId
+	 * @param ac
+	 * @return
+	 */
+	public String upgradeDefinition(String parentId,ApprovalComment ac);
+	
+	/**
 	 * 通过需求定义，获取需求定义详情
 	 * @param definition
 	 * @return

@@ -12,4 +12,10 @@ public interface SemanticsKindService {
 	String saveSemanticsKind(SemanticsKind kind);
 
 	String delSemanticsKind(SemanticsKind kind);
+	
+	/**
+	 * 获取语义库树
+	 * @return
+	 */
+	List<TreeNode> getSemanticsKindTree();
 }

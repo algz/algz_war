@@ -32,6 +32,14 @@ public interface TypicalExampleRepository  extends JpaRepository<TypicalExample,
 	public List<Map<String,Object>> getTypicalExampleForMapList(TypicalExample te);
 	
 	/**
+	 * 查询，返回值数组
+	 * @param modelI
+	 * @return
+	 */
+	@Query(nativeQuery = true, value = "select indicatorid from CF_REGULATION_INDICATOR where regulationid=?1")
+	public List<String> getRegulationIndicator(String modelI);
+	
+	/**
 	 * 自定义查询，分页
 	 * @param pageable
 	 * @return

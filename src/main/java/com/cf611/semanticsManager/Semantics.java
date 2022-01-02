@@ -38,6 +38,9 @@ public class Semantics {
 	@Column(name="KINDID")
 	private String kindId;
 	
+	@Column(name="CREATEDATE")
+	private String createDate;
+	
 	public String getId() {
 		return id;
 	}
@@ -68,6 +71,14 @@ public class Semantics {
 
 	public void setKindId(String kindId) {
 		this.kindId = kindId;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 	
 	

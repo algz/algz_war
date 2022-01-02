@@ -16,17 +16,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.algz.demo.Goods;
 import com.algz.platform.common.sql.dao.SQLRepository;
 
 
-
+/**
+ * 
+ * @author algz
+ *
+ */
 @RequestMapping("/common/sql")
 @RestController
 public class SQLControl {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(SQLControl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SQLControl.class);
 	//private final Logger log= LoggerFactory.getLogger(SQLControl.class);
 	
 	@Autowired

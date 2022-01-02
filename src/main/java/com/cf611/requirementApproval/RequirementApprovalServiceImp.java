@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.algz.platform.utility.SpringSecurityUtils;
+import com.algz.websocket.javax.WebSocketServer;
 import com.cf611.approvalCommentManager.ApprovalComment;
 import com.cf611.approvalCommentManager.ApprovalCommentService;
 import com.cf611.definitionDetailManager.DefinitionDetail;
@@ -29,6 +30,9 @@ public class RequirementApprovalServiceImp implements RequirementApprovalService
 	@Autowired
 	private RequirementDefinitionService requirementDefinitionService;
 	
+	@Autowired
+	private WebSocketServer webSocketServer;
+	
 	@Transactional
 	@Override
 	public String submitDefinition(ApprovalComment ac) {
@@ -36,7 +40,10 @@ public class RequirementApprovalServiceImp implements RequirementApprovalService
 		ac.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
 		ac.setKind("2");
 		definitionService.publishDefinition(ac.getDefinitionId(),ac.getApprovalResult().equals("1") ? "3" : "1",ac);
-
+		if(ac.getApprovalResult().equals("1") ) {
+			//通过
+			webSocketServer.sendMsgToAllUser("push@"+ac.getDefinitionId());
+		}
 		return null;
 	}
 

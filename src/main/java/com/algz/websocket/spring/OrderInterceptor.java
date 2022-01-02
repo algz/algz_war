@@ -8,6 +8,11 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
+/**
+ *  
+ * @author algz
+ *
+ */
 public class OrderInterceptor extends HttpSessionHandshakeInterceptor {
 	@Override  
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,  
@@ -16,7 +21,7 @@ public class OrderInterceptor extends HttpSessionHandshakeInterceptor {
        String userCode = ((ServletServerHttpRequest) request).getServletRequest().getParameter("userCode");
        System.out.println(userCode);
        
-        attributes.put("userCode", userCode);  
+        attributes.put("userCode", userCode);  //存入用户ID
   
         return super.beforeHandshake(request, response, wsHandler, attributes);  
     }  

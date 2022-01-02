@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.9.RELEASE</version>
+		<version>2.6.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.algz</groupId>
 	<artifactId>algz_war</artifactId>
 	<version>0.0.1</version>
-	<!-- 去掉下面这行，maven install 会打包成jar -->
-	<packaging>war</packaging>
+	<!-- 去掉下面这行，maven install 会打包成jar-->
+	<packaging>war</packaging> 
 	<name>algz_war</name>
 	<description>Algz project for Spring Boot</description>
 
@@ -44,10 +44,27 @@
 			</exclusions>
 		</dependency>
 
+    
+    	<!-- jpa -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+		<!-- 必须添加，不然启动时报异常：Add an implementation, such as Hibernate Validator, to the classpath -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.18.Final</version>
+		</dependency>
+        
+		<!-- redis -->
+	    <dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-data-redis</artifactId>
+	    </dependency> 
+		
+
 		
 		<!-- spring security -->
 		<dependency>
@@ -68,14 +85,15 @@
 	        <scope>provided</scope>
 	     </dependency>
      
-		<!-- 只能使用ojdbc6 与ojdbc8 (与 jsp引擎不兼容) -->
+		<!-- 只能使用ojdbc6 (因为ojdbc6不支持设置连接时间，所以启动时，会提示：Driver does not support get/set network timeout for connections. ) 
+		     与ojdbc8 (与 jsp引擎不兼容) -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>6</version>
 			<scope>runtime</scope>
 		</dependency> 
-		<!-- 只能使用ojdbc6 与ojdbc8 (与 jsp引擎不兼容) -->
+		<!-- 只能使用ojdbc6与ojdbc8 (与 jsp引擎不兼容) -->
 		
 		<!-- mysql 驱动 -->
         <dependency>
@@ -128,6 +146,14 @@
 		  <artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		
+		<!-- lombok 提供注解的简写（合集插件），@Getter/@Setter，@Slf4j 
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.16.20</version>
+   			 <scope>provided</scope>
+		</dependency>-->
+		
 <!-- https://blog.csdn.net/shipfei_csdn/article/details/103280032
 		<dependency>
 		<groupId>com</groupId>
@@ -135,27 +161,42 @@
 		<scope>system</scope>
 		<systemPath>${project.basedir}/libs/yourlocaljar-3.0-RELEASE.jar</systemPath>
 		</dependency> -->
-		
+
 	</dependencies>
 
-
-
+	<!-- 编译打包 -->
 	<build>
 	<defaultGoal>compile</defaultGoal>  
-	
 		<resources>
-		<resource>
-		<directory>D:/Users/algz/Desktop/refDll/dll/tem</directory>
-		<!-- 可选，部署目标目录 -->
-		<targetPath>WEB-INF/lib</targetPath>
-		<includes>
-		<include>**/*.jar</include>
-		</includes>
-		</resource>
+		    <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <!-- <include>application.properties</include> -->
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.html</include>
+                    <include>**/*.js</include>
+                    <include>**/*.css</include>
+                    <include>**/*.map</include>
+                    <include>**/*.jpg</include>
+                    <include>**/*.png</include>
+                    <include>**/*.ico</include>
+                    <!-- 打包 banner.txt -->
+                    <include>**/banner.txt</include>
+                </includes>
+            </resource>
+			<resource>
+				<directory>D:/Users/algz/Desktop/refDll/dll/tem</directory>
+				<!-- 可选，部署目标目录 -->
+				<targetPath>WEB-INF/lib</targetPath>
+				<includes>
+					<include>**/*.jar</include>
+				</includes>
+			</resource>
 		</resources>
 	
 		<plugins>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

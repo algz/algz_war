@@ -37,9 +37,12 @@ public class Indicator {
 	@Column(name = "KEYWORD")
 	private String keyword;
 	
-	@Column(name = "PARENTID")
-	private String parentId;
+//	@Column(name = "PARENTID")
+//	private String parentId;
 
+	@Column(name="SEMANTICSID")
+	private String semanticsId;
+	
 	@Column(name="VALTYPE")
 	private String valType;
 	
@@ -94,14 +97,6 @@ public class Indicator {
 		this.keyword = keyword;
 	}
 
-	public String getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
-
 	public String getValType() {
 		return valType;
 	}
@@ -116,6 +111,14 @@ public class Indicator {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public String getSemanticsId() {
+		return semanticsId;
+	}
+
+	public void setSemanticsId(String semanticsId) {
+		this.semanticsId = semanticsId;
 	}
 	
 	

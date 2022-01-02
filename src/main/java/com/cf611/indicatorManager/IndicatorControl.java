@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.semanticsManager.Semantics;
 import com.cf611.util.ProTablePage;
 import com.cf611.util.TreeNode;
 
@@ -31,9 +32,11 @@ public class IndicatorControl {
 		return service.GetIndicators(pageParam,indicatorParam);
 	}
 	
+	//暂没使用
 	@RequestMapping("/indicatornodes")
 	public List<TreeNode> getIndicatorNodes(TreeNode nodeParam){
-		return service.GetIndicatorNodes(nodeParam);
+		//return service.GetIndicatorNodes(nodeParam);
+		return null;
 	}
 	
 	@RequestMapping(path="saveindicator",method = RequestMethod.POST)
@@ -44,5 +47,16 @@ public class IndicatorControl {
 	@RequestMapping(path="delindicator",method=RequestMethod.POST)
 	public String delIndicator(Indicator indicatorParam) {
 		return service.delIndicator(indicatorParam);
+	}
+	
+	/**
+	 * 获取语义列表
+	 * @param pageParam
+	 * @param semanticsParam
+	 * @return
+	 */
+	@RequestMapping("indicatorslist")
+	public List<Indicator> getIndicatorsList(Indicator indicatorParam){
+		return service.getIndicatorsList(indicatorParam);
 	}
 }

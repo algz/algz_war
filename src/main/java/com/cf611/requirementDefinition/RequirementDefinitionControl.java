@@ -85,6 +85,22 @@ public class RequirementDefinitionControl {
 		return service.publishDefinition(definition.getId(),"1",ac);
 	}
 	
+	
+	/**
+	 * 提升版本需求定义
+	 * @param definition
+	 * @return
+	 */
+	@PostMapping("/upgradedefinition")
+	public String upgradeDefinition(@RequestBody Definition definition) {
+		ApprovalComment ac=new ApprovalComment();
+		ac.setDefinitionId(definition.getId());
+		ac.setApprovalResult("1");
+		ac.setCreator(SpringSecurityUtils.getCurrentUser().getUserid());
+		ac.setKind("0");
+		return service.upgradeDefinition(definition.getId(),ac);
+	}
+	
 	/**
 	 * 删除需求定义
 	 * @param definition

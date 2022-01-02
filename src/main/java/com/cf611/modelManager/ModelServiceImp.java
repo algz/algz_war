@@ -3,6 +3,7 @@ package com.cf611.modelManager;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +25,11 @@ import com.algz.platform.common.file.pathencode.APathCodeRepository;
 import com.algz.platform.common.file.pathencode.APathCodeService;
 import com.algz.platform.utility.SpringBeanUtils;
 import com.algz.platform.utility.SpringSecurityUtils;
+import com.cf611.semanticsManager.Semantics;
+import com.cf611.semanticsManager.semanticsKind.SemanticsKind;
+import com.cf611.semanticsManager.semanticsKind.SemanticsKindRepository;
 import com.cf611.util.ProTablePage;
+import com.cf611.util.TreeNode;
 
 @Transactional(readOnly = true)
 @Service
@@ -32,6 +38,9 @@ public class ModelServiceImp implements ModelService {
 	@Autowired
 	private ModelRepository repository;
 
+	@Autowired
+	private SemanticsKindRepository semanticsKindRepository;
+	
 	@Autowired
 	private APathCodeService apathcodeService;
 
@@ -155,5 +164,30 @@ public class ModelServiceImp implements ModelService {
 		
 		apathcodeService.delAPathCode(filePath);
 		return null;
+	}
+
+	@Override
+	public List<TreeNode> getModelNodes(TreeNode nodeParam) {
+		List<SemanticsKind> kindList=semanticsKindRepository.findAll();
+		TreeNode root=new TreeNode();
+		root.setKey("0");
+		root.setChildren(new ArrayList<TreeNode>());
+		for(SemanticsKind sk : kindList) {
+			TreeNode pnode = new TreeNode("p"+sk.getId(), sk.getName());
+			pnode.setChildren(new ArrayList<TreeNode>());
+			root.getChildren().add(pnode);
+			Model semanticsParam=new Model();
+			semanticsParam.setKindId(sk.getId());
+			List<Model> modelsList=repository.findAll(Example.of(semanticsParam),Sort.by("createDate"));
+			for(Model it:modelsList) {
+				TreeNode cnode=new TreeNode(it.getId(),it.getName()+"("+it.getSubmodelName()+")");
+				cnode.setIsLeaf(true);
+				Map<String,String> m=new HashMap<String,String>();
+				m.put("parentId", pnode.getKey());
+				cnode.setExtProps(m);
+				pnode.getChildren().add(cnode);
+			}
+		}		
+		return root.getChildren();
 	}
 }

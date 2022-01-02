@@ -36,4 +36,6 @@ public class DefinitionDetailControl {
 	public ProTablePage<DefinitionDetail> getDefinitiionDetails(ProTablePage<DefinitionDetail> pageParam,DefinitionDetail definitionDetailParam) {
 		return service.GetDefinitionDetails(pageParam, definitionDetailParam);
 	}
+	
+
 }

@@ -54,6 +54,8 @@ public class DefinitionView {
 	@Column(name="STATE")
 	private String state;
 	
+	@Column(name="VERSION")
+	private String version;
 	
 	@Column(name="CREATEDATE",updatable = false,insertable = false)
 	private String createDate;
@@ -121,6 +123,22 @@ public class DefinitionView {
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public List<DefinitionDetail> getDetailList() {
+		return detailList;
+	}
+
+	public void setDetailList(List<DefinitionDetail> detailList) {
+		this.detailList = detailList;
 	}
 
 	
