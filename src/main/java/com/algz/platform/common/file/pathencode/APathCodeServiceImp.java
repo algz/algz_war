@@ -135,7 +135,12 @@ public class APathCodeServiceImp implements APathCodeService{
 		return list;
 	}
 	
-
+	@Transactional
+	public String addAPathCode(APathCode pathcode) {
+		repository.save(pathcode);
+		return "";
+	}
+	
 	/**
 	 * 删除。
 	 * @param id

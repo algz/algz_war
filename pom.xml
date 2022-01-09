@@ -57,13 +57,6 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.0.18.Final</version>
 		</dependency>
-        
-		<!-- redis -->
-	    <dependency>
-	      <groupId>org.springframework.boot</groupId>
-	      <artifactId>spring-boot-starter-data-redis</artifactId>
-	    </dependency> 
-		
 
 		
 		<!-- spring security -->
@@ -119,7 +112,7 @@
 		</dependency>
 
 
-		<!-- ampq -->
+		<!-- ampq 消息队列 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
@@ -131,7 +124,7 @@
 		</dependency>
 		<!-- ampq -->
 
-		<!-- quartz <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-quartz</artifactId> 
+		<!-- quartz 定时任务 <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-quartz</artifactId> 
 			</dependency> -->
 
 		<!-- email -->
@@ -145,6 +138,27 @@
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
+		
+		<!-- redis -->
+	    <dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-data-redis</artifactId>
+	    </dependency> 
+		<!-- redis -->
+		
+		<!--解析excel-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.1.0</version>
+		</dependency>
+		<!--解析excel-->
+		
 		
 		<!-- lombok 提供注解的简写（合集插件），@Getter/@Setter，@Slf4j 
 		<dependency>
@@ -188,7 +202,7 @@
             </resource>
 			<resource>
 				<directory>D:/Users/algz/Desktop/refDll/dll/tem</directory>
-				<!-- 可选，部署目标目录 -->
+				<!-- 可选(默认部署到/BOOT-INF/class目录下)，部署目标目录（将tem目录下*.jar文件部署到/BOOT-INF/class/WEB-INF/lib目录下。） -->
 				<targetPath>WEB-INF/lib</targetPath>
 				<includes>
 					<include>**/*.jar</include>

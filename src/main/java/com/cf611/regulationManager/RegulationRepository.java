@@ -39,4 +39,9 @@ public interface RegulationRepository extends JpaRepository<Regulation, String> 
 	
 	@Query(nativeQuery = true, value = "select indicatorid from CF_REGULATION_INDICATOR where regulationid=?1")
 	public List<String> getRegulationIndicator(String modelId,Pageable pageable);
+	
+	
+	
+	@Query(nativeQuery = true, value = "select * from CF_REGULATION_FULL_VIEW where definitionid=?1")
+	public List<String> getRegulationFullViewByDefinitionId(String definitionid);
 }

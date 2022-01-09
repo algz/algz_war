@@ -83,15 +83,66 @@ public class Definition {
 	@Column(name="CREATEDATE",updatable = false,insertable = false)
 	private String createDate;
 	
+	/**
+	 * 接收人
+	 */
+	@Column(name="RECEIVER")
+	private String receiver;
+	
+	/**
+	 * 接收时间
+	 */
+	@Column(name="RECEIVEDATE")
+	private String receiveDate;
+	
+
+	/**
+	 * 判定文件ID
+	 */
+	@Column(name="REGULATIONFILEID")
+	private String regulationFileId;
+	
+	/**
+	 * 归档文件ID
+	 */
+	@Column(name="ARCHIVEFILEID")
+	private String archiveFileId;
+	
+	/**
+	 * 归档时间
+	 */
+	@Column(name="ARCHIVEDATE")
+	private String archiveDate;
+	
 	//mappedBy="DefinitionDetail对象的definitionId属性"
 	@OneToMany(cascade = CascadeType.ALL,fetch =FetchType.LAZY,mappedBy = "definitionId")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //解决无法接收前端参数,request请求的参数名前必须加 @RequestBody
 	private List<DefinitionDetail> detailList;
 	
+	/**
+	 * 创建人名称
+	 */
 	@Transient
 	private String creatorName;
 	
+	/**
+	 * 接收人中文名称
+	 */
+	@Transient
+	private String receiverName;
 	
+	
+	/**
+	 * 文件名称
+	 */
+	@Transient
+	private String regulationFileName;
+	
+	/**
+	 * 归档文件名称
+	 */
+	@Transient
+	private String archiveFileName;
 	
 	public String getCreatorName() {
 		return creatorName;
@@ -185,9 +236,72 @@ public class Definition {
 		this.topId = topId;
 	}
 
+	public String getReceiver() {
+		return receiver;
+	}
 
-	
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
 
-	
+
+
+
+	public String getReceiveDate() {
+		return receiveDate;
+	}
+
+	public void setReceiveDate(String receiveDate) {
+		this.receiveDate = receiveDate;
+	}
+
+	public String getRegulationFileId() {
+		return regulationFileId;
+	}
+
+	public void setRegulationFileId(String pathCodeId) {
+		this.regulationFileId = pathCodeId;
+	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public String getRegulationFileName() {
+		return regulationFileName;
+	}
+
+	public void setRegulationFileName(String regulationFileName) {
+		this.regulationFileName = regulationFileName;
+	}
+
+	public String getArchiveFileId() {
+		return archiveFileId;
+	}
+
+	public void setArchiveFileId(String archiveFileId) {
+		this.archiveFileId = archiveFileId;
+	}
+
+	public String getArchiveFileName() {
+		return archiveFileName;
+	}
+
+	public void setArchiveFileName(String archiveFileName) {
+		this.archiveFileName = archiveFileName;
+	}
+
+	public String getArchiveDate() {
+		return archiveDate;
+	}
+
+	public void setArchiveDate(String archiveDate) {
+		this.archiveDate = archiveDate;
+	}
+
 
 }

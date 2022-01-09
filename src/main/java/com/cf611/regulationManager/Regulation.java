@@ -44,6 +44,12 @@ public class Regulation {
 	private String modelId;
 	
 	/**
+	 * 组件数量
+	 */
+	@Column(name="MODELNUM")
+	private Integer modelNum;
+	
+	/**
 	 * 判定规则
 	 */
 	@Column(name="REGULATIONVAL")

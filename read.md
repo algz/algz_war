@@ -20,7 +20,8 @@ cxf.path=/webservice
 		execludeUrls= new HashSet<>(Arrays.asList(execludeUrlStr.split(",")));
     }
     
-   5.Controller接收数组类型时,客户端的ajax参数必须设置 traditional: true,否则获取不到数组数据.
+6. @Controller接收数组类型
+Controller接收数组类型时,客户端的ajax参数必须设置 traditional: true,否则获取不到数组数据.
  traditional,true 适用于servlet,  sql=1&sql=2; false,适用于PHP和Ruby on Rails,用于深度序列化 , sql[]=1& sql[]=1;
  客户端示例代码:
    	  $.ajax({
@@ -32,7 +33,7 @@ Controller示例代码:
 @RequestMapping("executebatchnonquery")
 public Integer ExecuteBatchNonQuery(String[] sql) 
 
-6.
+7.客户端ajax示例
  $.ajax({
             type:'post',
             url: "http://localhost:8080/algz/common/sql/executebatchnonquery1",

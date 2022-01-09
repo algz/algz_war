@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.algz.amqp.ProducerSend;
+import com.algz.platform.common.crypto.RSAEncryption;
 //import com.algz.amqp.ProducerSend;
 import com.algz.platform.security.authority.userManager.AUser;
 import com.algz.platform.security.authority.userManager.AUserRepository;
@@ -55,6 +56,15 @@ public class HelloControl {
 
 	@RequestMapping("/index")
 	public ModelAndView getIndex() {
+		String[] arr=RSAEncryption.genKeyPair();
+		String c="Lr3S96hFRbL/ArhwXLb0M8s2rPziv90V32pq4iUd97417tuQDuBBi0nGgEmjb464AFLGndygolCxfSEXR3I8qqUj4UULVTR0KiQXL/8vp/aRMxm7sE7iyr32bJnSl3Gs2hEXHM+yTTm1z7rmU6JuMzal24Bf5pI8XXFgiUGNDus=";
+		//公钥
+		String publicKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1icuM7QxgJlCDEo8siRqBOe2fcnCvquN6o/Gd/MtEUf8AvPRMvKKxtBTyB9pUyP8N9/6qNR3UMombSDIDJAHOP/YUPSOCxASwQyVeoDLzPy8XFeHLCZCm3LVfZqyLRaQG05pSIU2f65XcoANvkPiGclvrHsufHtcrU2FXkbGDPQIDAQAB";
+		//私钥
+		String privateKey="MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALWJy4ztDGAmUIMSjyyJGoE57Z9ycK+q43qj8Z38y0RR/wC89Ey8orG0FPIH2lTI/w33/qo1HdQyiZtIMgMkAc4/9hQ9I4LEBLBDJV6gMvM/LxcV4csJkKbctV9mrItFpAbTmlIhTZ/rldygA2+Q+IZyW+sey58e1ytTYVeRsYM9AgMBAAECgYB1tXk0UWfa2D0QH/KRz/xNmkAHSO7kGIwTM0YxSH6MOBZ+ZgaJ0y4yxy9ll83rd8BZUFniBzrmIjazZuZ2vtwjxgtbdzJcOUuXVx9UQ3Q9VccFoenoXA2ev39/BdLuDjFTabDjsvIFAnr6vfAFdeVZAfrAO0Hjq6ngkQAxtzmOQQJBAN3ajRpcdes8v/cbf/+dEC5ulX/lRuYs8REc1e9IOYI9NqyGVXm4Xl/JIQTJ7xEz6LUqU120joKl/MuEV8cMuWUCQQDRer148HQFvG2iz0e8Zy5k6RDdNZn+s34At6TMC/dwY67LqY1G4aImaNRG1Jv4hA2wKI4RJ0PO2QsvuNYnkXD5AkEAkODecK6c2wgLHKY6yoSZQpk4zBLAYCRNMS2xj9eMpr6u66+2NgzupILGK0hr9MH/X//J/VGiFzOqiIVehUCL+QJAdO3UcXuW59TERgr5+fqGdSF7nl7bNMcwYGoh/Rv45K1f1qMwDw7HmjUNuPPYlCHyGhCpLH4EZaPVkK/WKoQO0QJAG8SYMoX/aOCZr5HaSV5++d5u96HALrxSSd6epay5pzXm++FIQ4XqWJx+mmg3KfplU1C8R0J0XtpwAL+sotcaJQ==";
+		String dc=RSAEncryption.decrypt(c, privateKey);
+		System.out.print(dc);
+
 		consumer.start();
 		System.out.println(redisTemplate.opsForValue().get("test1"));
 		 ModelAndView mv=new ModelAndView();
