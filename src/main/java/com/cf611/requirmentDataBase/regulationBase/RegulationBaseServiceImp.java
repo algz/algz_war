@@ -20,8 +20,8 @@ import org.springframework.util.StringUtils;
 import com.algz.platform.utility.SpringSecurityUtils;
 import com.cf611.indicatorManager.Indicator;
 import com.cf611.indicatorManager.IndicatorRepository;
-import com.cf611.semanticsManager.Semantics;
-import com.cf611.semanticsManager.SemanticsRepository;
+import com.cf611.requirmentDataBase.semanticsBase.Semantics;
+import com.cf611.requirmentDataBase.semanticsBase.SemanticsRepository;
 import com.cf611.util.ProTablePage;
 import com.cf611.util.TreeNode;
 

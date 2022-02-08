@@ -60,7 +60,7 @@ public interface APathCodeService {
 	List<String> addAPathCode(MultipartFile[] files, APathCode pathCode, String custmoDir);
 
 	
-	public String addAPathCode(APathCode pathcode);
+//	String addAPathCode(APathCode pathcode);
 	
 	/**
 	 * 删除。

@@ -108,6 +108,9 @@ public class DefinitionDetail {
 	@Transient
 	private String indicatorName;
 	
+	@Transient
+	private String semanticsKindName;
+	
 	public String getId() {
 		return id;
 	}
@@ -251,6 +254,14 @@ public class DefinitionDetail {
 	public void setIndicatorName(String indicatorName) {
 		this.indicatorName = indicatorName;
 	}
+
+	public String getSemanticsKindName() {
+		return semanticsKindName;
+	}
+
+	public void setSemanticsKindName(String semanticsKindName) {
+		this.semanticsKindName = semanticsKindName;
+	}
 	
-	 
+	
 }

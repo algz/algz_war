@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.algz.platform.utility.SpringBeanUtils;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailView;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailViewRepository;
 import com.cf611.util.ProTablePage;
 
 
@@ -22,6 +24,9 @@ public class DefinitionDetailServiceImp implements DefinitionDetailService{
 
 	@Autowired
 	private DefinitionDetailRepository repository;
+	
+	@Autowired
+	private DefinitionDetailViewRepository definitionDetailViewRepository;
 	
 	/**
 	 * 添加需求详情
@@ -49,14 +54,17 @@ public class DefinitionDetailServiceImp implements DefinitionDetailService{
 	 * 通过 definitonId ，从 CF_DEFINITIONDETAIL_VIEW 获取需求详情列表
 	 */
 	@Override
-	public List<DefinitionDetail> getDefinitionDetailByDefinitionId(String definitonId) {
-		List<Map<String,Object>> mapList=repository.getDefinitionDetail(definitonId);
-		try {
-			return SpringBeanUtils.ListMapToListEntity(mapList, DefinitionDetail.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	public List<DefinitionDetailView> getDefinitionDetailByDefinitionId(String definitonId) {
+		DefinitionDetailView ddv=new DefinitionDetailView();
+		ddv.setDefinitionId(definitonId);
+		return definitionDetailViewRepository.findAll(Example.of(ddv));
+//		List<Map<String,Object>> mapList=repository.getDefinitionDetail(definitonId);
+//		try {
+//			return SpringBeanUtils.ListMapToListEntity(mapList, DefinitionDetail.class);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 	/**

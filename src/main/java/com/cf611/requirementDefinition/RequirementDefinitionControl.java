@@ -24,6 +24,7 @@ import com.cf611.approvalCommentManager.ApprovalComment;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.indicatorManager.IndicatorService;
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailView;
 import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
 import com.cf611.util.TreeNode;
@@ -53,9 +54,10 @@ public class RequirementDefinitionControl {
 	public ProTablePage<DefinitionView> getDefinitions(HttpServletRequest request,ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam) {
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //	    String name = auth.getName(); //get logged in userna
+		pageParam.getSorter();
 		String csrf=request.getHeader("X-CSRF-TOKEN");
 		request.getSession().setAttribute("CsrfToken", csrf);
-		return service.getDefinitions(pageParam,definitionParam);
+		return service.getDefinitionView(pageParam,definitionParam);
 	}
 	
 	
@@ -117,8 +119,8 @@ public class RequirementDefinitionControl {
 	 * @return
 	 */
 	@RequestMapping("/definitiondetails")
-	public List<DefinitionDetail> getDefinitionDetails(String definitonId){
-		return service.getDefinitionDetailByDefinitionId(definitonId);
+	public List<DefinitionDetailView> findDefinitionDetails(String definitonId){
+		return service.findDefinitionDetailViewByDefinitionId(definitonId);
 	}
 	
 
@@ -134,7 +136,7 @@ public class RequirementDefinitionControl {
 		String definitonId=request.getParameter("definitionId");
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("indicator", indicatorService.GetIndicatorNodes(new TreeNode(key)));
-		map.put("definitionDetail", service.getDefinitionDetailByDefinitionId(definitonId));
+		map.put("definitionDetail", service.findDefinitionDetailViewByDefinitionId(definitonId));
 		
 		return map;
 	}

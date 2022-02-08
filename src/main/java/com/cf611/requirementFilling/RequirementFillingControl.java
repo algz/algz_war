@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.indicatorManager.Indicator;
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailView;
 import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
 
@@ -29,7 +30,7 @@ public class RequirementFillingControl {
 	@RequestMapping("/fillings")
 	public ProTablePage<DefinitionView> getFillings(ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam) {
 		
-		return service.GetFillings(pageParam,definitionParam);
+		return service.getFillings(pageParam,definitionParam);
 	}
 	
 	/**
@@ -38,7 +39,7 @@ public class RequirementFillingControl {
 	 * @return
 	 */
 	@RequestMapping("definitiondetails")
-	public ProTablePage<DefinitionDetail> getDefinitionDetails(ProTablePage<DefinitionDetail> pageParam,DefinitionDetail definitionParam){
+	public ProTablePage<DefinitionDetailView> getDefinitionDetails(ProTablePage<DefinitionDetailView> pageParam,DefinitionDetail definitionParam){
 		pageParam.setData(service.getDefinitionDetail(definitionParam));
 		return pageParam;
 	}
@@ -64,7 +65,7 @@ public class RequirementFillingControl {
 	}
 	
 	/**
-	 * 提交需求定义
+	 * 反馈需求定义
 	 * @param params
 	 * @return
 	 */
@@ -82,5 +83,15 @@ public class RequirementFillingControl {
 	@RequestMapping("indicatorsforselect")
 	public List<Indicator> getIndicatorsForSelect(Indicator indicatorParam){
 		return service.getIndicatorsForSelect(indicatorParam);
+	}
+	
+	/**
+	 * 删除需求定义(除v1版本)
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping("deldefinition")
+	public String delDefinition(Definition params) {
+		return service.delDefinition(params);
 	}
 }

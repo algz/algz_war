@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.algz.amqp.ProducerSend;
+import com.algz.database.DatabaseService;
 import com.algz.platform.common.crypto.RSAEncryption;
 //import com.algz.amqp.ProducerSend;
 import com.algz.platform.security.authority.userManager.AUser;
@@ -41,6 +42,9 @@ public class HelloControl {
 
   @Autowired
   private MessageConsumerService consumer;
+  
+  @Autowired
+  private DatabaseService dataBaseService;
 	
 	@Autowired
 	private RedisTemplate<Object,Object> redisTemplate;
@@ -81,6 +85,7 @@ public class HelloControl {
 	
 	@RequestMapping("/hello")
 	public List<AUser> index(String str) {
+		dataBaseService.a();
 		producer.sendMeassage(new MessageEntity("1", "aaaa1"));
 		redisTemplate.opsForValue().set("test1", "val1");
 		webSocketServer.sendMsgToUser("1", "test,hello!");

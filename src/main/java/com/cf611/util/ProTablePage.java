@@ -1,8 +1,12 @@
 package com.cf611.util;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
+
+import com.algz.platform.utility.JsonUtils;
 
 /**
  * @author algz
@@ -46,6 +50,7 @@ public class ProTablePage<T> {
 	 */
 	private String sorter;
 	
+//	private HashMap<String,String> sorter;
 
 	private String filter;
 	
@@ -111,8 +116,9 @@ public class ProTablePage<T> {
 //		return page;
 //	}
 
-	public String getSorter() {
-		return sorter;
+	public Map<String,Object> getSorter() {
+		Map<String,Object> m=JsonUtils.jsonToMap(this.sorter);
+		return m;
 	}
 
 	public void setSorter(String sorter) {
@@ -122,6 +128,8 @@ public class ProTablePage<T> {
 	public String getFilter() {
 		return filter;
 	}
+
+
 
 	public void setFilter(String filter) {
 		this.filter = filter;

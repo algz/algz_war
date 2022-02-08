@@ -19,9 +19,9 @@ import com.algz.platform.utility.SpringBeanUtils;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.indicatorManager.Indicator;
 import com.cf611.indicatorManager.IndicatorRepository;
-import com.cf611.semanticsManager.Semantics;
-import com.cf611.semanticsManager.SemanticsRepository;
-import com.cf611.semanticsManager.semanticsKind.SemanticsKind;
+import com.cf611.requirmentDataBase.semanticsBase.Semantics;
+import com.cf611.requirmentDataBase.semanticsBase.SemanticsRepository;
+import com.cf611.requirmentDataBase.semanticsBase.semanticsKind.SemanticsKind;
 import com.cf611.util.ProTablePage;
 import com.cf611.util.TreeNode;
 

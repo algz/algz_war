@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import com.algz.platform.security.authority.permissionManager.APermission;
 import com.algz.platform.security.authority.permissionManager.APermissionRepository;
 import com.algz.platform.security.authority.roleManager.ARole;
-import com.cf611.modelManager.ModelControl;
+import com.cf611.requirmentDataBase.modelBase.ModelControl;
 
 
 

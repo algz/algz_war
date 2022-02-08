@@ -35,6 +35,8 @@ import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.definitionDetailManager.DefinitionDetailRepository;
 import com.cf611.requirementDefinition.definition.Definition;
 import com.cf611.requirementDefinition.definition.DefinitionRepository;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailView;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailViewRepository;
 import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.requirementDefinition.definitionView.DefinitionViewRepository;
 import com.cf611.util.ProTablePage;
@@ -60,20 +62,25 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 	private DefinitionDetailRepository definitionDetailRepository;
 	
 	@Autowired
+	private DefinitionDetailViewRepository definitionDetailViewRepository;
+	
+	
+	@Autowired
 	private ApprovalCommentService approvalCommentService;
 	
 	/**
 	 * 分页查询
 	 */
 	@Override
-	public ProTablePage<DefinitionView> getDefinitions(ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam) {
+	public ProTablePage<DefinitionView> getDefinitionView(ProTablePage<DefinitionView> pageParam,DefinitionView definitionParam) {
 
-		//排序
-		//Sort sort= new Sort(Sort.Direction.ASC, "uid");
+		
+//		排序
+//		Sort sort= new Sort(Sort.Direction.ASC, "uid");
 		//Pageable pageable = new PageRequest(pageIndex, pageSize,sort);
 		//Pageable pageable = PageRequest.of(0, 10,Sort.by("createTime"));
 		//参数1，分页需求设置，page为0，是从第一页，1是第二页；参数2，size 设置每页数据的条数;参数3，排序,字符串参数("createDate")是对象(definition)属性名称,大小写。
-		Pageable pageable = PageRequest.of(pageParam.getCurrent() -1, pageParam.getPageSize(),Sort.by("createDate").descending());
+		Pageable pageable = PageRequest.of(pageParam.getCurrent() -1, pageParam.getPageSize(),Sort.by("createDate","name").descending());
 		
 		//直接使用匿名内部类实现接口
         Specification<DefinitionView> specification = new Specification<DefinitionView>() {
@@ -93,7 +100,12 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
                 //条件3：TV 生产日期（dateOfProduction）小于等于 end
                 //predicateList.add(cb.lessThanOrEqualTo(root.get("dateOfProduction").as(Date.class), end));
  
-                //效果相当于 where (state in (?,?..) )
+                //1. where version=?
+                if(definitionParam.getVersion()!=null) {
+                	predicateList.add(cb.equal(root.get("version"), definitionParam.getVersion()));
+                }
+                
+                //2.效果相当于 where (state in (?,?..) )
                if(definitionParam.getState()!=null) {
                    String[] stateArr=definitionParam.getState().split(",");
     			   //Path<Object> path = root.get("state");
@@ -246,15 +258,16 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 
 
 	@Override
-	public List<DefinitionDetail> getDefinitionDetailByDefinitionId(String definitonId) {
-		List<Map<String,Object>> mapList=definitionDetailRepository.getDefinitionDetail(definitonId);
-		try {
-			return SpringBeanUtils.ListMapToListEntity(mapList, DefinitionDetail.class);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+	public List<DefinitionDetailView> findDefinitionDetailViewByDefinitionId(String definitonId) {
+		return definitionDetailViewRepository.findDefinitionDetailViewByDefinitionId(definitonId);
+//		List<Map<String,Object>> mapList=definitionDetailViewRepository.findAll(definitonId);
+//		try {
+//			return SpringBeanUtils.ListMapToListEntity(mapList, DefinitionDetailView.class);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 	@Transactional
@@ -289,5 +302,12 @@ public class RequirementDefinitionServiceImp implements RequirementDefinitionSer
 //			max=(BigDecimal) entityManager.createNativeQuery(sql).getSingleResult();
 //		}
 		return max.intValue();
+	}
+
+	@Transactional
+	@Override
+	public String saveDefinition(Definition definition) {
+		repository.save(definition);
+		return null;
 	}
 }

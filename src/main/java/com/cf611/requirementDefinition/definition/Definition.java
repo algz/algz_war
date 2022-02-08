@@ -60,7 +60,8 @@ public class Definition {
 	private String creator;
 	
 	/**
-	 * state: 0待发布；1待填充；2待审签；3待判定；4反馈;5已发布
+	 * X state: 0待发布；1待填充；2待审签；3待判定；4反馈;5已发布
+	 * state: 0待发布；1待填充；2待审签；3待判定；4待归档；5已归档；6反馈；
 	 */
 	@Column(name="STATE")
 	private String state;

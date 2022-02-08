@@ -139,7 +139,7 @@ public class ALGZSecurityConfig  extends WebSecurityConfigurerAdapter{
 //                @Override
 //                public <O extends FilterSecurityInterceptor> O postProcess(O o) {
 //                    o.setAccessDecisionManager(accessDecisionManager);//访问决策管理器
-//                    o.setSecurityMetadataSource(securityMetadataSource);//安全元数据源
+////                    o.setSecurityMetadataSource(securityMetadataSource);//安全元数据源
 //                    return o;
 //                }
 //            })

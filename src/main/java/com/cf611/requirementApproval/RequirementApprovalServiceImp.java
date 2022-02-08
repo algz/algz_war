@@ -22,10 +22,11 @@ import com.cf611.approvalCommentManager.ApprovalCommentService;
 import com.cf611.definitionDetailManager.DefinitionDetail;
 import com.cf611.requirementDefinition.RequirementDefinitionService;
 import com.cf611.requirementDefinition.definition.Definition;
-import com.cf611.requirmentRegulation.office.ExcelEntity;
-import com.cf611.requirmentRegulation.office.OfficeService;
-import com.cf611.requirmentRegulation.view.DefinitionRegulationView;
-import com.cf611.requirmentRegulation.view.DefinitionRegulationViewRepository;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailView;
+import com.cf611.requirmentJudge.office.ExcelEntity;
+import com.cf611.requirmentJudge.office.OfficeService;
+import com.cf611.requirmentJudge.view.DefinitionRegulationView;
+import com.cf611.requirmentJudge.view.DefinitionRegulationViewRepository;
 
 @Transactional(readOnly = true)
 @Service
@@ -53,7 +54,9 @@ public class RequirementApprovalServiceImp implements RequirementApprovalService
 	private OfficeService officeService;
 
 	/**
-	 * 审批通过后，发送需求任务给客户端。
+	 * 提交审批结果。
+	 * 通过，状态改为3(待判定)，发送需求任务给客户端；
+	 * 不通过，状态改为1(待填充)。
 	 */
 	@Transactional
 	@Override
@@ -121,7 +124,7 @@ public class RequirementApprovalServiceImp implements RequirementApprovalService
 	@Override
 	public Map<String, Object> getDefinitionDetails(String definitonId) {
 		Definition definition = requirementDefinitionService.getDefinition(definitonId);
-		List<DefinitionDetail> list = requirementDefinitionService.getDefinitionDetailByDefinitionId(definitonId);
+		List<DefinitionDetailView> list = requirementDefinitionService.findDefinitionDetailViewByDefinitionId(definitonId);
 		ApprovalComment ac = new ApprovalComment();
 		ac.setDefinitionId(definitonId);
 		ac.setKind("2");

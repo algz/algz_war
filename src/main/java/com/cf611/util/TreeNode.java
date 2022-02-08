@@ -1,11 +1,13 @@
 package com.cf611.util;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class TreeNode {
 
 	/**
+	 * 唯一ID
 	 * 被树的 (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys 属性所用。
 	 * 注意：整个树范围内的所有节点的 key 值不能重复！
 	 * key: string | number;
@@ -24,7 +26,7 @@ public class TreeNode {
 	private Map<String,?> extProps;
 	
 	/**
-	 * 子结点
+	 * 子结点集合
 	 * children?: DataNode[];
 	 */
 	private List<TreeNode> children;

@@ -3,7 +3,7 @@ package com.cf611.requirmentDataBase.indicatorBase;
 import java.util.List;
 
 import com.cf611.indicatorManager.Indicator;
-import com.cf611.semanticsManager.Semantics;
+import com.cf611.requirmentDataBase.semanticsBase.Semantics;
 import com.cf611.util.ProTablePage;
 import com.cf611.util.TreeNode;
 

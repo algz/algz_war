@@ -27,7 +27,7 @@ public class ALGZAccessDecisionManager implements AccessDecisionManager {
 	 * @param configAttributes 本次访问需要的权限集.
 	 * 由 ALGZFilterInvocationSecurityMetadataSource.getAttributes(object) 方法提供.
 	 */
-	@Override
+//	@Override
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes)
 			throws AccessDeniedException, InsufficientAuthenticationException {
 		/**

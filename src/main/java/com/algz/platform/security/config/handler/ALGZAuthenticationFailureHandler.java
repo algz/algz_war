@@ -21,9 +21,11 @@ import com.algz.platform.utility.JsonResult.ResultCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * 登录失败处理逻辑 (发起登录请求时，才响应。)
+ * 
  * 登录失败处理器主要用来对登录失败的场景（密码错误、账号锁定等…）做统一处理并返回给前台统一的json返回体。还记得我们创建用户表的时候创建了账号过期、密码过期、账号锁定之类的字段吗，这里就可以派上用场了.
  * 
- * 登录失败处理逻辑 
+ * 
  * @author algz
  *
  */

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cf611.modelManager.Model;
-import com.cf611.modelManager.ModelService;
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.requirmentDataBase.modelBase.Model;
+import com.cf611.requirmentDataBase.modelBase.ModelService;
 import com.cf611.util.ProTablePage;
 import com.cf611.util.TreeNode;
 

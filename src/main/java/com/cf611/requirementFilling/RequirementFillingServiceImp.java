@@ -16,6 +16,8 @@ import com.cf611.indicatorManager.IndicatorRepository;
 import com.cf611.indicatorManager.IndicatorService;
 import com.cf611.requirementDefinition.RequirementDefinitionService;
 import com.cf611.requirementDefinition.definition.Definition;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailView;
+import com.cf611.requirementDefinition.definitionDetailView.DefinitionDetailViewRepository;
 import com.cf611.requirementDefinition.definitionView.DefinitionView;
 import com.cf611.util.ProTablePage;
 
@@ -35,16 +37,18 @@ public class RequirementFillingServiceImp implements RequirementFillingService {
 	@Autowired
 	private IndicatorService indicatorService;
 	
+
+	
 	@Override
-	public ProTablePage<DefinitionView> GetFillings(ProTablePage<DefinitionView> pageParam, DefinitionView definitionParam) {
-		return definitionService.getDefinitions(pageParam, definitionParam);
+	public ProTablePage<DefinitionView> getFillings(ProTablePage<DefinitionView> pageParam, DefinitionView definitionParam) {
+		return definitionService.getDefinitionView(pageParam, definitionParam);
 	}
 
 	/**
 	 * 获取需求详情列表
 	 */
 	@Override
-	public List<DefinitionDetail> getDefinitionDetail(DefinitionDetail definitionParam) {
+	public List<DefinitionDetailView> getDefinitionDetail(DefinitionDetail definitionParam) {
 		return definitionDetailService.getDefinitionDetailByDefinitionId(definitionParam.getDefinitionId());
 	}
 
@@ -55,6 +59,9 @@ public class RequirementFillingServiceImp implements RequirementFillingService {
 		return null;
 	}
 
+	/**
+	 * 提交到流程审批，状态修改为2。
+	 */
 	@Transactional
 	@Override
 	public String submitDefinition(Definition params) {
@@ -68,6 +75,9 @@ public class RequirementFillingServiceImp implements RequirementFillingService {
 		return null;
 	}
 
+	/**
+	 * 退回待反馈，修改状态为0.
+	 */
 	@Transactional
 	@Override
 	public String feedbackDefinition(Definition params,String approvalComment) {
@@ -88,6 +98,18 @@ public class RequirementFillingServiceImp implements RequirementFillingService {
 		// TODO Auto-generated method stub
 		List<Indicator> list=indicatorService.getIndicatorsList(indicatorParam);
 		return list;
+	}
+
+	/**
+	 * 删除需求定义(除v1版本)
+	 */
+	@Transactional
+	@Override
+	public String delDefinition(Definition params) {
+		if(params.getVersion()!=null&&!"1".equals(params.getVersion())) {
+			definitionService.delDefinition(params);
+		}
+		return null;
 	}
 
 }

@@ -94,24 +94,28 @@ public class DefinitionView {
 	@Column(name="REGULATIONFILENAME")
 	private String regulationFileName;
 	
+	/**
+	 * 归档文件ID
+	 */
 	@Column(name="ARCHIVEFILEID")
 	private String archiveFileId;
 	
+	/**
+	 * 归档文件名
+	 */
 	@Column(name="ARCHIVEFILENAME")
 	private String archiveFileName;
+	
+	/**
+	 * 归档时间
+	 */
+	@Column(name="ARCHIVEDATE")
+	private String archiveDate;
 	
 	//mappedBy="DefinitionDetail对象的definitionId属性"
 	@OneToMany(cascade = CascadeType.ALL,fetch =FetchType.LAZY,mappedBy = "definitionId")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //解决无法接收前端参数
 	private List<DefinitionDetail> detailList;
-	
-	public String getCreatorName() {
-		return creatorName;
-	}
-
-	public void setCreatorName(String creatorName) {
-		this.creatorName = creatorName;
-	}
 
 	public String getId() {
 		return id;
@@ -153,14 +157,6 @@ public class DefinitionView {
 		this.state = state;
 	}
 
-	public String getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-
 	public String getVersion() {
 		return version;
 	}
@@ -169,12 +165,20 @@ public class DefinitionView {
 		this.version = version;
 	}
 
-	public List<DefinitionDetail> getDetailList() {
-		return detailList;
+	public String getCreateDate() {
+		return createDate;
 	}
 
-	public void setDetailList(List<DefinitionDetail> detailList) {
-		this.detailList = detailList;
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getCreatorName() {
+		return creatorName;
+	}
+
+	public void setCreatorName(String creatorName) {
+		this.creatorName = creatorName;
 	}
 
 	public String getReceiver() {
@@ -185,22 +189,12 @@ public class DefinitionView {
 		this.receiver = receiver;
 	}
 
-	public String getReceiverDate() {
+	public String getReceiveDate() {
 		return receiveDate;
 	}
 
-	public void setReceiverDate(String receiverDate) {
-		this.receiveDate = receiverDate;
-	}
-
-
-
-	public String getRegulationFileId() {
-		return regulationFileId;
-	}
-
-	public void setRegulationFileId(String regulationFileId) {
-		this.regulationFileId = regulationFileId;
+	public void setReceiveDate(String receiveDate) {
+		this.receiveDate = receiveDate;
 	}
 
 	public String getReceiverName() {
@@ -211,24 +205,56 @@ public class DefinitionView {
 		this.receiverName = receiverName;
 	}
 
-	public String getPathCodeName() {
+	public String getRegulationFileId() {
+		return regulationFileId;
+	}
+
+	public void setRegulationFileId(String regulationFileId) {
+		this.regulationFileId = regulationFileId;
+	}
+
+	public String getRegulationFileName() {
 		return regulationFileName;
 	}
 
-	public void setPathCodeName(String pathCodeName) {
-		this.regulationFileName = pathCodeName;
+	public void setRegulationFileName(String regulationFileName) {
+		this.regulationFileName = regulationFileName;
 	}
 
-	public String getReceiveDate() {
-		return receiveDate;
+	public String getArchiveFileId() {
+		return archiveFileId;
 	}
 
-	public void setReceiveDate(String receiveDate) {
-		this.receiveDate = receiveDate;
+	public void setArchiveFileId(String archiveFileId) {
+		this.archiveFileId = archiveFileId;
 	}
 
+	public String getArchiveFileName() {
+		return archiveFileName;
+	}
+
+	public void setArchiveFileName(String archiveFileName) {
+		this.archiveFileName = archiveFileName;
+	}
+
+	public List<DefinitionDetail> getDetailList() {
+		return detailList;
+	}
+
+	public void setDetailList(List<DefinitionDetail> detailList) {
+		this.detailList = detailList;
+	}
+
+	public String getArchiveDate() {
+		return archiveDate;
+	}
+
+	public void setArchiveDate(String archiveDate) {
+		this.archiveDate = archiveDate;
+	}
 	
-
+	
+	
 
 	
 

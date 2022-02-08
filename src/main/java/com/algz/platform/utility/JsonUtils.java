@@ -3,6 +3,8 @@ package com.algz.platform.utility;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.util.Strings;
+
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -107,7 +109,7 @@ public class JsonUtils {
     
     /**
      * 
-     * <b>Description:</b> 将json数据转换成Map<br>
+     * <b>Description:</b> 将json字符串数据转换成Map<br>
      * <b>Title:</b> jsonToMap<br>
      * 
      * @param json
@@ -119,11 +121,14 @@ public class JsonUtils {
      */
     public static Map<String, Object> jsonToMap(String json) {
         Map<String, Object> map = null;
-        try {
-            map = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(!Strings.isBlank(json)) {
+            try {
+                map = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
         return map;
     }
     

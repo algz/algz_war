@@ -57,7 +57,7 @@ public class APathCodeServiceImp implements APathCodeService{
 	}
 	
 	/**
-	 * 保存
+	 * 保存文件，并且写入数据库。
 	 * 路径："/"+RelationKind+custmoDir+ file.getOriginalFilename()
 	 * @param file
 	 * @param pathCode
@@ -135,11 +135,14 @@ public class APathCodeServiceImp implements APathCodeService{
 		return list;
 	}
 	
-	@Transactional
-	public String addAPathCode(APathCode pathcode) {
-		repository.save(pathcode);
-		return "";
-	}
+//	/**
+//	 * 仅保存数据，不保存文件。
+//	 */
+//	@Transactional
+//	public String addAPathCode(APathCode pathcode) {
+//		repository.save(pathcode);
+//		return "";
+//	}
 	
 	/**
 	 * 删除。

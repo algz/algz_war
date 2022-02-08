@@ -76,7 +76,7 @@ public class SimpleCsrfSecurityRequestMatcher implements RequestMatcher {
 
 		// 前后端分离，判断是否为ajax请求，是则不拦截。
 		boolean isAjaxRequest = false;
-		if (!(request.getHeader("Content-Type") == null)
+		if (request.getHeader("Content-Type") != null
 				&& request.getHeader("Content-Type").contains("application/json")) {
 			isAjaxRequest = true;
 			return false;
