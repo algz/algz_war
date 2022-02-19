@@ -12,8 +12,8 @@
 	<groupId>com.algz</groupId>
 	<artifactId>algz_war</artifactId>
 	<version>0.0.1</version>
-	<!-- 去掉下面这行，maven install 会打包成jar-->
-	<packaging>war</packaging> 
+	<!-- 去掉下面这行，maven install 会打包成jar
+	<packaging>war</packaging> -->
 	<name>algz_war</name>
 	<description>Algz project for Spring Boot</description>
 
