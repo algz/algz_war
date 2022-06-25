@@ -49,8 +49,15 @@ public abstract class SpringBeanUtils {
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();    
         for (PropertyDescriptor property : propertyDescriptors) {  
             Method setter = property.getWriteMethod();    
-            if (setter != null) {  
-                setter.invoke(t, map.get(property.getName()));   
+            if (setter != null&&map.get(property.getName())!=null) { 
+            	switch(setter.getParameterTypes()[0].getName()) {
+            	case "java.lang.String":
+            		setter.invoke(t, map.get(property.getName()));   
+            		break;
+            	case "java.lang.Integer":
+            		setter.invoke(t, Integer.parseInt(map.get(property.getName())+""));   
+            		break;
+            	}
             }  
         }  
         return t;

@@ -1,4 +1,4 @@
-package com.algz.webservice;
+package com.algz.webservice.example;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;

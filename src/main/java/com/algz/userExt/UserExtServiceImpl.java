@@ -11,7 +11,7 @@ public class UserExtServiceImpl implements UserExtService{
 	
 	@Override
 	public UserExt getUserExt(String userid) {
-		return repository.findById(userid).get();
+		return repository.findById(userid).orElse(new UserExt());
 	}
 
 }

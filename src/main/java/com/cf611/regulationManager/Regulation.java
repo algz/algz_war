@@ -117,6 +117,15 @@ public class Regulation {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public Integer getModelNum() {
+		return modelNum;
+	}
+
+	public void setModelNum(Integer modelNum) {
+		this.modelNum = modelNum;
+	}
+	
 	
 	
 }

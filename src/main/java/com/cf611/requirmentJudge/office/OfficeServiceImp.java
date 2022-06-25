@@ -63,9 +63,12 @@ public class OfficeServiceImp implements OfficeService{
 
 				CreateContent(sheet,entityList);
 				
-				MergedRegionForColumn(sheet,new int[]{1,2,3});
+				MergedRegionForColumn(sheet,new int[]{0,1,2,3});
 				
-
+				//按欧普兰-excel要求，新增一行空数据
+				Row row=sheet.createRow(entityList.size()+1);
+				row.createCell(0).setCellValue("000");
+				
 				try  (OutputStream fileOut = new FileOutputStream(filePath)) {
 				    wb.write(fileOut);
 				}
@@ -152,6 +155,11 @@ public class OfficeServiceImp implements OfficeService{
 					if(mSRow!=rowNum&&preCellStr.equals(curCell.getStringCellValue())){
 						//1.最后一行，合并单元格；2.或者不是最后一行，但下一个单元格值不一样，则合并单元格。
 						if(rowNum==rowEnd||(rowNum!=rowEnd&&!sheet.getRow(rowNum+1).getCell(colNum, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL).getStringCellValue().equals(curCell.getStringCellValue()))) {
+							//合并单元格没有清空第一行后的其它值（类似于office合并单元格）
+							for(int i=mSRow+1;i<=rowNum;i++) {
+								sheet.getRow(i).getCell(colNum).setCellValue("");
+							}
+							
 							sheet.addMergedRegion(new CellRangeAddress(
 									mSRow, //first row (0-based)
 									rowNum, //last row  (0-based)

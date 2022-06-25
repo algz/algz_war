@@ -10,6 +10,8 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.algz.webservice.example.CommonServiceA;
+import com.algz.webservice.example.CommonServiceB;
 import com.sany.webservice.DesignPlatformService;
 
 /**

@@ -84,10 +84,17 @@ public class RequirementApprovalServiceImp implements RequirementApprovalService
 		view.setDefinitionId(def.getId());
 		List<DefinitionRegulationView> list = definitionRegulationViewRepository.findAll(Example.of(view));
 		List<ExcelEntity> entityList = new ArrayList<ExcelEntity>();
+		int seqNo=0;
+		String lastSemanticsName="";
 		for (int i = 0; i < list.size(); i++) {
 			DefinitionRegulationView v = list.get(i);
 			ExcelEntity ee = new ExcelEntity();
-			ee.setSerialNo((i + 1) + "");
+			if(lastSemanticsName.equals(v.getSemanticsName())) {
+				//新数据
+				seqNo++;
+			}
+			lastSemanticsName=v.getSemanticsName();
+			ee.setSerialNo(seqNo+ "");
 			ee.setKindName(v.getKindName());
 			ee.setSemanticsName(v.getSemanticsName());
 			ee.setUserIndicatorName(v.getUserIndicatorName());
@@ -96,7 +103,7 @@ public class RequirementApprovalServiceImp implements RequirementApprovalService
 			ee.setComponentName(v.getComponentName());
 			ee.setSubModelName(v.getSubModelName());
 			ee.setSubModelPath(v.getSubModelPath());
-			ee.setNewLine("1");
+			ee.setNewLine(seqNo%5==0?"1":"0");
 			entityList.add(ee);
 		}
 

@@ -79,4 +79,24 @@ public interface DesignPlatformService {
 	 * @return
 	 */
 	public String GetSimulationParts();
+	
+	/**
+	 * 获取机型列表
+	 * @return
+	 */
+	public String GetAirModels();
+	
+	/**
+	 * 获取动力学载荷
+	 * @param modelId
+	 * @return
+	 */
+	public String GetDynamicZH(String modelId);
+	
+	/**
+	 * 3.接收静力学仿真计算任务
+	 * @param datajson
+	 * @return
+	 */
+	public String ReceiveStaticSimulationTaskForOther(String datajson);
 }
