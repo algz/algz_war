@@ -25,7 +25,7 @@ import com.sany.airmodelManager.AirModelService;
 import com.sany.dynamic.DynamicService;
 import com.sany.other.OtherService;
 
-import net.sf.jni4net.Bridge;
+//import net.sf.jni4net.Bridge;
 
 //import net.sf.jni4net.Bridge;
 
@@ -270,16 +270,16 @@ public class DesignPlatformServiceImp implements DesignPlatformService {
       String str="";
       SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
       System.err.println(sdf.format(new Date())+" ReceiveStaticSimulationTask:\nin:"+datajson);
-      try {
-			Bridge.init();
-	        File loadDll = new File(file);
-	        Bridge.LoadAndRegisterAssemblyFrom(loadDll);
-	        str=jniinterfaceclass.JniInvokClass.AddStaticTask(datajson);//AddWholeTask("123");//.InvokMethod("test111");
-	        System.err.println(str);
-		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-		}
+//      try {
+////			Bridge.init();
+////	        File loadDll = new File(file);
+////	        Bridge.LoadAndRegisterAssemblyFrom(loadDll);
+////	        str=jniinterfaceclass.JniInvokClass.AddStaticTask(datajson);//AddWholeTask("123");//.InvokMethod("test111");
+////	        System.err.println(str);
+//		} catch (IOException e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//		}
 //      str=st1.ReceiveStaticSimulationTask(datajson);
       System.err.println("out:"+str);
 		//String str=com.algz.FromCSharpDll.invokCSharpMethod("D:\\Source\\java\\eclipse-workspace\\Jni4netProject\\ref\\JniInterfaceClass.j4n.dll", "");

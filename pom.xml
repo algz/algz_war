@@ -159,7 +159,12 @@
 		</dependency>
 		<!--解析excel-->
 		
-		
+        <!-- 文档导出 
+		<dependency>
+		    <groupId>e-iceblue</groupId>
+		    <artifactId>spire.doc</artifactId>
+		    <version>10.9.8</version>
+		</dependency>-->
 		
 		
 		<!-- lombok 提供注解的简写（合集插件），@Getter/@Setter，@Slf4j 
@@ -178,7 +183,22 @@
 		<systemPath>${project.basedir}/libs/yourlocaljar-3.0-RELEASE.jar</systemPath>
 		</dependency> -->
 
+		<!-- Spire.Doc for Java -->
+		<dependency>
+		    <groupId>e-iceblue</groupId>
+		    <artifactId>spire.doc</artifactId>
+		    <version>10.9.8</version>
+		</dependency>
+
 	</dependencies>
+
+	<repositories>
+	        <repository>
+	            <id>com.e-iceblue</id>
+	            <name>e-iceblue</name>
+	            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
+	        </repository>
+	</repositories>
 
 	<!-- 编译打包 -->
 	<build>
@@ -219,5 +239,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 
 </project>
