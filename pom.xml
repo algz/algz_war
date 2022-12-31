@@ -79,14 +79,25 @@
 	     </dependency>
      
 		<!-- 只能使用ojdbc6 (因为ojdbc6不支持设置连接时间，所以启动时，会提示：Driver does not support get/set network timeout for connections. ) 
-		     与ojdbc8 (与 jsp引擎不兼容) -->
+		     与ojdbc8 (与 jsp引擎不兼容) 
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>6</version>
 			<scope>runtime</scope>
-		</dependency> 
+		</dependency> -->
 		<!-- 只能使用ojdbc6与ojdbc8 (与 jsp引擎不兼容) -->
+		
+		<!-- oracle wallet  ${pom.basedir}内置属性验证有问题，但运行没有问题。
+					<systemPath>${pom.basedir}/src/main/resources/oracleWallet/lib/ojdbc8.jar</systemPath>
+		-->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>12.0</version>
+			<scope>runtime</scope>
+		</dependency>  
+		
 		
 		<!-- mysql 驱动 -->
         <dependency>

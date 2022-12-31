@@ -1,6 +1,9 @@
 package com.algz.platform.utility;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+
+import org.springframework.util.ResourceUtils;
 
 public class AFileUtils {
 
@@ -137,6 +140,22 @@ public class AFileUtils {
         }
     }
 
+    /**
+     * 获取ClassPath 路径。
+     * 如：D:\Source\java\eclipse-workspace\algz_war\target\classes\
+     * src/main/java、src/main/webapp和src/main/resources 默认都对应这一个目录。
+     * @return
+     */
+    public static String getClassPath() {
+    	String url=null;
+    	try {
+			url = ResourceUtils.getURL("classpath:").getPath();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	return url;
+    }
+    
 //    public static void main(String[] args) {
 ////  // 删除单个文件
 ////  String file = "c:/test/test.txt";

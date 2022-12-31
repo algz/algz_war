@@ -43,3 +43,28 @@ public Integer ExecuteBatchNonQuery(String[] sql)
             }
 })
 
+8.oracle ojdbc授权问题，需自行下载ojdbc8.jar再手动安装。
+https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/
+
+mvn install:install-file -Dfile=D:\ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar -DgeneratePom=true
+
+指令参数：
+install:可以将项目本身编译并打包到本地仓库
+install-file:安装文件
+-Dfile=D:\ojdbc8.jar : 指定要打的包的文件位置
+-DgroupId=com.oracle : 指定当前包的groupId为com.oracle
+-DartifactId=ojdbc8 : 指定当前的artifactfactId为ojdbc8
+-Dversion=12.2.0.1 : 指定当前包的版本为12.2.0.1
+-DgeneratePom=true:是否生成pom文件
+-DgroupId=包名
+-DartifactId=项目名
+-Dversion=版本号
+-Dpackaging=jar
+-Dfile=jar文件所在路径
+pom文件：
+<dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>12.2.0.1</version>
+        </dependency>
+

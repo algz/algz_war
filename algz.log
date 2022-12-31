@@ -1,86 +1,111 @@
-2022-11-04 14:41:48.219  INFO 7108 --- [main] c.a.platform.start.AlgzWarApplication    : Starting AlgzWarApplication using Java 1.8.0_192 on D-LIZHIQUN with PID 7108 (D:\Source\java\eclipse-workspace\algz_war\target\classes started by algz in D:\Source\java\eclipse-workspace\algz_war)
-2022-11-04 14:41:48.227  INFO 7108 --- [main] c.a.platform.start.AlgzWarApplication    : No active profile set, falling back to default profiles: default
-2022-11-04 14:41:52.726  WARN 7108 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: URL [jar:file:/D:/Users/algz/.m2/repository/e-iceblue/spire.doc/10.9.8/spire.doc-10.9.8.jar!/com/spire/doc/packages/sprsey.class]; nested exception is java.lang.IllegalArgumentException: com.spire.doc.packages.sproty is not an enum type
-2022-11-04 14:41:52.753 ERROR 7108 --- [main] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: URL [jar:file:/D:/Users/algz/.m2/repository/e-iceblue/spire.doc/10.9.8/spire.doc-10.9.8.jar!/com/spire/doc/packages/sprsey.class]; nested exception is java.lang.IllegalArgumentException: com.spire.doc.packages.sproty is not an enum type
-	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.scanCandidateComponents(ClassPathScanningCandidateComponentProvider.java:457) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents(ClassPathScanningCandidateComponentProvider.java:316) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:276) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ComponentScanAnnotationParser.parse(ComponentScanAnnotationParser.java:128) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:296) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:250) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:207) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:175) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:746) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564) ~[spring-context-5.3.14.jar:5.3.14]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.2.jar:2.6.2]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730) [spring-boot-2.6.2.jar:2.6.2]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412) [spring-boot-2.6.2.jar:2.6.2]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302) [spring-boot-2.6.2.jar:2.6.2]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301) [spring-boot-2.6.2.jar:2.6.2]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290) [spring-boot-2.6.2.jar:2.6.2]
-	at com.algz.platform.start.AlgzWarApplication.main(AlgzWarApplication.java:40) [classes/:na]
-Caused by: java.lang.IllegalArgumentException: com.spire.doc.packages.sproty is not an enum type
-	at java.lang.Class.enumConstantDirectory(Class.java:3344) ~[na:1.8.0_192]
-	at java.lang.Enum.valueOf(Enum.java:232) ~[na:1.8.0_192]
-	at org.springframework.core.type.classreading.MergedAnnotationReadingVisitor.visitEnum(MergedAnnotationReadingVisitor.java:104) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.core.type.classreading.MergedAnnotationReadingVisitor.visitEnum(MergedAnnotationReadingVisitor.java:79) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.asm.ClassReader.readElementValue(ClassReader.java:3081) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.asm.ClassReader.readElementValues(ClassReader.java:3000) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.asm.ClassReader.readMethod(ClassReader.java:1415) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.asm.ClassReader.accept(ClassReader.java:746) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.asm.ClassReader.accept(ClassReader.java:426) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:49) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:123) ~[spring-core-5.3.14.jar:5.3.14]
-	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.scanCandidateComponents(ClassPathScanningCandidateComponentProvider.java:429) ~[spring-context-5.3.14.jar:5.3.14]
-	... 20 common frames omitted
-
-2022-11-04 14:46:43.893  INFO 1640 --- [main] c.a.platform.start.AlgzWarApplication    : Starting AlgzWarApplication using Java 1.8.0_192 on D-LIZHIQUN with PID 1640 (D:\Source\java\eclipse-workspace\algz_war\target\classes started by algz in D:\Source\java\eclipse-workspace\algz_war)
-2022-11-04 14:46:43.897  INFO 1640 --- [main] c.a.platform.start.AlgzWarApplication    : No active profile set, falling back to default profiles: default
-2022-11-04 14:47:12.896  INFO 4172 --- [main] c.a.platform.start.AlgzWarApplication    : Starting AlgzWarApplication using Java 1.8.0_192 on D-LIZHIQUN with PID 4172 (D:\Source\java\eclipse-workspace\algz_war\target\classes started by algz in D:\Source\java\eclipse-workspace\algz_war)
-2022-11-04 14:47:12.901  INFO 4172 --- [main] c.a.platform.start.AlgzWarApplication    : No active profile set, falling back to default profiles: default
-2022-11-04 14:47:15.726  INFO 4172 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-11-04 14:47:15.727  INFO 4172 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-11-04 14:47:16.889  INFO 4172 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1153 ms. Found 25 JPA repository interfaces.
-2022-11-04 14:47:17.165  INFO 4172 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-11-04 14:47:17.166  INFO 4172 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2022-11-04 14:47:17.173  INFO 4172 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
-2022-11-04 14:47:17.771  INFO 4172 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-11-04 14:47:17.781  INFO 4172 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-11-04 14:47:17.782  INFO 4172 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-11-04 14:47:18.079  INFO 4172 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-2022-11-04 14:47:18.084  INFO 4172 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/algz]   : Initializing Spring embedded WebApplicationContext
-2022-11-04 14:47:18.084  INFO 4172 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5129 ms
-2022-11-04 14:47:18.323  INFO 4172 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-11-04 14:47:18.465  INFO 4172 --- [main] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (oracle.jdbc.driver.T4CConnection.getNetworkTimeout()I)
-2022-11-04 14:47:18.470  INFO 4172 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-11-04 14:47:18.723  INFO 4172 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-11-04 14:47:18.774  INFO 4172 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.3.Final
-2022-11-04 14:47:18.924  INFO 4172 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2022-11-04 14:47:19.070  INFO 4172 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
-2022-11-04 14:47:19.313  WARN 4172 --- [main] o.h.b.i.InFlightMetadataCollectorImpl    : HHH000069: Duplicate generator name ALGZGenerator
-2022-11-04 14:47:19.501  WARN 4172 --- [main] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.cf611.requirmentJudge.view.DefintionRegulationKey
-2022-11-04 14:47:19.501  WARN 4172 --- [main] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.cf611.requirmentJudge.view.DefintionRegulationKey
-2022-11-04 14:47:19.966  INFO 4172 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-11-04 14:47:19.975  INFO 4172 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-11-04 14:47:20.252  WARN 4172 --- [main] .a.p.s.c.ALGZAbstractSecurityInterceptor : Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
-2022-11-04 14:47:22.138  INFO 4172 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1e2928cb, org.springframework.security.web.context.SecurityContextPersistenceFilter@7a0334e4, org.springframework.security.web.header.HeaderWriterFilter@7ad7cdad, org.springframework.security.web.csrf.CsrfFilter@5c75562d, org.springframework.security.web.authentication.logout.LogoutFilter@919a11, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@64172da3, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@65eabb9c, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@78f033f7, org.springframework.security.web.session.ConcurrentSessionFilter@633d6e89, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@630de622, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@22182c0, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@40ce4314, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@795945f0, org.springframework.security.web.session.SessionManagementFilter@6481052c, org.springframework.security.web.access.ExceptionTranslationFilter@78a51fb6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@701f8b18]
-2022-11-04 14:47:22.191  INFO 4172 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://webservice.algz.com/}CommonServiceA from class com.algz.webservice.example.CommonServiceA
-2022-11-04 14:47:22.539  INFO 4172 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /CommonServiceA
-2022-11-04 14:47:22.548  INFO 4172 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://example.webservice.algz.com/}CommonServiceBImpService from class com.algz.webservice.example.CommonServiceB
-2022-11-04 14:47:22.556  INFO 4172 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /CommonServiceB
-2022-11-04 14:47:22.557  INFO 4172 --- [main] o.a.c.w.s.f.ReflectionServiceFactoryBean : Creating Service {http://webservice.algz.com/}DesignPlatformService from class com.sany.webservice.DesignPlatformService
-2022-11-04 14:47:22.610  INFO 4172 --- [main] org.apache.cxf.endpoint.ServerImpl       : Setting the server's publish address to be /DesignPlatformService
-2022-11-04 14:47:23.127  WARN 4172 --- [main] o.apache.jasper.EmbeddedServletOptions   : Warning: Invalid value for the initParam development. Will use the default value of "true"
-2022-11-04 14:47:23.135  INFO 4172 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/algz'
-2022-11-04 14:47:23.137  INFO 4172 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-11-04 14:47:23.137  INFO 4172 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@76aa7736]]
-2022-11-04 14:47:23.138  INFO 4172 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-11-04 14:47:23.145  INFO 4172 --- [main] c.a.platform.start.AlgzWarApplication    : Started AlgzWarApplication in 10.623 seconds (JVM running for 11.519)
-2022-11-04 14:48:22.706  INFO 4172 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2022-12-31 12:18:53.439  INFO 15500 --- [main] c.a.platform.start.AlgzWarApplication    : Starting AlgzWarApplication using Java 1.8.0_192 on D-LIZHIQUN with PID 15500 (D:\Source\java\eclipse-workspace\algz_war\target\classes started by algz in D:\Source\java\eclipse-workspace\algz_war)
+2022-12-31 12:18:53.454  INFO 15500 --- [main] c.a.platform.start.AlgzWarApplication    : No active profile set, falling back to default profiles: default
+2022-12-31 12:19:00.359  INFO 15500 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-12-31 12:19:00.369  INFO 15500 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-31 12:19:04.072  INFO 15500 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3650 ms. Found 25 JPA repository interfaces.
+2022-12-31 12:19:04.787  INFO 15500 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-12-31 12:19:04.789  INFO 15500 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-12-31 12:19:04.807  INFO 15500 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2022-12-31 12:19:06.316  INFO 15500 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-31 12:19:06.369  INFO 15500 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-31 12:19:06.369  INFO 15500 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-12-31 12:19:06.874  INFO 15500 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2022-12-31 12:19:06.882  INFO 15500 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/algz]   : Initializing Spring embedded WebApplicationContext
+2022-12-31 12:19:06.883  INFO 15500 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 13312 ms
+2022-12-31 12:19:07.456  INFO 15500 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-31 12:19:11.864  INFO 15500 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-31 12:19:12.381  INFO 15500 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-31 12:19:12.501  INFO 15500 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.3.Final
+2022-12-31 12:19:12.848  INFO 15500 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-12-31 12:19:13.336  INFO 15500 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2022-12-31 12:19:14.371  WARN 15500 --- [main] o.h.b.i.InFlightMetadataCollectorImpl    : HHH000069: Duplicate generator name ALGZGenerator
+2022-12-31 12:19:14.798  WARN 15500 --- [main] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.cf611.requirmentJudge.view.DefintionRegulationKey
+2022-12-31 12:19:14.798  WARN 15500 --- [main] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.cf611.requirmentJudge.view.DefintionRegulationKey
+2022-12-31 12:19:16.098  INFO 15500 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-31 12:19:16.129  INFO 15500 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-31 12:19:16.794  WARN 15500 --- [main] .a.p.s.c.ALGZAbstractSecurityInterceptor : Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2022-12-31 12:19:20.454  INFO 15500 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25b4e1cb, org.springframework.security.web.context.SecurityContextPersistenceFilter@2ddcb981, org.springframework.security.web.header.HeaderWriterFilter@454fd1a9, org.springframework.security.web.csrf.CsrfFilter@bd01803, org.springframework.security.web.authentication.logout.LogoutFilter@1b89d2ea, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@131e79b9, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@705ccb05, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@35af72f8, org.springframework.security.web.session.ConcurrentSessionFilter@69d03100, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6a491147, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@473e040, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@6c5980f0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5e06ad02, org.springframework.security.web.session.SessionManagementFilter@2c5b3c2f, org.springframework.security.web.access.ExceptionTranslationFilter@99730cd, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@517ae14b]
+2022-12-31 12:19:22.019  WARN 15500 --- [main] o.apache.jasper.EmbeddedServletOptions   : Warning: Invalid value for the initParam development. Will use the default value of "true"
+2022-12-31 12:19:22.032  INFO 15500 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/algz'
+2022-12-31 12:19:22.035  INFO 15500 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2022-12-31 12:19:22.035  INFO 15500 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d85369b]]
+2022-12-31 12:19:22.035  INFO 15500 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2022-12-31 12:19:22.050  INFO 15500 --- [main] c.a.platform.start.AlgzWarApplication    : Started AlgzWarApplication in 29.51 seconds (JVM running for 139.742)
+2022-12-31 12:20:20.657  INFO 15500 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2022-12-31 12:21:54.872  INFO 15500 --- [http-nio-8080-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/algz]   : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-31 12:21:54.873  INFO 15500 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-31 12:21:54.875  INFO 15500 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-12-31 12:22:13.278  INFO 15500 --- [RMI TCP Connection(10)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2022-12-31 12:22:13.283  INFO 15500 --- [RMI TCP Connection(10)-127.0.0.1] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2022-12-31 12:22:13.283  INFO 15500 --- [RMI TCP Connection(10)-127.0.0.1] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d85369b]]
+2022-12-31 12:22:13.283  INFO 15500 --- [RMI TCP Connection(10)-127.0.0.1] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2022-12-31 12:22:13.679  INFO 15500 --- [RMI TCP Connection(10)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-31 12:22:13.682  INFO 15500 --- [RMI TCP Connection(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-31 12:22:15.402  INFO 15500 --- [RMI TCP Connection(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-31 14:17:27.363  INFO 18876 --- [main] c.a.platform.start.AlgzWarApplication    : Starting AlgzWarApplication using Java 1.8.0_192 on D-LIZHIQUN with PID 18876 (D:\Source\java\eclipse-workspace\algz_war\target\classes started by algz in D:\Source\java\eclipse-workspace\algz_war)
+2022-12-31 14:17:27.368  INFO 18876 --- [main] c.a.platform.start.AlgzWarApplication    : No active profile set, falling back to default profiles: default
+2022-12-31 14:17:32.629  INFO 18876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-12-31 14:17:32.629  INFO 18876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-31 14:17:34.077  INFO 18876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1436 ms. Found 25 JPA repository interfaces.
+2022-12-31 14:17:34.376  INFO 18876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-12-31 14:17:34.378  INFO 18876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-12-31 14:17:34.388  INFO 18876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2022-12-31 14:17:35.068  INFO 18876 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-31 14:17:35.078  INFO 18876 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-31 14:17:35.079  INFO 18876 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-12-31 14:17:35.354  INFO 18876 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2022-12-31 14:17:35.359  INFO 18876 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/algz]   : Initializing Spring embedded WebApplicationContext
+2022-12-31 14:17:35.359  INFO 18876 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7916 ms
+2022-12-31 14:17:35.599  INFO 18876 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-31 14:17:36.190  INFO 18876 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-31 14:17:36.432  INFO 18876 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-31 14:17:36.485  INFO 18876 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.3.Final
+2022-12-31 14:17:36.639  INFO 18876 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-12-31 14:17:36.783  INFO 18876 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2022-12-31 14:17:37.104  WARN 18876 --- [main] o.h.b.i.InFlightMetadataCollectorImpl    : HHH000069: Duplicate generator name ALGZGenerator
+2022-12-31 14:17:37.282  WARN 18876 --- [main] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.cf611.requirmentJudge.view.DefintionRegulationKey
+2022-12-31 14:17:37.282  WARN 18876 --- [main] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.cf611.requirmentJudge.view.DefintionRegulationKey
+2022-12-31 14:17:37.759  INFO 18876 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-31 14:17:37.790  INFO 18876 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-31 14:17:38.053  WARN 18876 --- [main] .a.p.s.c.ALGZAbstractSecurityInterceptor : Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2022-12-31 14:17:39.587  INFO 18876 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@16519bbf, org.springframework.security.web.context.SecurityContextPersistenceFilter@40773ab2, org.springframework.security.web.header.HeaderWriterFilter@6f1114ad, org.springframework.security.web.csrf.CsrfFilter@3bbcfaa6, org.springframework.security.web.authentication.logout.LogoutFilter@398d36c9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7b71edca, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@9bf5c4b, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@38746343, org.springframework.security.web.session.ConcurrentSessionFilter@36d6f67b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@81f1148, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3ebbc636, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@9d55c44, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3fa0984a, org.springframework.security.web.session.SessionManagementFilter@1f75716a, org.springframework.security.web.access.ExceptionTranslationFilter@5bbf00c4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@20f13990]
+2022-12-31 14:17:40.234  WARN 18876 --- [main] o.apache.jasper.EmbeddedServletOptions   : Warning: Invalid value for the initParam development. Will use the default value of "true"
+2022-12-31 14:17:40.243  INFO 18876 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/algz'
+2022-12-31 14:17:40.245  INFO 18876 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2022-12-31 14:17:40.245  INFO 18876 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@716b0b51]]
+2022-12-31 14:17:40.245  INFO 18876 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2022-12-31 14:17:40.255  INFO 18876 --- [main] c.a.platform.start.AlgzWarApplication    : Started AlgzWarApplication in 13.365 seconds (JVM running for 14.848)
+2022-12-31 14:19:21.390  INFO 1176 --- [main] c.a.platform.start.AlgzWarApplication    : Starting AlgzWarApplication using Java 1.8.0_192 on D-LIZHIQUN with PID 1176 (D:\Source\java\eclipse-workspace\algz_war\target\classes started by algz in D:\Source\java\eclipse-workspace\algz_war)
+2022-12-31 14:19:21.394  INFO 1176 --- [main] c.a.platform.start.AlgzWarApplication    : No active profile set, falling back to default profiles: default
+2022-12-31 14:19:25.925  INFO 1176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-12-31 14:19:25.925  INFO 1176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-31 14:19:27.209  INFO 1176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1273 ms. Found 25 JPA repository interfaces.
+2022-12-31 14:19:27.525  INFO 1176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-12-31 14:19:27.527  INFO 1176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-12-31 14:19:27.536  INFO 1176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2022-12-31 14:19:28.195  INFO 1176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-31 14:19:28.206  INFO 1176 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-31 14:19:28.206  INFO 1176 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-12-31 14:19:28.525  INFO 1176 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2022-12-31 14:19:28.529  INFO 1176 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/algz]   : Initializing Spring embedded WebApplicationContext
+2022-12-31 14:19:28.529  INFO 1176 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7078 ms
+2022-12-31 14:19:28.795  INFO 1176 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-31 14:19:33.722  INFO 1176 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-31 14:19:33.969  INFO 1176 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-31 14:19:34.028  INFO 1176 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.3.Final
+2022-12-31 14:19:34.201  INFO 1176 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-12-31 14:19:34.572  INFO 1176 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2022-12-31 14:19:35.360  WARN 1176 --- [main] o.h.b.i.InFlightMetadataCollectorImpl    : HHH000069: Duplicate generator name ALGZGenerator
+2022-12-31 14:19:35.547  WARN 1176 --- [main] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.cf611.requirmentJudge.view.DefintionRegulationKey
+2022-12-31 14:19:35.548  WARN 1176 --- [main] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.cf611.requirmentJudge.view.DefintionRegulationKey
+2022-12-31 14:19:36.071  INFO 1176 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-31 14:19:36.082  INFO 1176 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-31 14:19:36.368  WARN 1176 --- [main] .a.p.s.c.ALGZAbstractSecurityInterceptor : Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2022-12-31 14:19:37.969  INFO 1176 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5b8afcb1, org.springframework.security.web.context.SecurityContextPersistenceFilter@4ede4622, org.springframework.security.web.header.HeaderWriterFilter@5a504ca3, org.springframework.security.web.csrf.CsrfFilter@58320288, org.springframework.security.web.authentication.logout.LogoutFilter@d16be1f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@51fc5eba, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@e5f7116, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5528de92, org.springframework.security.web.session.ConcurrentSessionFilter@1d08cd76, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@23651ae1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2d638ccd, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@51bd755b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3c7581cd, org.springframework.security.web.session.SessionManagementFilter@5096d893, org.springframework.security.web.access.ExceptionTranslationFilter@5ace0b38, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@160b97dc]
+2022-12-31 14:19:38.653  WARN 1176 --- [main] o.apache.jasper.EmbeddedServletOptions   : Warning: Invalid value for the initParam development. Will use the default value of "true"
+2022-12-31 14:19:38.660  INFO 1176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/algz'
+2022-12-31 14:19:38.662  INFO 1176 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2022-12-31 14:19:38.662  INFO 1176 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@26179a1d]]
+2022-12-31 14:19:38.662  INFO 1176 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2022-12-31 14:19:38.670  INFO 1176 --- [main] c.a.platform.start.AlgzWarApplication    : Started AlgzWarApplication in 17.671 seconds (JVM running for 18.742)
+2022-12-31 14:20:38.071  INFO 1176 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]

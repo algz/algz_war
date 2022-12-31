@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<License xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Key="jhGpPanc1Z5Y9dSj7QEAPs6EFTV9B9NEIt7Bco3de9juA2ZM/DgGQBIteBYMggnfB7E+cdp2INRNoq3ySxs61oMEefImRM1p2UGu6lnqFalMK/8taonAyZHSR8d/7hXyBFd+ZIgq0CFbNi8j+RUUscVJros4xWHeBsLR6OMi6MZO3QAHVV0redGei9nqwq0eOAxweFl7Yu4r6E/laZLh3Krm1kbHB8MRJ/9EEeUkbJdd9Pgf6Saz5dJCW+Qzhl34MGZ7sypTQ1xurG072D2yTjQDxqtymdKgOM//T5oagbrAiOHdwl+pbGFBOOK7rBCQmKAeRzs4SQA6ZN5GH0R3p4vPyRfb+Lgs0zKVkUTbxAiupDps8d6Q4lnAvqeL/igGb3k87L0pyDy9x3b82iYMWRgnkYJJE3nMNlhX/NMXk57j2+2DMCqeIm2k0S9tZPb8/KQGjuTWP4AObr4UXudrXSpgE8l1rmXX530IgEohl1n9fKAukdMKbn88EsSAATMBOHk2NdQQzN2Qn+c4NcC61i3OhuxOvJUQIn7VZoc0vzpdcCIhmQ/HXQZL/psdLu4nMlOf1qLwHKKt3h/WyRjWLKPqUtwjU6jd8adXy6mRyzqxSaW1mJMzfq8YCwAuU6uQ5f40M5vS7hB2ywN3WoW2TAUFDaMmKjiKbVMA95sVudq4V7nr7dh0Zwkr267UzMQdSkH7LtNgEOeFI0nKGEVu4oo4e8RjUnq+QYOUHmG/7e24Qi/8HOui1VAIdcZsvY63Pv9HhkpLFQg6r5s/EKuHi2O7Oteg/FBEkz3QzO8wYXXQBDvCf7EOPk5XaoU28XdZVGd/OBbNs7AAl2JiqZUcTOl9G3xX9KTPSP0lA6EbWepLVF47jEe1/MLDrhGijV7rdgR/C+6fU3jMQCJE7tAza95xp6vJDLAaEPvTXe6Gz1tSzHdpMYZ3cHnXIgX3IphZPEZ6NET/w9PcVUD2YG56/8PbwhmC+wacbUzjVDHvAfm09XJZ2AzJ4c9m7wcDV6kULaSsEBtwLqoOsVYekXCxi1LpA2uPX/WEEEi1zwt0uibx8b6zYSawYXdzfLiSEyRQurIVrcInoMaeVoFURvyPa74Fv/QlEpTkH9dKFI8mlsimGOzLjoU83/fW/Ajj/8CHUzQVKXdfpGduvrFfP9TFWjIJY+x0ptS4JqkJ2ctnswi4g4dHLOowsB+xN+c0FNmZTWiJJHuCG9l3ywRQqfbb0FbSuLKWE1eQ5AnnkNuZu6XqxxcnROfOGPBOSWGE+HTBA73zHRIG4/zXl413x1JebwN/FnKTpar+pDTmAAV0euQ/H+6iPE8XIP2L9fjHxCDuNyd1F6hU46OlsHPyJYqIDrKW3yfNDLP4AxI4rIpTrCUpuIVh5w4xC9ojUEaIv9i77WwFMJkHw06eiRs3NcrCVgLqtflnhP8kJ2WY257Hqt6NDIDConRTcJAnSDPy0EUc/UxFGWU/LzqztLCBD7MiGLBUYG0U+QqKdtojURUCbR0=" Version="1.3">
+	<Type>Runtime</Type>
+	<Username>陶福星</Username>
+	<Email>taofx@avic.co</Email>
+	<Organization>金航数码科技有限责任公司</Organization>
+	<LicensedDate>2022-01-03T00:00:00Z</LicensedDate>
+	<ExpiredDate>2023-01-03T00:00:00Z</ExpiredDate>
+	<Products>
+		<Product>
+			<Name>Spire.Doc for JAVA</Name>
+			<Version>10.6</Version>
+			<Subscription>
+				<NumberOfPermittedDeveloper>1</NumberOfPermittedDeveloper>
+				<NumberOfPermittedSite>2147483647</NumberOfPermittedSite>
+			</Subscription>
+		</Product>
+	</Products>
+	<Issuer>
+		<Name>e-iceblue</Name>
+		<Email>sales@e-iceblue.com</Email>
+		<Url>http://www.e-iceblue.com</Url>
+	</Issuer>
+</License>
