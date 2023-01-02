@@ -2,6 +2,9 @@ package com.test;
 
 import java.io.UnsupportedEncodingException;
 
+/**
+ * @author algz
+ */
 public class Test{
 	/** 7位ascii字符，也叫作iso646-us、unicode字符集的基本拉丁块 */
 	 public static final String us_ascii = "us-ascii";
