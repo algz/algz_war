@@ -27,7 +27,3 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "Compile complete."
   tags:
     - algz_war_tag
-
-
-
-
