@@ -13,6 +13,8 @@
 # * Verify but don't deploy merge requests.
 # * Deploy built artifacts from master branch only.
 
+# 定义作业变量
+#变量的读取顺序：gitlab 仓库配置的 runner 的 variables -> yml 中定义的 variables -> 环境变量
 variables:
   # `showDateTime` will show the passed time in milliseconds. You need to specify `--batch-mode` to make this work.
   MAVEN_OPTS: >-
@@ -39,12 +41,14 @@ variables:
 # for verifying and deploying images
 # Maven 3.8.x REQUIRES HTTPS repositories.
 # See https://maven.apache.org/docs/3.8.1/release-notes.html#how-to-fix-when-i-get-a-http-repository-blocked for more.
-image: maven:3-openjdk-8
+#使用的 docker 映像。
+#image: maven:3-openjdk-8
 
 # Cache downloaded dependencies and plugins between builds.
 # To keep cache across branches add 'key: "$CI_JOB_NAME"'
 # Be aware that `mvn deploy` will install the built jar into this repository. If you notice your cache size
 # increasing, consider adding `-Dmaven.install.skip=true` to `MAVEN_OPTS` or in `.mvn/maven.config`
+#在后续运行之间应缓存的文件列表。
 cache:
   paths:
     - .m2/repository
