@@ -16,5 +16,17 @@
 				</httpHeaders>
 			</configuration>
 		</server>
+		
+		<!-- 阿里云效(限制企业成员访问) 登录用户名及密码 -->
+		<server>
+			<id>rdc-releases</id>
+			<username>63b629edd1660910422e0d73</username>
+			<password>5e_zDEFRNI-9</password>
+		</server>
+		<server>
+			<id>rdc-snapshots</id>
+			<username>63b629edd1660910422e0d73</username>
+			<password>5e_zDEFRNI-9</password>
+		</server>
 	</servers>
 </settings>
