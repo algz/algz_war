@@ -82,7 +82,7 @@ deploy:jdk8:
       fi
     - 'mvn $MAVEN_CLI_OPTS deploy'
     #- 'mvn $MAVEN_CLI_OPTS deploy --settings ci_settings.xml'
-  #如果提交的分支==默认分支，则执行此job(deploy:jdk8)
+  #如果提交的分支==默认分支，则执行此job(deploy:jdk8) 
   only:
      variables:
       - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
