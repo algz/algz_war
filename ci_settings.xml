@@ -27,8 +27,9 @@
 			<id>rdc-snapshots</id>
 			<username>63b629edd1660910422e0d73</username>
 			<password>5e_zDEFRNI-9</password>
-		</server>
-	</servers>-->
+		</server>-->
+		
+	</servers>
 
 <!-- Gitlab mvn clean install -->
 <profiles>
