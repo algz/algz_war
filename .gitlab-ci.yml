@@ -83,4 +83,4 @@ deploy:jdk8:
     #- 'mvn $MAVEN_CLI_OPTS deploy --settings ci_settings.xml' 
   only:
     variables:
-      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      - $CI_COMMIT_BRANCH == develop
