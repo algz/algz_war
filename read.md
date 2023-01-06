@@ -69,3 +69,5 @@ pom文件：
         </dependency>
 
 9.提交代码到Gitlab，由Gitlab CI/CD 打包部署到软件包；本地mvn clean develop,打包部署到阿里云效。
+Gitlab的仓库配置：ci_setting.xml;
+阿里云效仓库配置： D:\Program Files (x86)\apache-maven-3.8.2\conf\settings.xml 全局文件。

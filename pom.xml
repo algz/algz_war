@@ -209,46 +209,7 @@
 	            <name>e-iceblue</name>
 	            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
 	        </repository>
-	        
-	        <!-- 从阿里云效拉取 
-	        <repository>
-			    <id>rdc-releases</id>
-			    <url>https://packages.aliyun.com/maven/repository/2319794-release-DgOSZd/</url>
-			</repository>-->
-			
-			<!-- 从 Gitlab 拉取 
-			  <repository>
-			    <id>gitlab-maven</id>
-			    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
-			  </repository>
-		  <repository>
-		    <id>gitlab-algz-war-p</id>
-		    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
-		  </repository>-->
 	</repositories>
-
-	<distributionManagement>
-		<!-- 打包部署推送到阿里云效 -->
-	    <repository>
-	        <!-- 此处id 与 settings.xml server id保持一致 -->
-	        <id>rdc-releases</id>
-	        <url>https://packages.aliyun.com/maven/repository/2319794-release-DgOSZd/</url>
-	    </repository>
-	    <snapshotRepository>
-	        <id>rdc-snapshots</id>
-	        <url>https://packages.aliyun.com/maven/repository/2319794-snapshot-dgsT7w/</url>
-	    </snapshotRepository>
-
-		<!-- Gitlab 部署打包上传 
-	  <repository>
-	    <id>gitlab-maven</id>
-	    <url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
-	  </repository>
-	  <snapshotRepository>
-	    <id>gitlab-maven</id>
-	    <url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
-	  </snapshotRepository>-->
-	</distributionManagement>
 
 	<!-- 编译打包 -->
 	<build>
