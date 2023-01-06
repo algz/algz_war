@@ -29,12 +29,12 @@ variables:
   # As of Maven 3.6.1, the use of `--no-tranfer-progress` (or `-ntp`) suppresses download and upload messages. The use
   # of the `Slf4jMavenTransferListener` is no longer necessary.
   # `installAtEnd` and `deployAtEnd` are only effective with recent version of the corresponding plugins.
+  #  #--no-transfer-progress
   MAVEN_CLI_OPTS: >-
     --batch-mode
     --errors
     --fail-at-end
     --show-version
-    --no-transfer-progress
     -DinstallAtEnd=true
     -DdeployAtEnd=true
 
