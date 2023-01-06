@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.algz.platform</groupId>
 	<artifactId>algz_war</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<!-- 去掉下面这行，maven install 会打包成jar
 	<packaging>war</packaging> -->
 	<name>algz_war</name>
@@ -200,7 +200,6 @@
 		    <artifactId>spire.doc</artifactId>
 		    <version>10.9.8</version>
 		</dependency>
-
 	</dependencies>
 
     
@@ -217,14 +216,7 @@
 			    <id>rdc-releases</id>
 			    <url>https://packages.aliyun.com/maven/repository/2319794-release-DgOSZd/</url>
 			</repository>
-	        
-	         <!-- 从 Gitlab 私服拉取 
-	         <repository>
-			    <id>gitlab-maven</id>
-			    <url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
-			 </repository>-->
 	</repositories>
-
 
 	<distributionManagement>
 		<!-- 打包部署推送到阿里云效 -->
