@@ -211,11 +211,17 @@
 	            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
 	        </repository>
 	        
-	        <!-- 从阿里云效拉取 -->
+	        <!-- 从阿里云效拉取 
 	        <repository>
 			    <id>rdc-releases</id>
 			    <url>https://packages.aliyun.com/maven/repository/2319794-release-DgOSZd/</url>
-			</repository>
+			</repository>-->
+			
+			<!-- 从 Gitlab 拉取 
+			  <repository>
+			    <id>gitlab-maven</id>
+			    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
+			  </repository>-->
 	</repositories>
 
 	<distributionManagement>

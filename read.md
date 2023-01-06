@@ -68,3 +68,4 @@ pom文件：
             <version>12.2.0.1</version>
         </dependency>
 
+9.提交代码到Gitlab，由Gitlab CI/CD 打包部署到软件包；本地mvn clean develop,打包部署到阿里云效。

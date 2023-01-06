@@ -35,13 +35,19 @@
 <profiles>
 	<profile>
 	    <id>gitlab</id>
+		<repositories>
+		  <repository>
+		    <id>gitlab-maven</id>
+		    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
+		  </repository>
+		</repositories>
         <properties>
-        <altReleaseDeploymentRepository>
-            gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
-        </altReleaseDeploymentRepository>
-        <altSnapshotDeploymentRepository>
-            gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
-        </altSnapshotDeploymentRepository>
+	        <altReleaseDeploymentRepository>
+	            gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
+	        </altReleaseDeploymentRepository>
+	        <altSnapshotDeploymentRepository>
+	            gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
+	        </altSnapshotDeploymentRepository>
         </properties>
     </profile>
 </profiles>
