@@ -33,6 +33,7 @@
 <!-- Gitlab mvn clean install -->
 <profiles>
 	<profile>
+	    <id>gitlab</id>
         <properties>
         <altReleaseDeploymentRepository>
             gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
@@ -43,6 +44,9 @@
         </properties>
     </profile>
 </profiles>
-
+<!-- 激活配置文件 -->
+<activeProfiles>
+    <activeProfile>gitlab</activeProfile>
+</activeProfiles>
 
 </settings>
