@@ -24,6 +24,6 @@ public class DemoControl {
 	
 	@RequestMapping("index2")
 	public String getIndex2() {
-		return "test";
+		return "test124";
 	}
 }
