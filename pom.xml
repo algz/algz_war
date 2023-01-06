@@ -6,13 +6,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.9.RELEASE</version>
+		<version>2.6.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.algz</groupId>
+	<groupId>com.algz.platform</groupId>
 	<artifactId>algz_war</artifactId>
 	<version>0.0.1</version>
-	<packaging>war</packaging>
+	<!-- 去掉下面这行，maven install 会打包成jar
+	<packaging>war</packaging> -->
 	<name>algz_war</name>
 	<description>Algz project for Spring Boot</description>
 
@@ -43,25 +44,68 @@
 			</exclusions>
 		</dependency>
 
+    
+    	<!-- jpa -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+		<!-- 必须添加，不然启动时报异常：Add an implementation, such as Hibernate Validator, to the classpath -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.18.Final</version>
+		</dependency>
+
+		
+		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.oracle.ojdbc</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- spring security -->
+
+	     <!-- jasper:tomcat提供的jsp引擎 -->
+	     <dependency>
+	        <groupId>org.apache.tomcat.embed</groupId>
+	        <artifactId>tomcat-embed-jasper</artifactId>
+	        <scope>provided</scope>
+	     </dependency>
+     
+		<!-- 只能使用ojdbc6 (因为ojdbc6不支持设置连接时间，所以启动时，会提示：Driver does not support get/set network timeout for connections. ) 
+		     与ojdbc8 (与 jsp引擎不兼容) 
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>6</version>
+			<scope>runtime</scope>
+		</dependency> -->
+		<!-- 只能使用ojdbc6与ojdbc8 (与 jsp引擎不兼容) -->
+		
+		<!-- oracle wallet  ${pom.basedir}内置属性验证有问题，但运行没有问题。
+					<systemPath>${pom.basedir}/src/main/resources/oracleWallet/lib/ojdbc8.jar</systemPath>
+		-->
+		<dependency>
+			<groupId>com.algz.oracle</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>12.0</version>
+			<scope>runtime</scope>
+		</dependency>  
+		
+		
+		<!-- mysql 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- mysql 驱动 -->
 
 		<!-- CXF webservice 只能匹配 spring boot2.2.9.RELEASE -->
 		<dependency>
@@ -79,7 +123,7 @@
 		</dependency>
 
 
-		<!-- ampq -->
+		<!-- ampq 消息队列 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
@@ -89,8 +133,9 @@
 			<artifactId>spring-rabbit-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- ampq -->
 
-		<!-- quartz <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-quartz</artifactId> 
+		<!-- quartz 定时任务 <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-quartz</artifactId> 
 			</dependency> -->
 
 		<!-- email -->
@@ -98,9 +143,107 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		
+		<!-- websocket -->
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		
+		<!-- redis -->
+	    <dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-data-redis</artifactId>
+	    </dependency> 
+		<!-- redis -->
+		
+		<!--解析excel-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.1.0</version>
+		</dependency>
+		<!--解析excel-->
+		
+        <!-- 文档导出 
+		<dependency>
+		    <groupId>e-iceblue</groupId>
+		    <artifactId>spire.doc</artifactId>
+		    <version>10.9.8</version>
+		</dependency>-->
+		
+		
+		<!-- lombok 提供注解的简写（合集插件），@Getter/@Setter，@Slf4j 
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.16.20</version>
+   			 <scope>provided</scope>
+		</dependency>-->
+		
+<!-- https://blog.csdn.net/shipfei_csdn/article/details/103280032
+		<dependency>
+		<groupId>com</groupId>
+		<artifactId>a</artifactId>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/libs/yourlocaljar-3.0-RELEASE.jar</systemPath>
+		</dependency> -->
+
+		<!-- Spire.Doc for Java -->
+		<dependency>
+		    <groupId>e-iceblue</groupId>
+		    <artifactId>spire.doc</artifactId>
+		    <version>10.9.8</version>
+		</dependency>
+
 	</dependencies>
 
+    <!-- Spire.Doc for Java  -->
+	<repositories>
+	        <repository>
+	            <id>com.e-iceblue</id>
+	            <name>e-iceblue</name>
+	            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
+	        </repository>
+	</repositories>
+
+	<!-- 编译打包 -->
 	<build>
+	<defaultGoal>compile</defaultGoal>  
+		<resources>
+		    <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <!-- <include>application.properties</include> -->
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.html</include>
+                    <include>**/*.js</include>
+                    <include>**/*.css</include>
+                    <include>**/*.map</include>
+                    <include>**/*.jpg</include>
+                    <include>**/*.png</include>
+                    <include>**/*.ico</include>
+                    <!-- 打包 banner.txt -->
+                    <include>**/banner.txt</include>
+                </includes>
+            </resource>
+			<resource>
+				<directory>D:/Users/algz/Desktop/refDll/dll/tem</directory>
+				<!-- 可选(默认部署到/BOOT-INF/class目录下)，部署目标目录（将tem目录下*.jar文件部署到/BOOT-INF/class/WEB-INF/lib目录下。） -->
+				<targetPath>WEB-INF/lib</targetPath>
+				<includes>
+					<include>**/*.jar</include>
+				</includes>
+			</resource>
+		</resources>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -108,5 +251,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 
 </project>
