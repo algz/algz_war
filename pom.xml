@@ -95,7 +95,6 @@
 			<groupId>com.algz.oracle</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>12.0</version>
-			<scope>runtime</scope>
 		</dependency>  
 		
 		
@@ -221,11 +220,11 @@
 			  <repository>
 			    <id>gitlab-maven</id>
 			    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
-			  </repository>-->
+			  </repository>
 		  <repository>
-		    <id>gitlab-maven</id>
+		    <id>gitlab-algz-war-p</id>
 		    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
-		  </repository>
+		  </repository>-->
 	</repositories>
 
 	<distributionManagement>
