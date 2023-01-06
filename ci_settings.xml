@@ -30,10 +30,9 @@
 		</server>
 	</servers>
 
-<!-- Gitlab mvn clean install org.apache.maven.plugins:maven-deploy-plugin:2.8:deploy -DskipTests 
+<!-- Gitlab mvn clean install -->
 <profiles>
 	<profile>
-	        
         <properties>
         <altReleaseDeploymentRepository>
             gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
@@ -44,6 +43,6 @@
         </properties>
     </profile>
 </profiles>
--->
+
 
 </settings>
