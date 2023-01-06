@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
 	<!-- Gitlab CI/DI 配置 -->
 	<servers>
-		<!-- 配置 Gitlab 登录服务，用于部署打包上传。ID与pom.xml <repository> <id> 一致.-->
+		<!-- 配置 Gitlab 登录服务，用于部署打包上传。ID与pom.xml <repository> <id> 一致. -->
 		<server>
 			<id>gitlab-maven</id>
 			<configuration>
@@ -16,7 +16,7 @@
 				</httpHeaders>
 			</configuration>
 		</server>
-		
+
 		<!-- 阿里云效(限制企业成员访问)登录用户名及密码，用于拉取拉取依赖和部署打包上传 -->
 		<server>
 			<id>rdc-releases</id>
@@ -29,4 +29,19 @@
 			<password>5e_zDEFRNI-9</password>
 		</server>
 	</servers>
+
+<profiles>
+	<profile>
+	        <!-- Gitlab mvn clean install org.apache.maven.plugins:maven-deploy-plugin:2.8:deploy -DskipTests -->
+        <properties>
+        <altReleaseDeploymentRepository>
+            gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
+        </altReleaseDeploymentRepository>
+        <altSnapshotDeploymentRepository>
+            gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
+        </altSnapshotDeploymentRepository>
+        </properties>
+    </profile>
+</profiles>
+
 </settings>
