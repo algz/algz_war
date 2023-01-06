@@ -9,7 +9,7 @@
 		<version>2.6.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.algz</groupId>
+	<groupId>com.algz.platform</groupId>
 	<artifactId>algz_war</artifactId>
 	<version>0.0.1</version>
 	<!-- 去掉下面这行，maven install 会打包成jar
@@ -92,7 +92,7 @@
 					<systemPath>${pom.basedir}/src/main/resources/oracleWallet/lib/ojdbc8.jar</systemPath>
 		-->
 		<dependency>
-			<groupId>com.oracle</groupId>
+			<groupId>com.algz.oracle</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>12.0</version>
 			<scope>runtime</scope>
@@ -203,6 +203,7 @@
 
 	</dependencies>
 
+    <!-- Spire.Doc for Java  -->
 	<repositories>
 	        <repository>
 	            <id>com.e-iceblue</id>
