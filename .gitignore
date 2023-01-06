@@ -31,4 +31,4 @@ build/
 .vscode/
 
 ### custom ###
-algz.log*
+/algz.log*
