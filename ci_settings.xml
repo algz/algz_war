@@ -17,6 +17,11 @@
 			</configuration>
 		</server>
 
+		<server>
+			<id>gitlab+deploy-token-2</id>
+			<username>gitlab+deploy-token-2</username>
+			<password>X55PyAYsZVoVxzSudnaq</password>
+		</server>
 		<!-- 阿里云效(限制企业成员访问)登录用户名及密码，用于拉取拉取依赖和部署打包上传 
 		<server>
 			<id>rdc-releases</id>
@@ -37,7 +42,7 @@
 	    <id>gitlab</id>
 		<repositories>
 		  <repository>
-		    <id>gitlab-maven</id>
+		    <id>gitlab+deploy-token-2</id>
 		    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
 		  </repository>
 		</repositories>
