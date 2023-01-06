@@ -17,6 +17,7 @@
 #变量的读取顺序：gitlab 仓库配置的 runner 的 variables -> yml 中定义的 variables -> 环境变量
 variables:
   # `showDateTime` will show the passed time in milliseconds. You need to specify `--batch-mode` to make this work.
+  # maven 的环境变量，mvn 执行时自动加载变量值。
   MAVEN_OPTS: >-
     -Dhttps.protocols=TLSv1.2
     -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
