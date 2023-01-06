@@ -222,6 +222,10 @@
 			    <id>gitlab-maven</id>
 			    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
 			  </repository>-->
+		  <repository>
+		    <id>gitlab+deploy-token-2</id>
+		    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
+		  </repository>
 	</repositories>
 
 	<distributionManagement>
