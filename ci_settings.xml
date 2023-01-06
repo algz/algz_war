@@ -19,8 +19,8 @@
 
 		<server>
 			<id>gitlab+deploy-token-2</id>
-			<username>gitlab+deploy-token-2</username>
-			<password>X55PyAYsZVoVxzSudnaq</password>
+			<username>gitlab-algz-war-p</username>
+			<password>glpat-fciqnbxGa9q4J-ETPrSC</password>
 		</server>
 		<!-- 阿里云效(限制企业成员访问)登录用户名及密码，用于拉取拉取依赖和部署打包上传 
 		<server>
