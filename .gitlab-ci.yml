@@ -60,6 +60,7 @@ cache:
   stage: test
   script:
     - 'mvn $MAVEN_CLI_OPTS verify'
+  # 排除提交分支==默认分支外，都执行此job(verify:jdk8)
   except:
     variables:
       - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -81,6 +82,8 @@ deploy:jdk8:
       fi
     - 'mvn $MAVEN_CLI_OPTS deploy'
     #- 'mvn $MAVEN_CLI_OPTS deploy --settings ci_settings.xml'
+  #如果提交的分支==默认分支，则执行此job(deploy:jdk8)
   only:
-    variables:
+     variables:
       - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
