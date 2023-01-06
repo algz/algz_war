@@ -18,7 +18,7 @@
 		</server>
 
 		<server>
-			<id>gitlab-maven</id>
+			<id>gitlab-maven1</id>
 			<username>gitlab+deploy-token-2</username>
 			<password>X55PyAYsZVoVxzSudnaq</password>
 		</server>
@@ -46,11 +46,11 @@
 <profiles>
 	<profile>
 	    <id>gitlab</id>
-		<repositories>
- 			<repository>
-			    <id>rdc-releases</id>
-			    <url>https://packages.aliyun.com/maven/repository/2319794-release-DgOSZd/</url>
-			</repository>
+	    <repositories>
+		  <repository>
+		    <id>gitlab-maven</id>
+		    <url>http://algz.f3322.net/api/v4/projects/2/packages/maven</url>
+		  </repository>
 		</repositories>
         <properties>
 	        <altReleaseDeploymentRepository>
