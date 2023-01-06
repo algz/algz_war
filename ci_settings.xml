@@ -23,7 +23,7 @@
 			<password>glpat-fciqnbxGa9q4J-ETPrSC</password>
 		</server>
 		<!-- 阿里云效(限制企业成员访问)登录用户名及密码，用于拉取拉取依赖和部署打包上传 
-		<server>
+		--><server>
 			<id>rdc-releases</id>
 			<username>63b629edd1660910422e0d73</username>
 			<password>5e_zDEFRNI-9</password>
@@ -32,7 +32,7 @@
 			<id>rdc-snapshots</id>
 			<username>63b629edd1660910422e0d73</username>
 			<password>5e_zDEFRNI-9</password>
-		</server>-->
+		</server>
 		
 	</servers>
 
@@ -40,6 +40,12 @@
 <profiles>
 	<profile>
 	    <id>gitlab</id>
+		<repositories>
+ 			<repository>
+			    <id>rdc-releases</id>
+			    <url>https://packages.aliyun.com/maven/repository/2319794-release-DgOSZd/</url>
+			</repository>
+		</repositories>
         <properties>
 	        <altReleaseDeploymentRepository>
 	            gitlab-maven::default::${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven/
